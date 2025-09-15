@@ -1,3 +1,3 @@
-<?php 
-    include('config/app.php');
-?>
+<?php
+
+header('Location: view/homepage.php');

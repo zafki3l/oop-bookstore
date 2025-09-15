@@ -10,7 +10,7 @@ class CreateDatabaseMVCBookStore extends Database
         try {
             $sql = "CREATE DATABASE mvc_book_store";
 
-            $this->connect()->exec($sql);
+            $this->connect()->execute_query($sql);
 
             echo 'Create database successfully!';
         } catch (Exception $e) {
@@ -18,7 +18,6 @@ class CreateDatabaseMVCBookStore extends Database
         }
     }
 }
-
 
 class Migration extends CreateDatabaseMVCBookStore 
 {

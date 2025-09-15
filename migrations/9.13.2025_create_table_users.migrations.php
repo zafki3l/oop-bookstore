@@ -14,12 +14,12 @@ class CreateTableUsers extends Database
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
                 address VARCHAR(255),
-                role TINYINT,
+                role TINYINT DEFAULT 1, -- 1 = 'customer', 2 = 'staff', 3 = 'admin'
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )";
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )"; 
 
-            $this->connect()->exec($sql);
+            $this->connect()->execute_query($sql);
 
             echo 'Create table users successfully!';
         } catch (Exception $e) {

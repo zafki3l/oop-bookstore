@@ -1,0 +1,23 @@
+<?php 
+
+include_once 'app.config.php';
+
+class Database
+{
+    private $server = SERVER_NAME;
+    private $user = DB_USER;
+    private $password = DB_PASSWORD;
+    private $database = DB_NAME;
+
+    protected function connect()
+    {
+        try {
+            $mysqli = new mysqli($this->server, $this->user, $this->password, $this->database);
+            
+            return $mysqli;
+        } catch (Exception $e) {
+            print 'Error!: ' . $e->getMessage() . '<br>';
+            die();
+        }
+    }
+}

@@ -1,0 +1,32 @@
+HƯỚNG DẪN VÀ VAI TRÒ CỦA CÁC THƯ MỤC
+
+1. config
+    - Chứa các file cấu hình của project.
+    - Ví dụ: database.config.php dùng để kết nối với cơ sở dữ liệu MySQL.
+    - Có thể chứa các cấu hình đường dẫn hoặc thiết lập khác.
+
+2. migrations
+    - Quản lý các phiên bản sửa đổi cấu trúc cơ sở dữ liệu.
+    - Giúp theo dõi các thay đổi trong database theo thời gian.
+
+3. model
+    - Chứa các file trung gian (Models) để lấy dữ liệu từ database và trả về controller hoặc view.
+    - Ví dụ: Book.Model.php lấy dữ liệu sách từ database.
+
+4. view
+    - Chứa các file giao diện người dùng (HTML, PHP template).
+    - Hiển thị thông tin do controller cung cấp.
+
+5. controller
+    - Chứa các file xử lý logic của ứng dụng và các request từ người dùng.
+    - Ví dụ: BookController.php xử lý các thao tác thêm, sửa, xóa sách.
+
+6. actions
+    - Chứa các file trả kết quả từ controller về view.
+    - Ví dụ: trả dữ liệu JSON hoặc render trang HTML.
+
+7. public
+    - Chứa các file công khai mà người dùng có thể truy cập trực tiếp.
+    -css: các file định dạng giao diện.
+    - js: các file xử lý tương tác phía frontend.
+    - images: chứa hình ảnh, ví dụ ảnh sách.

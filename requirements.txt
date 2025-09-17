@@ -1,0 +1,27 @@
+# Yêu Cầu Dự Án
+
+## 1. Tiêu Chuẩn Viết Mã
+- Tất cả mã PHP phải tuân thủ tiêu chuẩn PSR-12
+- Sử dụng tên biến, hàm và class có ý nghĩa, tuân theo hướng dẫn của PSR-12 
+- ví dụ: CamelCase cho class, camelCase cho phương thức.
+
+## 2. Kiến Trúc Phần mềm
+- Áp dụng mô hình MVC
+- Tuân theo các nguyên tắc OOP.
+
+## 3. Quản Lý Cơ Sở Dữ Liệu
+- Không được sửa đổi, thay đổi hoặc xóa trực tiếp cấu trúc bảng trong cơ sở dữ liệu.
+- Mọi thay đổi cấu trúc cơ sở dữ liệu phải được quản lý qua các file migration.
+- Tạo file migration trong thư mục `migrations` với quy ước đặt tên: `YYYY_MM_DD_HHMMSS_mô_tả.php` 
+    (ví dụ: `2025_09_13_120000_create_users_table.php`).
+
+## 4. Tài Nguyên Giao Diện
+- Đặt tất cả file JavaScript và CSS trong thư mục `public`, tổ chức vào các thư mục con: `public/js` và `public/css`.
+- Đặt tên file JS và CSS với tiền tố theo mục đích sử dụng (ví dụ: `user.script.js`, `homepage.style.css`).
+
+## 5. Quy Ước Đặt Tên File
+- Tất cả file phải tuân theo quy ước đặt tên, bao gồm tiền tố là tên thư mục, theo sau là mục đích của file và phần mở rộng:
+  - Model: `<name>.model.php` (ví dụ: `user.model.php` trong `/models/`).
+  - View: `<name>.view.php` (ví dụ: `homepage.view.php` trong `/views/`).
+  - Controller: `<name>.controller.php` (ví dụ: `userController.controller.php` trong `/controllers/`).
+  - Migration: `<YYYY_MM_DD_HHMMSS_mô_tả>.php` (ví dụ: `2025_09_13_120000_create_users_table.php`).

@@ -2,7 +2,7 @@
 
 include_once '../config/database.config.php';
 
-class CreateTableUsers
+class CreateOrdersTable
 {
     private $db;
 
@@ -15,15 +15,14 @@ class CreateTableUsers
     public function createTable()
     {
         try {
-            $sql = "CREATE TABLE users (
+            $sql = "CREATE TABLE orders (
                 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL UNIQUE,
-                password VARCHAR(255) NOT NULL,
-                address VARCHAR(255),
-                role TINYINT DEFAULT 1, -- 1 = 'customer', 2 = 'staff', 3 = 'admin'
+                user_id INT UNSIGNED,
+                status TINYINT NOT NULL DEFAULT 0, -- 0 - pending, 1 - being delivered, 2 - completed
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+                CONSTRAINT FK01_orders FOREIGN KEY (user_id) REFERENCES users (id)
             )"; 
 
             $this->db->connect()->execute_query($sql);
@@ -36,5 +35,5 @@ class CreateTableUsers
 }
 
 $db = new Database();
-$table = new CreateTableUsers($db);
+$table = new CreateOrdersTable($db);
 $table->createTable();

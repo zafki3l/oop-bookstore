@@ -2,15 +2,22 @@
 
 include_once '../config/database.config.php';
 
-class CreateDatabaseMVCBookStore extends Database
+class CreateDatabaseMVCBookStore
 {
+    private $db;
+
+    public function __construct(Database $db)
+    {
+        $this->db = $db;
+    }
+	
     // Tạo database MVC_book_store
-    protected function createDatabaseBookStore()
+    public function createDatabase()
     {
         try {
             $sql = "CREATE DATABASE mvc_book_store";
 
-            $this->connect()->execute_query($sql);
+            $this->db->connect()->execute_query($sql);
 
             echo 'Create database successfully!';
         } catch (Exception $e) {
@@ -19,13 +26,6 @@ class CreateDatabaseMVCBookStore extends Database
     }
 }
 
-class Migration extends CreateDatabaseMVCBookStore 
-{
-    public function createDatabase()
-    {
-        $this->createDatabaseBookStore();
-    }
-}
-
-$bookStore = new Migration();
+$db = new Database();
+$bookStore = new CreateDatabaseMVCBookStore($db);
 $bookStore->createDatabase();

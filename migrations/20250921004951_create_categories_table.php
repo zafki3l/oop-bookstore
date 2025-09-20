@@ -2,7 +2,7 @@
 
 include_once '../config/database.config.php';
 
-class CreateTableUsers
+class CreateCategoriesTable
 {
     private $db;
 
@@ -15,13 +15,9 @@ class CreateTableUsers
     public function createTable()
     {
         try {
-            $sql = "CREATE TABLE users (
+            $sql = "CREATE TABLE categories (
                 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL UNIQUE,
-                password VARCHAR(255) NOT NULL,
-                address VARCHAR(255),
-                role TINYINT DEFAULT 1, -- 1 = 'customer', 2 = 'staff', 3 = 'admin'
+                name VARCHAR(255) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )"; 
@@ -36,5 +32,5 @@ class CreateTableUsers
 }
 
 $db = new Database();
-$table = new CreateTableUsers($db);
+$table = new CreateCategoriesTable($db);
 $table->createTable();

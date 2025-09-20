@@ -9,7 +9,7 @@ class Database
     private $password = DB_PASSWORD;
     private $database = DB_NAME;
 
-    protected function connect()
+    public function connect()
     {
         try {
             $mysqli = new mysqli($this->server, $this->user, $this->password, $this->database);

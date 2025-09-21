@@ -1,16 +1,9 @@
 <?php
 
-include_once '../config/database.config.php';
+include_once 'migration.migrations.php';
 
-class CreateBooksTable
+class CreateBooksTable extends Migration
 {
-    private $db;
-
-    public function __construct(Database $db)
-    {
-        $this->db = $db;
-    }
-	
     // Tạo bảng users
     public function createTable()
     {
@@ -32,7 +25,7 @@ class CreateBooksTable
                 CONSTRAINT FK01_books FOREIGN KEY (category_id) REFERENCES categories (id)
             )"; 
 
-            $this->db->connect()->execute_query($sql);
+            $this->getDb()->connect()->execute_query($sql);
 
             echo 'Create table successfully!';
         } catch (Exception $e) {

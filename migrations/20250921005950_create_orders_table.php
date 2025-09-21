@@ -1,16 +1,9 @@
 <?php
 
-include_once '../config/database.config.php';
+include_once 'migration.migrations.php';
 
-class CreateOrdersTable
+class CreateOrdersTable extends Migration
 {
-    private $db;
-
-    public function __construct(Database $db)
-    {
-        $this->db = $db;
-    }
-	
     // Tạo bảng users
     public function createTable()
     {
@@ -25,7 +18,7 @@ class CreateOrdersTable
                 CONSTRAINT FK01_orders FOREIGN KEY (user_id) REFERENCES users (id)
             )"; 
 
-            $this->db->connect()->execute_query($sql);
+            $this->getDb()->connect()->execute_query($sql);
 
             echo 'Create table successfully!';
         } catch (Exception $e) {

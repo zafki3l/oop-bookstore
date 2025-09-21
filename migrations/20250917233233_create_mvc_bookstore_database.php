@@ -1,23 +1,16 @@
 <?php 
 
-include_once '../config/database.config.php';
+include_once 'migration.migrations.php';
 
-class CreateDatabaseMVCBookStore
+class CreateDatabaseMVCBookStore extends Migration
 {
-    private $db;
-
-    public function __construct(Database $db)
-    {
-        $this->db = $db;
-    }
-	
     // Tạo database MVC_book_store
     public function createDatabase()
     {
         try {
             $sql = "CREATE DATABASE mvc_book_store";
 
-            $this->db->connect()->execute_query($sql);
+            $this->getDb()->connect()->execute_query($sql);
 
             echo 'Create database successfully!';
         } catch (Exception $e) {

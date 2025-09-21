@@ -1,16 +1,9 @@
 <?php
 
-include_once '../config/database.config.php';
+include_once 'migration.migrations.php';
 
-class CreateTableUsers
+class CreateTableUsers extends Migration
 {
-    private $db;
-
-    public function __construct(Database $db)
-    {
-        $this->db = $db;
-    }
-	
     // Tạo bảng users
     public function createTable()
     {
@@ -26,7 +19,7 @@ class CreateTableUsers
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )"; 
 
-            $this->db->connect()->execute_query($sql);
+            $this->getDb()->connect()->execute_query($sql);
 
             echo 'Create table successfully!';
         } catch (Exception $e) {

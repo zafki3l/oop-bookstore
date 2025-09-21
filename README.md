@@ -1,10 +1,10 @@
-# 📚 OOP Bookstore
+# OOP Bookstore
 
 Dự án **Bookstore Management** được viết bằng PHP sử dụng mô hình OOP và MVC cơ bản. Ứng dụng cho phép quản lý người dùng, sách, giỏ hàng, đơn hàng, và hỗ trợ hệ thống đăng nhập/đăng ký.
 
 ---
 
-## ⚙️ Cấu hình môi trường
+## Cấu hình môi trường
 Dự án được phát triển và chạy trên:
 - Apache 2.4.58
 - MariaDB 10.4.32
@@ -18,7 +18,7 @@ Dự án được phát triển và chạy trên:
 
 ---
 
-## 📥 Hướng dẫn cài đặt
+## Hướng dẫn cài đặt
 
 ### 1. Clone dự án
 ```bash
@@ -52,7 +52,7 @@ cd oop-bookstore
     php 20250921004951_create_categories_table.php
     ```
 
-- **Lưu ý**: Một số file có lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Bạn có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
+- **Lưu ý**: Một số file có lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
 
 ### 4. Chạy ứng dụng
 - Đặt thư mục dự án vào thư mục gốc của máy chủ web (ví dụ: `htdocs` của XAMPP).
@@ -60,14 +60,14 @@ cd oop-bookstore
 
 ---
 
-## 🛠️ Công nghệ sử dụng
-- **Backend**: PHP (OOP + MVC)
+## Công nghệ sử dụng
+- **Backend**: PHP
 - **Cơ sở dữ liệu**: MySQL/MariaDB
 - **Frontend**: HTML, CSS, JavaScript
 
 ---
 
-## 📂 Cấu trúc thư mục
+## Cấu trúc thư mục
 ```
 oop-bookstore/
 ├── actions/                  # Các file xử lý action (auth, homepage)

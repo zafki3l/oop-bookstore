@@ -47,6 +47,13 @@ class AuthController
         exit();
     }
 
+    // Đăng xuất
+    public function logout()
+    {
+        header('Location: \oop-bookstore\views\auth\login.auth.php');
+        exit();
+    }
+
     // Xác nhận mật khẩu khi đăng ký
     public function passwordMismatch($password, $password_confirmation)
     {

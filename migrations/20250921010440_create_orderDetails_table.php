@@ -30,7 +30,7 @@ class CreateOrderDetailsTable
 
             $this->db->connect()->execute_query($sql);
 
-            echo 'Create table users successfully!';
+            echo 'Create table successfully!';
         } catch (Exception $e) {
             echo 'ERROR: ' . $e->getMessage();
         }

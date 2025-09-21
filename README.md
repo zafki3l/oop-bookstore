@@ -22,7 +22,7 @@ Dự án được phát triển và chạy trên:
 
 ### 1. Clone dự án
 ```bash
-git clone https://github.com/username/oop-bookstore.git
+git clone https://github.com/zafki3l/oop-bookstore.git
 cd oop-bookstore
 ```
 

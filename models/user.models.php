@@ -4,6 +4,12 @@ include_once 'model.models.php';
 
 class User extends Model
 {
+    //CONSTANTS
+    const ROLE_USER = 1;
+    const ROLE_STAFF = 2;
+    const ROLE_ADMIN = 3;
+
+    //Attributes
     private $id;
     private $username;
     private $email;

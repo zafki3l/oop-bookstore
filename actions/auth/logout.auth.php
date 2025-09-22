@@ -10,6 +10,5 @@ $authController = new AuthController($user);
 
 // Nếu như người dùng bấm logout
 if (isset($_POST['logout'])) {
-    session_destroy();
     $authController->logout();
 }

@@ -45,8 +45,8 @@
                 <p>Follow us at</p>
                 <hr>    
                 <ul type="none">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/">Instagram</a></li>
                 </ul>
             </li>
         </ul>

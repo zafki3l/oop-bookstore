@@ -11,16 +11,16 @@ class AuthController
     {
         $this->user = $user;
     }
-	
+
     // Đăng ký người dùng
     public function register()
     {
         $user = $this->user;
-        
+
         $user->registerUser(
-            $user->getUsername(), 
-            $user->getEmail(), 
-            $user->getPassword(), 
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPassword(),
             $user->getAddress()
         );
 
@@ -33,25 +33,63 @@ class AuthController
     {
         $user = $this->user;
         $loginUser = $user->getLoginUser($user->getEmail());
+        $inputPassword = $user->getPassword();
+        $userPassword = $loginUser['password'];
 
         // Kiểm tra mật khẩu
-        $this->checkPassword();
-    
-        // Lưu thông tin user vào session khi đăng nhập thành công
-        $_SESSION['username'] = $loginUser['username'];
-        $_SESSION['email'] = $loginUser['email'];
-        $_SESSION['address'] = $loginUser['address'];
-        $_SESSION['role'] = $loginUser['role'];
+        $this->checkPassword($inputPassword, $userPassword);
 
-        header('Location: \oop-bookstore\views\homepage.views.php');
-        exit();
+        // Lưu thông tin user vào session khi đăng nhập thành công
+        $this->sessionManager($loginUser);
+
+        // Kiểm tra role hợp lệ
+        $this->checkRole($user);
+
+        // Xử lý role redirect
+        $this->redirectUser($user);
     }
 
     // Đăng xuất
     public function logout()
     {
+        session_unset();
+        session_destroy();
+        
         header('Location: \oop-bookstore\views\auth\login.auth.php');
         exit();
+    }
+
+    // Lưu thông tin đăng nhập vào session
+    private function sessionManager($loginUser)
+    {
+        $_SESSION['username'] = $loginUser['username'];
+        $_SESSION['email'] = $loginUser['email'];
+        $_SESSION['address'] = $loginUser['address'];
+        $_SESSION['role'] = $loginUser['role'];
+    }
+
+    // Xử lý redirect user
+    private function redirectUser($user)
+    {
+        if ($_SESSION['role'] == $user::ROLE_ADMIN) {
+            header('Location: \oop-bookstore\views\admin\dashboard.admin.php');
+            exit();
+        } else if ($_SESSION['role'] == $user::ROLE_STAFF) {
+            header('Location: \oop-bookstore\views\staff\dashboard.staff.php');
+            exit();
+        } else {
+            header('Location: \oop-bookstore\views\homepage.views.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra role của user
+    private function checkRole($user)
+    {
+        if ($_SESSION['role'] != $user::ROLE_USER && $_SESSION['role'] != $user::ROLE_STAFF && $_SESSION['role'] != $user::ROLE_ADMIN) {
+            header('Location: \oop-bookstore\views\auth\login.auth.php?error=invaliduser');
+            exit();
+        }
     }
 
     // Xác nhận mật khẩu khi đăng ký
@@ -64,14 +102,8 @@ class AuthController
     }
 
     // Kiểm tra mật khẩu nhập vào với mật khẩu trong database
-    private function checkPassword()
+    private function checkPassword($inputPassword, $userPassword)
     {
-        $user = $this->user;
-
-        $loginUser = $user->getLoginUser($user->getEmail());
-        $inputPassword = $user->getPassword();
-        $userPassword = $loginUser['password'];
-
         if (!password_verify($inputPassword, $userPassword)) {
             header('Location: \oop-bookstore\views\auth\login.auth.php?error=password_incorrect');
             exit();

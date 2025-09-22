@@ -15,7 +15,7 @@
         <ul type="none" class="user-menu">
             <!-- Search bar -->
             <li class="search-bar">
-                <form action="\bookStore\view\homepage\searchResult.php" method="get">
+                <form action="#" method="get">
                     <input type="text" name="search" placeholder="Search books..." />
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>

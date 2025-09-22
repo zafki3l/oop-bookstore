@@ -23,7 +23,7 @@
                         <a href="../category/science.php">Science</a>
                         <a href="../category/history.php">History</a>
                     </div>
-                <li><a href="../homepage/index.php">Homepage</a></li>
+                <li><a href="\oop-bookstore\views\homepage.views.php">Homepage</a></li>
                 <?php if($role == 3): ?> <!--admin-->
                         <li><a href="../admin/dashboard.php">Admin Dashboard</a></li> <!--show dashboard for admin-->
                         <li><a href="../staff/books/bookIndex.php">Staff Dashboard</a></li>

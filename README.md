@@ -12,7 +12,7 @@ Dự án được phát triển và chạy trên:
 - phpMyAdmin 5.2.1
 
 ### Yêu cầu hệ thống
-- Máy chủ web hỗ trợ PHP (như Apache hoặc Nginx)
+- Máy chủ web hỗ trợ PHP (Apache)
 - Cơ sở dữ liệu MySQL/MariaDB
 - PHP phiên bản 8.0 trở lên
 
@@ -32,7 +32,7 @@ cd oop-bookstore
 - Chỉnh sửa thông tin kết nối database (host, username, password, dbname) theo môi trường của bạn.
 
 ### 3. Khởi tạo Database
-- Trong thư mục `migrations/`, có các file SQL để khởi tạo cơ sở dữ liệu:
+- Trong thư mục `migrations/`, có các file PHP để khởi tạo cơ sở dữ liệu:
   - `20250917233233_create_mvc_bookstore_database.php`
   - `20250917233341_create_users_table.php`
   - `20250921004647_create_books_table.php`
@@ -51,7 +51,7 @@ cd oop-bookstore
     ```bash
     php 20250921004951_create_categories_table.php
     ```
-
+- **Lưu ý**: Nếu chạy file php trên terminal, hãy đảm bảo máy bạn đã cài đặt sẵn môi trường cho PHP (Check php -v trong terminal).
 - **Lưu ý**: Một số file có lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
 
 ### 4. Chạy ứng dụng

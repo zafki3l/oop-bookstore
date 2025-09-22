@@ -14,22 +14,15 @@ $username = $_SESSION['username'] ?? 'Guest';
 </head>
 <body>
     <!--Header-->
-    <?php include('layouts/header.layouts.php') ?>
-    <div class="header">
-        <ul type="none" class="user-menu">
-            <div class="search-bar">
-                <form action="\bookStore\view\homepage\searchResult.php" method="get">
-                    <input type="text" name="search" placeholder="Search books..."/>
-                </form> 
-            </div>
-        </ul>
-    </div>
+    <?php include 'layouts/header.layouts.php' ?>
+    <!-- Search bar -->
+     <?php include 'layouts/searchbar.layouts.php' ?>
 
     <div class="main-content">
         <h1>WELCOME <?php echo htmlspecialchars($username) ?></h1>
     </div>
 
     <!--Footer-->
-    <?php include('layouts/footer.layouts.php') ?>
+    <?php include 'layouts/footer.layouts.php' ?>
 </body>
 </html>

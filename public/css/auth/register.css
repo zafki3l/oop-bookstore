@@ -99,3 +99,8 @@ p {
     justify-content: space-between;   
     font-size: 14px;
 }
+
+.error-box {
+    padding-top: 15px;
+    color: #ca122f;
+}

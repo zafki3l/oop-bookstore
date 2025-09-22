@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 include_once '../../controllers/authController.controllers.php';
 
 $db = new Database();

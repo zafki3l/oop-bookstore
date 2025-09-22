@@ -97,3 +97,8 @@ p {
   display: flex;
   justify-content: space-between;   
 }
+
+.error-box {
+    padding-top: 15px;
+    color: #ca122f;
+}

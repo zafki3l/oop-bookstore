@@ -6,8 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     die('Change your request method to POST');
 }
 
-session_start();
-
 $email = $_POST['email'];
 $inputPassword = $_POST['password'];
 

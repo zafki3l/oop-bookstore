@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\oop-bookstore\public\css\layouts\header.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/header.css">
     <title>Document</title>
 </head>
 <body>
@@ -18,12 +18,12 @@
                     <div class="dropdown">
                         <button>Category</button>
                         <div class="content">
-                        <a href="../category/fiction.php">Fiction</a>
-                        <a href="../category/nonFiction.php">Non-Fiction</a>
-                        <a href="../category/science.php">Science</a>
-                        <a href="../category/history.php">History</a>
+                        <a href="#">Fiction</a>
+                        <a href="#">Non-Fiction</a>
+                        <a href="#">Science</a>
+                        <a href="#">History</a>
                     </div>
-                <li><a href="\oop-bookstore\views\homepage.views.php">Homepage</a></li>
+                <li><a href="/oop-bookstore/views/homepage.views.php">Homepage</a></li>
                 <?php if($role == 3): ?> <!--admin-->
                         <li><a href="../admin/dashboard.php">Admin Dashboard</a></li> <!--show dashboard for admin-->
                         <li><a href="../staff/books/bookIndex.php">Staff Dashboard</a></li>
@@ -38,12 +38,12 @@
                     <li>
                         <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
                     </li>
-                    <form id="logoutForm" action="\oop-bookstore\actions\auth\logout.auth.php" method="post" style="display:none;">
+                    <form id="logoutForm" action="/oop-bookstore/actions/auth/logout.auth.php" method="post" style="display:none;">
                         <input type="hidden" name="logout" value="1">
                     </form>
                 <?php else: ?>
-                    <li><a href="\oop-bookstore\views\auth\register.auth.php">Register</a></li>
-                    <li><a href="\oop-bookstore\views\auth\login.auth.php">Login</a></li>
+                    <li><a href="/oop-bookstore/views/auth/register.auth.php">Register</a></li>
+                    <li><a href="/oop-bookstore/views/auth/login.auth.php">Login</a></li>
                 <?php endif; ?>
             </div>
         </ul>

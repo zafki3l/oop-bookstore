@@ -11,69 +11,195 @@ class AuthController
     {
         $this->user = $user;
     }
-	
+
     // Đăng ký người dùng
     public function register()
     {
+        session_start();
         $user = $this->user;
         
+        $this->isRegisterFormEmpty();
+        $this->isEmailExist($user);
+
         $user->registerUser(
-            $user->getUsername(), 
-            $user->getEmail(), 
-            $user->getPassword(), 
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPassword(),
             $user->getAddress()
         );
 
-        header('Location: \oop-bookstore\views\homepage.views.php');
+        header('Location: /oop-bookstore/views/auth/login.auth.php');
         exit();
     }
 
     // Đăng nhập
     public function login()
     {
+        session_start();
         $user = $this->user;
         $loginUser = $user->getLoginUser($user->getEmail());
 
-        // Kiểm tra mật khẩu
-        $this->checkPassword();
-    
-        // Lưu thông tin user vào session khi đăng nhập thành công
-        $_SESSION['username'] = $loginUser['username'];
-        $_SESSION['email'] = $loginUser['email'];
-        $_SESSION['address'] = $loginUser['address'];
-        $_SESSION['role'] = $loginUser['role'];
+        $this->validateLoginInput($user, $loginUser);
 
-        header('Location: \oop-bookstore\views\homepage.views.php');
-        exit();
+        // Lưu thông tin user vào session khi đăng nhập thành công
+        $this->sessionManager($loginUser);
+
+        // Kiểm tra role hợp lệ
+        $this->checkRole($user);
+
+        // Xử lý role redirect
+        $this->redirectUser($user);
     }
 
     // Đăng xuất
     public function logout()
     {
-        header('Location: \oop-bookstore\views\auth\login.auth.php');
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header('Location: /oop-bookstore/views/auth/login.auth.php');
         exit();
+    }
+
+    // Lưu thông tin đăng nhập vào session
+    private function sessionManager($loginUser)
+    {
+        $_SESSION['username'] = $loginUser['username'];
+        $_SESSION['email'] = $loginUser['email'];
+        $_SESSION['address'] = $loginUser['address'];
+        $_SESSION['role'] = $loginUser['role'];
+    }
+
+    // Xử lý redirect user
+    private function redirectUser($user)
+    {
+        if ($_SESSION['role'] == $user::ROLE_ADMIN) {
+            header('Location: /oop-bookstore/views/admin/dashboard.admin.php');
+            exit();
+        } else if ($_SESSION['role'] == $user::ROLE_STAFF) {
+            header('Location: /oop-bookstore/views/staff/dashboard.staff.php');
+            exit();
+        } else {
+            header('Location: /oop-bookstore/views/homepage.views.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra role của user
+    private function checkRole($user)
+    {
+        if ($_SESSION['role'] != $user::ROLE_USER && $_SESSION['role'] != $user::ROLE_STAFF && $_SESSION['role'] != $user::ROLE_ADMIN) {
+            header('Location: /oop-bookstore/views/auth/login.auth.php?error=invaliduser');
+            exit();
+        }
     }
 
     // Xác nhận mật khẩu khi đăng ký
     public function passwordMismatch($password, $password_confirmation)
     {
         if ($password != $password_confirmation) {
-            header('Location: \oop-bookstore\views\auth\register.auth.php?error=password_mismatch');
+            header('Location: /oop-bookstore/views/auth/register.auth.php?error=password_mismatch');
             exit();
         }
     }
 
-    // Kiểm tra mật khẩu nhập vào với mật khẩu trong database
-    private function checkPassword()
+    // Xác thực đầu vào
+    public function validateLoginInput($user, $loginUser)
     {
-        $user = $this->user;
-
-        $loginUser = $user->getLoginUser($user->getEmail());
         $inputPassword = $user->getPassword();
         $userPassword = $loginUser['password'];
+        $inputEmail = $user->getEmail();
+        $userEmail = $loginUser['email'];
 
+        // Nếu người dùng không nhập gì
+        $this->isLoginFormEmpty($inputEmail, $inputPassword);
+
+        // Kiểm tra mật khẩu
+        $this->checkPassword($inputPassword, $userPassword);
+
+        // Kiểm tra email
+        $this->checkEmail($inputEmail, $userEmail);
+    }
+
+    // Kiểm tra mật khẩu nhập vào với mật khẩu trong database
+    private function checkPassword($inputPassword, $userPassword)
+    {
         if (!password_verify($inputPassword, $userPassword)) {
-            header('Location: \oop-bookstore\views\auth\login.auth.php?error=password_incorrect');
+            $_SESSION['error'] = "Password or email incorrect!";
+            header('Location: /oop-bookstore/views/auth/login.auth.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra email
+    private function checkEmail($inputEmail, $userEmail)
+    {
+        if ($inputEmail != $userEmail) {
+            $_SESSION['error'] = "Password or email incorrect!";
+            header('Location: /oop-bookstore/views/auth/login.auth.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra input login rỗng
+    private function isLoginFormEmpty($inputEmail, $inputPassword)
+    {
+        if (empty($inputEmail) || empty($inputPassword)) {
+            $_SESSION['error'] = "Empty password or email!";
+            header('Location: /oop-bookstore/views/auth/login.auth.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra input register rỗng
+    private function isRegisterFormEmpty()
+    {
+        if (empty($_POST['username']) && empty($_POST['email']) && empty($_POST['address']) && empty($_POST['password']) && empty($_POST['password-confirmation'])) {
+            $_SESSION['error'] = "Empty input!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+
+        if (empty($_POST['username'])) {
+            $_SESSION['error'] = "Empty username!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+
+        if (empty($_POST['email'])) {
+            $_SESSION['error'] = "Empty email!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+
+        if (empty($_POST['address'])) {
+            $_SESSION['error'] = "Empty address!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+
+        if (empty($_POST['password'])) {
+            $_SESSION['error'] = "Empty password!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+
+        if (empty($_POST['password-confirmation'])) {
+            $_SESSION['error'] = "Confirm your password!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+    }
+
+    // Nếu như email đã tồn tại
+    private function isEmailExist($user)
+    {
+        $dbUser = $user->getLoginUser($_POST['email']);
+        $dbEmail = $dbUser['email'];
+        if ($user->getEmail() == $dbEmail) {
+            $_SESSION['error'] = "Email already exist!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
     }

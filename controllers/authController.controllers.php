@@ -20,6 +20,7 @@ class AuthController
         
         $this->isRegisterFormEmpty();
         $this->isEmailExist($user);
+        $this->checkEmailFormat($user);
 
         $user->registerUser(
             $user->getUsername(),
@@ -98,8 +99,10 @@ class AuthController
     // Xác nhận mật khẩu khi đăng ký
     public function passwordMismatch($password, $password_confirmation)
     {
+        session_start();
         if ($password != $password_confirmation) {
-            header('Location: /oop-bookstore/views/auth/register.auth.php?error=password_mismatch');
+            $_SESSION['error'] = "Password mismatch!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
     }
@@ -162,31 +165,31 @@ class AuthController
         }
 
         if (empty($_POST['username'])) {
-            $_SESSION['error'] = "Empty username!";
+            $_SESSION['error_username'] = "Empty username!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
 
         if (empty($_POST['email'])) {
-            $_SESSION['error'] = "Empty email!";
+            $_SESSION['error_email'] = "Empty email!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
 
         if (empty($_POST['address'])) {
-            $_SESSION['error'] = "Empty address!";
+            $_SESSION['error_address'] = "Empty address!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
 
         if (empty($_POST['password'])) {
-            $_SESSION['error'] = "Empty password!";
+            $_SESSION['error_password'] = "Empty password!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
 
         if (empty($_POST['password-confirmation'])) {
-            $_SESSION['error'] = "Confirm your password!";
+            $_SESSION['error_password_confirmation'] = "Confirm your password!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }
@@ -198,7 +201,17 @@ class AuthController
         $dbUser = $user->getLoginUser($_POST['email']);
         $dbEmail = $dbUser['email'];
         if ($user->getEmail() == $dbEmail) {
-            $_SESSION['error'] = "Email already exist!";
+            $_SESSION['error_email'] = "Email already exist!";
+            header('Location: /oop-bookstore/views/auth/register.auth.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra định dạng email
+    private function checkEmailFormat($user)
+    {
+        if (!filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error_email'] = "Invalid email format!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
         }

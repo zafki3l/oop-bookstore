@@ -52,7 +52,7 @@ cd oop-bookstore
     php 20250921004951_create_categories_table.php
     ```
 - **Lưu ý**: Nếu chạy file php trên terminal, hãy đảm bảo máy bạn đã cài đặt sẵn môi trường cho PHP (Check php -v trong terminal).
-- **Lưu ý**: Một số file có lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
+- **Lưu ý**: Một số file có thể chứa lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
 
 ### 4. Chạy ứng dụng
 - Đặt thư mục dự án vào thư mục gốc của máy chủ web (ví dụ: `htdocs` của XAMPP).

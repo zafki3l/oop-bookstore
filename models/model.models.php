@@ -1,6 +1,6 @@
 <?php
 
-include_once '../config/database.config.php';
+include_once __DIR__ . '/../config/database.config.php';
 
 abstract class Model
 {

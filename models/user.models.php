@@ -33,6 +33,7 @@ class User extends Model
         $this->updated_at = $updated_at;
     }
 
+    // Tạo 1 user mới khi user đăng ký
     public function registerUser($username, $email, $password, $address)
     {
         $conn = $this->getDb()->connect();
@@ -49,6 +50,7 @@ class User extends Model
         $conn->close();
     }
 
+    // Lấy ra user login
     public function getLoginUser($email)
     {
         $conn = $this->getDb()->connect();
@@ -61,6 +63,37 @@ class User extends Model
         $stmt->execute();
         $result = $stmt->get_result();
         $data = $result->fetch_assoc();
+
+        $stmt->close();
+        $conn->close();
+
+        return $data;
+    }
+
+    // Lấy ra tất cả user
+    public function getAllUser()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = $conn->execute_query("SELECT * FROM users");
+
+        $data = $sql->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
+    // Tìm kiếm user
+    public function findUser($id, $username)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT * FROM users WHERE id = ? OR username LIKE ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $id, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
 
         $stmt->close();
         $conn->close();

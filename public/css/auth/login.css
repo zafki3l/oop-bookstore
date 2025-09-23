@@ -102,3 +102,20 @@ p {
     padding-top: 15px;
     color: #ca122f;
 }
+
+.register-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #faf9ea;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+.register-message.show {
+    opacity: 1;
+}

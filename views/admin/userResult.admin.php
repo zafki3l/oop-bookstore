@@ -1,7 +1,5 @@
 <?php
-include_once '../../actions/admin/dashboard.admin.php';
-
-function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
+include_once '../../actions/admin/findUser.admin.php';
 ?>
 
 <!DOCTYPE html>
@@ -19,15 +17,6 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <?php include '../layouts/header.layouts.php' ?>
 
     <div class="main-content">
-        <!-- Thông báo login thành công -->
-        <div class="login-message">
-            <?php if (isset($_SESSION['login_success'])): ?>
-                <?php echo loginMessage(); ?>
-            <?php endif; ?>
-        </div>
-
-        <h1>WELCOME <?php echo htmlspecialchars($username) ?></h1>
-
         <!-- Thanh tìm kiếm -->
         <?php include_once 'searchUser.admin.php' ?>
 
@@ -85,14 +74,9 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <!-- Hiển thị thông báo login thành công -->
-        <?php if (!empty($_SESSION['login_success'])): ?>
-            <script src="/oop-bookstore/public/js/loginMessage.js"></script>
-            <?php unset($_SESSION['login_success']); ?>
-        <?php endif; ?>
-
     </div>
+    </div>
+
 </body>
 
 </html>

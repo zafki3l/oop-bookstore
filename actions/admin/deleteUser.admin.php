@@ -4,7 +4,7 @@ session_start();
 
 include_once '../../controllers/userController.controllers.php';
 
-$id = $_GET['id'];
+$id = $_POST['id'];
 
 $db = new Database();
 $user = new User($db);

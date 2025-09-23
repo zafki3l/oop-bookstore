@@ -20,7 +20,7 @@ include_once '../../actions/admin/findUser.admin.php';
         <!-- Thanh tìm kiếm -->
         <?php include_once 'searchUser.admin.php' ?>
 
-        <a href="#">Add user</a>
+        <a href="addUser.admin.php">Add user</a>
 
         <!-- Bảng quản lý user -->
         <table border="1">

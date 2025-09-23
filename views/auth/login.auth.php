@@ -2,6 +2,8 @@
 session_start();
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
+
+function registerMessage() { return htmlspecialchars($_SESSION['register-success']); }
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +21,14 @@ unset($_SESSION['error']);
     <!--Header-->
     <?php include '../layouts/header.layouts.php' ?>
     <div class="main-content">
+
+        <!-- Thông báo register thành công -->
+        <div class="register-message">
+            <?php if (isset($_SESSION['register-success'])): ?>
+                <?php echo htmlspecialchars(registerMessage()) ?>
+            <?php endif; ?>
+        </div>
+
         <div class="login-container">
             <h2>LOGIN</h2>
             <form action="../../actions/auth/login.auth.php" method="post">
@@ -40,6 +50,11 @@ unset($_SESSION['error']);
                 <a href="register.auth.php">Register</a>
             </p>
         </div>
+
+        <?php if (!empty($_SESSION['register-success'])): ?>
+            <script src="/oop-bookstore/public/js/registerMessage.js"></script>
+            <?php unset($_SESSION['register_success']); ?>
+        <?php endif; ?>
     </div>
 
     <!--Footer-->

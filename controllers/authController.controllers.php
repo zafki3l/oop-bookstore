@@ -12,12 +12,16 @@ class AuthController
         $this->user = $user;
     }
 
+    /**
+     * ----- CÁC CHỨC NĂNG CHÍNH -----
+     */
+
     // Đăng ký người dùng
     public function register()
     {
         session_start();
         $user = $this->user;
-        
+
         $this->isRegisterFormEmpty();
         $this->isEmailExist($user);
         $this->checkEmailFormat($user);
@@ -28,6 +32,8 @@ class AuthController
             $user->getPassword(),
             $user->getAddress()
         );
+
+        $_SESSION['register-success'] = 'Register successfully!';
 
         header('Location: /oop-bookstore/views/auth/login.auth.php');
         exit();
@@ -63,9 +69,14 @@ class AuthController
         exit();
     }
 
+    /**
+     * ----- CÁC CHỨC NĂNG PHỤ -----
+     */
+
     // Lưu thông tin đăng nhập vào session
     private function sessionManager($loginUser)
     {
+        $_SESSION['id'] = $loginUser['id'];
         $_SESSION['username'] = $loginUser['username'];
         $_SESSION['email'] = $loginUser['email'];
         $_SESSION['address'] = $loginUser['address'];
@@ -75,6 +86,8 @@ class AuthController
     // Xử lý redirect user
     private function redirectUser($user)
     {
+        $_SESSION['login_success'] =  'Login successfully!';
+        
         if ($_SESSION['role'] == $user::ROLE_ADMIN) {
             header('Location: /oop-bookstore/views/admin/dashboard.admin.php');
             exit();
@@ -214,6 +227,23 @@ class AuthController
             $_SESSION['error_email'] = "Invalid email format!";
             header('Location: /oop-bookstore/views/auth/register.auth.php');
             exit();
+        }
+    }
+
+    // Nếu chưa đăng nhập thì đẩy người dùng ra trang đăng nhập
+    public function ensureLogin()
+    {
+        if (!isset($_SESSION['id'])) {
+            header('Location: /oop-bookstore/views/auth/login.auth.php');
+            exit();
+        }
+    }
+
+    // Kiểm tra role admin mới được truy cập
+    public function ensureAdmin()
+    {
+        if ($_SESSION['role'] != $this->user::ROLE_ADMIN) {
+            die('You do not have permission to visit this site!');
         }
     }
 }

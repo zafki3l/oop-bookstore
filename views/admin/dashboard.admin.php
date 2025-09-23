@@ -119,7 +119,19 @@ function deleteUserMessage()
                         <td><?php echo htmlspecialchars($user['updated_at']) ?></td>
                         <td>
                             <a href="editUser.admin.php?id=<?php echo htmlspecialchars($user['id']) ?>">Edit</a>
-                            <a href="/oop-bookstore/actions/admin/deleteUser.admin.php?id=<?php echo htmlspecialchars($user['id']) ?>">Delete</a>
+                            <button onclick="showConfirm(<?php echo htmlspecialchars($user['id']) ?>)">Delete</button>
+
+                            <!-- Delete Modal -->
+                            <div id="confirmModal-<?php echo htmlspecialchars($user['id']) ?>" class="modal">
+                                <div class="modal-content">
+                                    <p>Click confirm to delete</p>
+                                    <form action="../../actions/admin/deleteUser.admin.php" method="post" id="deleteForm">
+                                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                        <button type="submit">Confirm</button>
+                                        <button type="button" onclick="closeModal(<?php echo htmlspecialchars($user['id']) ?>)">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -149,6 +161,8 @@ function deleteUserMessage()
             <script src="/oop-bookstore/public/js/deleteUserMessage.js"></script>
             <?php unset($_SESSION['delete-user-success']); ?>
         <?php endif; ?>
+
+        <script src="/oop-bookstore/public/js/confirmDeleteUser.js"></script>
     </div>
 </body>
 

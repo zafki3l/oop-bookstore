@@ -1,7 +1,26 @@
 <?php
 include_once '../../actions/admin/dashboard.admin.php';
 
-function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
+function loginMessage()
+{
+    return $_SESSION['login_success'];
+}
+
+function createUserMessage()
+{
+    return $_SESSION['create-user-success'];
+}
+
+function editUserMessage()
+{
+    return $_SESSION['edit-user-success'];
+}
+
+function deleteUserMessage()
+{
+    return $_SESSION['delete-user-success'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +41,28 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <!-- Thông báo login thành công -->
         <div class="login-message">
             <?php if (isset($_SESSION['login_success'])): ?>
-                <?php echo loginMessage(); ?>
+                <?php echo htmlspecialchars(loginMessage()); ?>
+            <?php endif; ?>
+        </div>
+
+        <!-- Thông báo tạo user thành công -->
+        <div class="create-user-message">
+            <?php if (isset($_SESSION['create-user-success'])): ?>
+                <?php echo htmlspecialchars(createUserMessage()); ?>
+            <?php endif; ?>
+        </div>
+
+        <!-- Thông báo edit user thành công -->
+        <div class="edit-user-message">
+            <?php if (isset($_SESSION['edit-user-success'])): ?>
+                <?php echo htmlspecialchars(editUserMessage()); ?>
+            <?php endif; ?>
+        </div>
+
+        <!-- Thông báo xóa user thành công -->
+        <div class="delete-user-message">
+            <?php if (isset($_SESSION['delete-user-success'])): ?>
+                <?php echo htmlspecialchars(deleteUserMessage()); ?>
             <?php endif; ?>
         </div>
 
@@ -31,7 +71,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <!-- Thanh tìm kiếm -->
         <?php include_once 'searchUser.admin.php' ?>
 
-        <a href="#">Add user</a>
+        <a href="addUser.admin.php">Add user</a>
 
         <!-- Bảng quản lý user -->
         <table border="1">
@@ -78,8 +118,8 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
                         <td><?php echo htmlspecialchars($user['created_at']) ?></td>
                         <td><?php echo htmlspecialchars($user['updated_at']) ?></td>
                         <td>
-                            <a href="#">Edit</a>
-                            <a href="#">Delete</a>
+                            <a href="editUser.admin.php?id=<?php echo htmlspecialchars($user['id']) ?>">Edit</a>
+                            <a href="/oop-bookstore/actions/admin/deleteUser.admin.php?id=<?php echo htmlspecialchars($user['id']) ?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -92,6 +132,23 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
             <?php unset($_SESSION['login_success']); ?>
         <?php endif; ?>
 
+        <!-- Hiển thị thông báo khi tạo user thành công -->
+        <?php if (!empty($_SESSION['create-user-success'])): ?>
+            <script src="/oop-bookstore/public/js/createUserMessage.js"></script>
+            <?php unset($_SESSION['create-user-success']); ?>
+        <?php endif; ?>
+
+        <!-- Hiển thị thông báo khi edit user thành công -->
+        <?php if (!empty($_SESSION['edit-user-success'])): ?>
+            <script src="/oop-bookstore/public/js/editUserMessage.js"></script>
+            <?php unset($_SESSION['edit-user-success']); ?>
+        <?php endif; ?>
+
+        <!-- Hiển thị thông báo khi delete user thành công -->
+        <?php if (!empty($_SESSION['delete-user-success'])): ?>
+            <script src="/oop-bookstore/public/js/deleteUserMessage.js"></script>
+            <?php unset($_SESSION['delete-user-success']); ?>
+        <?php endif; ?>
     </div>
 </body>
 

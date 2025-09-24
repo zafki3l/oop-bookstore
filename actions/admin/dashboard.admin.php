@@ -3,7 +3,6 @@
 session_start();
 
 include_once '../../controllers/authController.controllers.php';
-include_once 'getAllUser.admin.php';
 
 $db = new Database();
 $user = new User($db);
@@ -14,4 +13,12 @@ $authController->ensureAdmin();
 
 $username = $_SESSION['username'];
 
-$users = $data;
+if (isset($_GET['found'])) {
+    $found = $_GET['user'] ?? '';
+    $id = $found ?? '';
+    $usernameData = "%$found%" ?? '';
+
+    $users = $user->findUser($id, $usernameData);
+} else {
+    $users = $user->getAllUser();
+}

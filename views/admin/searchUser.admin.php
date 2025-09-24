@@ -10,9 +10,9 @@
 
 <body>
     <!-- Thanh tìm kiếm -->
-    <form action="userResult.admin.php" method="get">
+    <form action="dashboard.admin.php" method="get">
+        <button type="submit" name="found"><i class="fas fa-search"></i></button>
         <input type="text" name="user" placeholder="Find user">
-        <input type="submit" name="found">
     </form>
 
 </body>

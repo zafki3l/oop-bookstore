@@ -13,6 +13,7 @@ function registerMessage() { return htmlspecialchars($_SESSION['register-success
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/auth/login.css">
     <title>Document</title>
 </head>

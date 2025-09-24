@@ -11,6 +11,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <title>Document</title>
 </head>
 <body>

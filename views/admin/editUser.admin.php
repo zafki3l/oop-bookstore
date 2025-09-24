@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 include_once '../../models/user.models.php';
 
 $db = new Database();

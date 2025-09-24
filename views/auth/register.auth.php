@@ -15,10 +15,10 @@ $error_address = $_SESSION['error_address'] ?? '';
 unset($_SESSION['error_address']);
 
 $error_password = $_SESSION['error_password'] ?? '';
-unset($_SESSION['error_address']);
+unset($_SESSION['error_password']);
 
 $error_password_confirmation = $_SESSION['error_password_confirmation'] ?? '';
-unset($_SESSION['error_address']);
+unset($_SESSION['error_password_confirmation']);
 ?>
 
 <!DOCTYPE html>

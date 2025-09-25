@@ -13,6 +13,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Staff Dashboard</title>
 </head>
 <body>
@@ -22,12 +23,23 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <div class="main-content">
         
         <div class="dashboard-grid">
-            <div class="dashboard-box staff-info">Thông tin nhân viên</div>
-            <div class="dashboard-box book-manage"><a href="#">Book Management</a></div>
-            <div class="dashboard-box category-man">Quản lý thể loại</div>
-            <div class="dashboard-box sales-report">Thống kê doanh số</div>
-            <div class="dashboard-box order-manage">Quản lý đơn hàng</div>
-            <div class="dashboard-box total-order">Tổng đơn hàng</div>
+            <div class="div1">
+                <div class="dashboard staff-info">
+                    <p>Thông tin nhân viên</p>
+                </div>
+                <div class="div2">
+                    <a href="#"><div class="dashboard box1 book-manage">Book Management</div></a>
+                    <div class="dashboard box1 category-man">Quản lý thể loại</div>
+                </div>
+            </div>
+
+            <div class="div1 bottom">
+                <div class="dashboard sales-report">Thống kê doanh số</div>
+                <div class="div2">
+                    <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>
+                    <div class="dashboard box2 total-order">Tổng đơn hàng</div>
+                </div>
+            </div>
         </div>
 
         <div class="login-message">

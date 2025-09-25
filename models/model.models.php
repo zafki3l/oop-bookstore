@@ -11,5 +11,8 @@ abstract class Model
         $this->db = $db;
     }
 
-    protected function getDb() {return $this->db;}
+    protected function getDb()
+    {
+        return $this->db;
+    }
 }

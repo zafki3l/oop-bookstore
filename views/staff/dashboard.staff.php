@@ -23,7 +23,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         
         <div class="dashboard-grid">
             <div class="dashboard-box staff-info">Thông tin nhân viên</div>
-            <div class="dashboard-box book-manage"><a href="#">Book Management</a></div>
+            <div class="dashboard-box book-manage"><a href="books/index.books.php">Book Management</a></div>
             <div class="dashboard-box category-man">Quản lý thể loại</div>
             <div class="dashboard-box sales-report">Thống kê doanh số</div>
             <div class="dashboard-box order-manage">Quản lý đơn hàng</div>

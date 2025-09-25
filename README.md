@@ -70,53 +70,86 @@ cd oop-bookstore
 ## Cấu trúc thư mục
 ```
 oop-bookstore/
-├── actions/                  # Các file xử lý action (auth, homepage)
-│   ├── auth/
-│   │   ├── login.auth.php
-│   │   ├── logout.auth.php
-│   │   └── register.auth.php
-│   └── homepage.actions.php
-├── config/                   # File cấu hình ứng dụng và database
-│   ├── app.config.php
-│   ├── app.example.config.php
-│   └── database.config.php
-├── controllers/              # Các controller (ví dụ: auth)
-│   └── authController.controllers.php
-├── migrations/               # File migration để tạo database và bảng
-│   ├── 20250917233233_create_mvc_bookstore_database.php
-│   ├── 20250917233341_create_users_table.php
-│   ├── 20250921004647_create_books_table.php
-│   ├── 20250921004951_create_categories_table.php
-│   ├── 20250921005950_create_orders_table.php
-│   ├── 20250921010440_create_orderDetails_table.php
-│   ├── 20250921010727_create_carts_table.php
-│   ├── 20250921170733_add_pages_to_table.php
-│   ├── create.ps1
-│   └── migration.migrations.php
-├── models/                   # Các model (ví dụ: user)
-│   ├── model.models.php
-│   └── user.models.php
-├── public/                   # Tài nguyên công khai (CSS, JS, images)
-│   ├── css/
-│   │   ├── layouts/
-│   │   │   ├── footer.css
-│   │   │   └── header.css
-│   │   ├── homepage.css
-│   │   └── rule.css
-│   ├── images/
-│   ├── js/
-│   └── hello.txt
-├── views/                    # Các view (auth, layouts, homepage)
-│   ├── auth/
-│   │   ├── login.auth.php
-│   │   └── register.auth.php
-│   ├── layouts/
-│   │   ├── footer.layouts.php
-│   │   └── header.layouts.php
-│   └── homepage.views.php
-├── .gitignore
-├── index.php                 # File entry point
-├── instructions.txt
-├── README.md                
-└── requirements.txt
+├─ actions/
+│  ├─ admin/
+│  │  ├─ createUser.admin.php
+│  │  ├─ dashboard.admin.php
+│  │  ├─ deleteUser.admin.php
+│  │  └─ editUser.admin.php
+│  ├─ auth/
+│  │  ├─ login.auth.php
+│  │  ├─ logout.auth.php
+│  │  └─ register.auth.php
+│  └─ homepage.actions.php
+├─ config/
+│  ├─ .htaccess
+│  ├─ app.config.php
+│  ├─ app.example.config.php
+│  └─ database.config.php
+├─ controllers/
+│  ├─ authController.controllers.php
+│  └─ userController.controllers.php
+├─ handlers/
+│  └─ userErrorHandler.handlers.php
+├─ migrations/
+│  ├─ 20250917233233_create_mvc_bookstore_database.php
+│  ├─ 20250917233341_create_users_table.php
+│  ├─ 20250921004647_create_books_table.php
+│  ├─ 20250921004951_create_categories_table.php
+│  ├─ 20250921005950_create_orders_table.php
+│  ├─ 20250921010440_create_orderDetails_table.php
+│  ├─ 20250921010727_create_carts_table.php
+│  ├─ 20250921170733_add_pages_to_table.php
+│  ├─ create.ps1
+│  └─ migration.migrations.php
+├─ models/
+│  ├─ model.models.php
+│  └─ user.models.php
+├─ public/
+│  ├─ css/
+│  │  ├─ admin/
+│  │  │  ├─ addUser.css
+│  │  │  ├─ dashboard.css
+│  │  │  └─ editUser.css
+│  │  ├─ auth/
+│  │  │  ├─ login.css
+│  │  │  └─ register.css
+│  │  ├─ layouts/
+│  │  │  ├─ footer.css
+│  │  │  ├─ header.css
+│  │  │  └─ searchbar.css
+│  │  ├─ homepage.css
+│  │  ├─ noti.css
+│  │  └─ rule.css
+│  ├─ images/
+│  ├─ js/
+│  │  ├─ confirmDeleteUser.js
+│  │  ├─ createUserMessage.js
+│  │  ├─ deleteUserMessage.js
+│  │  ├─ editUserMessage.js
+│  │  ├─ loginMessage.js
+│  │  └─ registerMessage.js
+│  └─ hello.txt
+├─ views/
+│  ├─ admin/
+│  │  ├─ addUser.admin.php
+│  │  ├─ dashboard.admin.php
+│  │  ├─ editUser.admin.php
+│  │  └─ searchUser.admin.php
+│  ├─ auth/
+│  │  ├─ login.auth.php
+│  │  └─ register.auth.php
+│  ├─ layouts/
+│  │  ├─ footer.layouts.php
+│  │  ├─ header.layouts.php
+│  │  └─ searchbar.layouts.php
+│  ├─ staff/
+│  │  └─ dashboard.staff.php
+│  └─ homepage.views.php
+├─ .gitattributes
+├─ .gitignore
+├─ index.php
+├─ instructions.txt
+├─ README.md
+└─ requirements.txt
 ```

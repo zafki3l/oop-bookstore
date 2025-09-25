@@ -15,7 +15,7 @@ function registerMessage() { return htmlspecialchars($_SESSION['register-success
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/auth/login.css">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 
 <body>

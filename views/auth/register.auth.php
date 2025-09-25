@@ -29,7 +29,7 @@ unset($_SESSION['error_password_confirmation']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/auth/register.css">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 
 <body>

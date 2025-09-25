@@ -11,6 +11,7 @@ $inputPassword = $_POST['password'];
 
 $db = new Database();
 $user = new User($db, null, $email, null, $inputPassword);
-$authController = new AuthController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$authController = new AuthController($user, $userErrorHandler);
 
 $authController->login();

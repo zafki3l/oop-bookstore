@@ -14,8 +14,9 @@ $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 $db = new Database();
 $user = new User($db, null, $email, $username, $hashedPassword, $address, $role);
-$authController = new AuthController($user);
-$userController = new UserController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$authController = new AuthController($user, $userErrorHandler);
+$userController = new UserController($user, $userErrorHandler);
 
 $authController->ensureLogin();
 $authController->ensureAdmin();

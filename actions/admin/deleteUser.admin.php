@@ -8,5 +8,6 @@ $id = $_POST['id'];
 
 $db = new Database();
 $user = new User($db);
-$userController = new UserController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$userController = new UserController($user, $userErrorHandler);
 $userController->delete($id);

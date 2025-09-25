@@ -13,10 +13,11 @@ $role = $_POST['role'];
 
 $db = new Database();
 $user = new User($db, $id, $email, $username, null, $address, $role);
-$authController = new AuthController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$authController = new AuthController($user, $userErrorHandler);
 
 $authController->ensureLogin();
 $authController->ensureAdmin();
 
-$userController = new UserController($user);
+$userController = new UserController($user, $userErrorHandler);
 $userController->edit();

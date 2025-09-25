@@ -1,16 +1,51 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  height: max-content;
+}
+
 .main-content {
-    padding: 20px 150px;
+    justify-content: center;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* trái rộng hơn */
-  grid-template-rows: repeat(4, 1fr); /* 4 hàng đều nhau */
-  gap: 15px;
-  height: 80vh; /* cho nó full màn hình */
+.div1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .staff-info{
+    padding: 150px 200px;
+  }
+  .sales-report{
+    padding: 150px 170px;
+  }
 }
 
-.dashboard-box {
+.div2{
+  margin-left: 20px ;
+  a{
+    text-decoration: none;
+  }
+  .box1{
+    padding: 65px 100px;
+  }
+
+  .box2{
+    padding: 65px 135px;
+  }
+  .book-manage, .order-manage{
+    margin-bottom: 20px ;
+    color: black;
+  }
+}
+
+.bottom{
+  margin: 20px 0;
+}
+
+.dashboard {
   background: #fdfcf0;
   padding: 30px;
   border-radius: 8px;
@@ -18,26 +53,10 @@
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* Gán vị trí */
-.staff-info    { grid-column: 1; grid-row: 1 / span 2; }   /* chiếm 2 hàng */
-.sales-report  { grid-column: 1; grid-row: 3 / span 2; max-width: 80%; }   /* chiếm 2 hàng */
-.book-manage   { grid-column: 2; grid-row: 1; }
-.category-man  { grid-column: 2; grid-row: 2; }
-.order-manage   { grid-column: 2; grid-row: 3; }
-.total-order    { grid-column: 2; grid-row: 3; }
 
-.order-manage,
-.total-order {
-  width: 48%; /* chia đôi */
-  justify-self: center;
-}
 
-.order-manage { justify-self: start; }
-.total-order  { justify-self: end; }
+
 
 

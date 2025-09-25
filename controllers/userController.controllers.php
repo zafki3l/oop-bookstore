@@ -22,6 +22,7 @@ class UserController
         $this->userErrorHandler->emptyInput($user, $redirectPath);
         $this->userErrorHandler->checkEmailFormat($user, $redirectPath);
         $this->userErrorHandler->isEmailExist($user, $redirectPath);
+
         $user->createUser();
 
         $_SESSION['create-user-success'] = 'Create new user successfully!';

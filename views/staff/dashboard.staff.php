@@ -12,6 +12,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/staff/dashboard.css">
     <title>Staff Dashboard</title>
 </head>
 <body>
@@ -20,28 +21,13 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
 
     <div class="main-content">
         
-        <div class="staff-information">
-            <h1>WELCOME <?php echo htmlspecialchars($username) ?></h1>
-        </div>
-
-        <div class="categories-container">
-            <h1>Category Management</h1>
-        </div>
-
-        <div class="books-container">
-            <h1>Book Management</h1>
-        </div>
-
-        <div class="sales-report-container">
-            <h1>Sales Report</h1>
-        </div>
-
-        <div class="orders-container">
-            <h1>Order Management</h1>
-        </div>
-
-        <div class="total-order-container">
-            <h1>Total Order</h1>
+        <div class="dashboard-grid">
+            <div class="dashboard-box staff-info">Thông tin nhân viên</div>
+            <div class="dashboard-box book-manage"><a href="#">Book Management</a></div>
+            <div class="dashboard-box category-man">Quản lý thể loại</div>
+            <div class="dashboard-box sales-report">Thống kê doanh số</div>
+            <div class="dashboard-box order-manage">Quản lý đơn hàng</div>
+            <div class="dashboard-box total-order">Tổng đơn hàng</div>
         </div>
 
         <div class="login-message">

@@ -2,21 +2,26 @@
 
 include_once __DIR__ . '/../models/user.models.php';
 include_once __DIR__ . '/../config/database.config.php';
+include_once __DIR__ . '/../handlers/userErrorHandler.handlers.php';
 
 class UserController
 {
     private $user;
+    private $userErrorHandler;
 
-    public function __construct(User $user)
+    public function __construct(User $user, userErrorHandler $userErrorHandler)
     {
         $this->user = $user;
+        $this->userErrorHandler = $userErrorHandler;
     }
 
     public function create()
     {
+        $redirectPath = '/oop-bookstore/views/admin/addUser.admin.php';
         $user = $this->user;
-        $this->emptyInput($user);
-        $this->checkEmailFormat($user);
+        $this->userErrorHandler->emptyInput($user, $redirectPath);
+        $this->userErrorHandler->checkEmailFormat($user, $redirectPath);
+        $this->userErrorHandler->isEmailExist($user, $redirectPath);
         $user->createUser();
 
         $_SESSION['create-user-success'] = 'Create new user successfully!';
@@ -26,7 +31,10 @@ class UserController
 
     public function edit()
     {
+        $redirectPath = '/oop-bookstore/views/admin/editUser.admin.php?id=' . $this->user->getId();
         $user = $this->user;
+        $this->userErrorHandler->emptyInput($user, $redirectPath, true);
+        $this->userErrorHandler->checkEmailFormat($user, $redirectPath);
         $user->editUser();
 
         $_SESSION['edit-user-success'] = 'Edit user successfully!';
@@ -42,47 +50,5 @@ class UserController
         $_SESSION['delete-user-success'] = 'Delete user successfully!';
         header('Location: /oop-bookstore/views/admin/dashboard.admin.php');
         exit();
-    }
-
-    private function emptyInput($user)
-    {
-        if (empty($user->getUsername()) && empty($user->getEmail()) && empty($user->getPassword()) && empty($user->getAddress())) {
-            $_SESSION['error'] = "Empty input!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
-
-        if (empty($user->getUsername())) {
-            $_SESSION['error_username'] = "Empty username!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
-
-        if (empty($user->getEmail())) {
-            $_SESSION['error_email'] = "Empty email!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
-
-        if (empty($user->getPassword())) {
-            $_SESSION['error_password'] = "Empty password!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
-
-        if (empty($user->getAddress())) {
-            $_SESSION['error_address'] = "Empty address!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
-    }
-
-    private function checkEmailFormat($user)
-    {
-        if (!filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['error_email'] = "Invalid email format!";
-            header('Location: /oop-bookstore/views/admin/addUser.admin.php');
-            exit();
-        }
     }
 }

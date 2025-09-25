@@ -6,7 +6,8 @@ include_once '../../controllers/authController.controllers.php';
 
 $db = new Database();
 $user = new User($db);
-$authController = new AuthController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$authController = new AuthController($user, $userErrorHandler);
 
 $authController->ensureLogin();
 $authController->ensureAdmin();

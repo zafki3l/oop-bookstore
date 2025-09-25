@@ -17,7 +17,8 @@ $address = $_POST['address'];
 // Khai báo các lớp
 $db = new Database();
 $user = new User($db, null, $email, $username, $hashedPassword, $address);
-$authController = new AuthController($user);
+$userErrorHandler = new UserErrorHandler($user);
+$authController = new AuthController($user, $userErrorHandler);
 
 // Check mật khẩu có trùng khớp không?
 $authController->passwordMismatch($password, $passwordConfirmation);

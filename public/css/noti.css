@@ -1,9 +1,9 @@
 .login-message {
   position: fixed;
-  top: 20px;
+  top: 60px;
   right: 20px;
-  background-color: #faf9ea;
-  color: black;
+  background-color: #28a745;
+  color: white;
   padding: 15px 25px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -18,10 +18,10 @@
 
 .create-user-message {
   position: fixed;
-  top: 20px;
+  top: 60px;
   right: 20px;
-  background-color: #faf9ea;
-  color: black;
+  background-color: #28a745;
+  color: white;
   padding: 15px 25px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -36,10 +36,10 @@
 
 .edit-user-message {
   position: fixed;
-  top: 20px;
+  top: 60px;
   right: 20px;
-  background-color: #faf9ea;
-  color: black;
+  background-color: #28a745;
+  color: white;
   padding: 15px 25px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -54,10 +54,10 @@
 
 .delete-user-message {
   position: fixed;
-  top: 20px;
+  top: 60px;
   right: 20px;
-  background-color: #faf9ea;
-  color: black;
+  background-color: #28a745;
+  color: white;
   padding: 15px 25px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -72,10 +72,10 @@
 
 .register-message {
     position: fixed;
-    top: 20px;
+    top: 60px;
     right: 20px;
-    background-color: #faf9ea;
-    color: black;
+    background-color: #28a745;
+    color: white;
     padding: 15px 25px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);

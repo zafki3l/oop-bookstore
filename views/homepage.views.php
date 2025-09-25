@@ -14,7 +14,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <link rel="stylesheet" href="/oop-bookstore/public/css/homepage.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
-    <title>Document</title>
+    <title>Homepage</title>
 </head>
 
 <body>

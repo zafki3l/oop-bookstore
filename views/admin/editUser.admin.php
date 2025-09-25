@@ -33,7 +33,7 @@ unset($_SESSION['error_address']);
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/admin/editUser.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
-    <title>Document</title>
+    <title>Edit User</title>
 </head>
 
 <body>

@@ -26,7 +26,7 @@ unset($_SESSION['error_password']);
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/admin/addUser.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
-    <title>Document</title>
+    <title>Create New User</title>
 </head>
 
 <body>
@@ -74,6 +74,8 @@ unset($_SESSION['error_password']);
                     <div class="form-group">
                         <a href="dashboard.admin.php" class="cancel-btn">Cancel</a>
                         <input type="submit" name="submit" value="Create User" class="submit-btn">
+
+                        <!-- Hiển thị lỗi -->
                         <?php if (!empty($error)): ?>
                             <div class="error-box"><?= htmlspecialchars($error) ?></div>
                         <?php elseif (!empty($error_username)): ?>

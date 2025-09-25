@@ -9,15 +9,15 @@ HƯỚNG DẪN VÀ VAI TRÒ CỦA CÁC THƯ MỤC
     - Quản lý các phiên bản sửa đổi cấu trúc cơ sở dữ liệu.
     - Giúp theo dõi các thay đổi trong database theo thời gian.
 
-3. model
+3. models
     - Chứa các file trung gian (Models) để lấy dữ liệu từ database và trả về controller hoặc view.
     - Ví dụ: Book.Model.php lấy dữ liệu sách từ database.
 
-4. view
+4. views
     - Chứa các file giao diện người dùng (HTML, PHP template).
     - Hiển thị thông tin do controller cung cấp.
 
-5. controller
+5. controllers
     - Chứa các file xử lý logic của ứng dụng và các request từ người dùng.
     - Ví dụ: BookController.php xử lý các thao tác thêm, sửa, xóa sách.
 
@@ -30,3 +30,7 @@ HƯỚNG DẪN VÀ VAI TRÒ CỦA CÁC THƯ MỤC
     -css: các file định dạng giao diện.
     - js: các file xử lý tương tác phía frontend.
     - images: chứa hình ảnh, ví dụ ảnh sách.
+
+8. handlers
+    - Chứa các file xử lý lỗi
+    - Ví dụ: userErrorHandler.handlers.php

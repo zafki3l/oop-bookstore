@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/addBook.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
     <title>Create New Book</title>
 </head>
 
@@ -15,6 +19,10 @@
     <?php include '../../layouts/header.layouts.php' ?>
 
     <div class="main-content">
+        <div class="sidebar">
+            <?php include '../../layouts/sidebar.layouts.php' ?>
+        </div>
+
         <div class="container">
             <div class="container-header">
                 <h2>ADD NEW BOOK</h2>
@@ -54,8 +62,7 @@
 
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <input type="text" id="description" name="description" placeholder="Description">
-
+                        <textarea name="description" id="description"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -81,6 +88,21 @@
                         <a href="index.books.php" class="cancel-btn">Cancel</a>
                         <input type="submit" name="submit" class="submit-btn" value="Create Book">
                     </div>
+
+                    <!-- Hiển thị lỗi -->
+                    <?php if (!empty($_SESSION['error_name'])): ?>
+                        <div class="error-box"><?= htmlspecialchars($_SESSION['error_name']) ?></div>
+                        <?php unset($_SESSION['error_name']); ?>
+                    <?php elseif (!empty($_SESSION['error_pages'])): ?>
+                        <div class="error-box"><?= htmlspecialchars($_SESSION['error_pages']) ?></div>
+                        <?php unset($_SESSION['error_pages']); ?>
+                    <?php elseif (!empty($_SESSION['error_price'])): ?>
+                        <div class="error-box"><?= htmlspecialchars($_SESSION['error_price']) ?></div>
+                        <?php unset($_SESSION['error_price']); ?>
+                    <?php elseif (!empty($_SESSION['error_quantity'])): ?>
+                        <div class="error-box"><?= htmlspecialchars($_SESSION['error_quantity']) ?></div>
+                        <?php unset($_SESSION['error_quantity']); ?>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

@@ -15,7 +15,7 @@ $currentPage = isset($_GET['page_number']) ? (int)$_GET['page_number'] : 1;
 
 <body>
     <!-- Display the page info text -->
-    
+
     <div class="page-info">
         <?php if (!isset($_GET['page_number'])): ?>
             <?php $page = 1; ?>
@@ -38,32 +38,38 @@ $currentPage = isset($_GET['page_number']) ? (int)$_GET['page_number'] : 1;
         <?php endif; ?>
 
         <!-- Output the page number -->
-        <?php if ($_GET['page_number'] == 1): ?>
-            <?php $endPage = 5; ?>
-            <?php for ($i = 1; $i <= $endPage; $i++): ?>
-                <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
-            <?php endfor; ?>
-        <?php elseif ($_GET['page_number'] == 2): ?>
-            <?php
-                $startPage = $_GET['page_number'] - 1;
-                $endPage = $_GET['page_number'] + 3; 
-            ?>
-            <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
-                <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
-            <?php endfor; ?>
-        <?php elseif ($_GET['page_number'] == $pages): ?>
-            <?php $startPage = $pages - 4; ?>
-            <?php for ($i = $startPage; $i <= $pages; $i++): ?>
+        <?php if ($pages < 5): ?>
+            <?php for ($i = 1; $i <= $page; $i++): ?>
                 <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
             <?php endfor; ?>
         <?php else: ?>
-            <?php
-            $startPage = $_GET['page_number'] - 2;
-            $endPage = $_GET['page_number'] + 2;
-            ?>
-            <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
-                <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
-            <?php endfor; ?>
+            <?php if ($_GET['page_number'] == 1): ?>
+                <?php $endPage = 5; ?>
+                <?php for ($i = 1; $i <= $endPage; $i++): ?>
+                    <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
+                <?php endfor; ?>
+            <?php elseif ($_GET['page_number'] == 2): ?>
+                <?php
+                $startPage = $_GET['page_number'] - 1;
+                $endPage = $_GET['page_number'] + 3;
+                ?>
+                <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                    <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
+                <?php endfor; ?>
+            <?php elseif ($_GET['page_number'] == $pages): ?>
+                <?php $startPage = $pages - 4; ?>
+                <?php for ($i = $startPage; $i <= $pages; $i++): ?>
+                    <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
+                <?php endfor; ?>
+            <?php else: ?>
+                <?php
+                $startPage = $_GET['page_number'] - 2;
+                $endPage = $_GET['page_number'] + 2;
+                ?>
+                <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                    <a href="?page_number=<?php echo $i ?>&found=<?= urlencode($search) ?>&data=<?= urlencode($data) ?>"><?php echo $i ?></a>
+                <?php endfor; ?>
+            <?php endif; ?>
         <?php endif; ?>
 
         <!-- Go to next page button -->

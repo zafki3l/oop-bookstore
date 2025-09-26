@@ -28,7 +28,7 @@ if (isset($_GET['found'])) {
     $records = $user->getFindUserCount($id, $usernameData);
 
     // Tính số trang
-    $pages = ceil($records / $row_per_page);
+    $pages = (ceil($records / $row_per_page) <= 1) ? 1 : ceil($records / $row_per_page);
 
     if (isset($_GET['page_number'])) {
         $page = $_GET['page_number'] - 1;
@@ -44,7 +44,7 @@ if (isset($_GET['found'])) {
     $records = $user->getAllUserCount();
 
     // Tính số trang
-    $pages = ceil($records / $row_per_page);
+    $pages = (ceil($records / $row_per_page) <= 1) ? 1 : ceil($records / $row_per_page);
 
     if (isset($_GET['page_number'])) {
         $page = $_GET['page_number'] - 1;

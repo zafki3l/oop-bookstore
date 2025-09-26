@@ -14,7 +14,7 @@ Dự án được phát triển và chạy trên:
 ### Yêu cầu hệ thống
 - Máy chủ web hỗ trợ PHP (Apache)
 - Cơ sở dữ liệu MySQL/MariaDB
-- PHP phiên bản 8.0 trở lên
+- PHP phiên bản 8.2.12 trở lên
 
 ---
 

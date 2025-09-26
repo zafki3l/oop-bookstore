@@ -14,6 +14,7 @@ $authController->ensureAdmin();
 
 $username = $_SESSION['username'];
 
+// Find user
 if (isset($_GET['found'])) {
     $found = $_GET['user'] ?? '';
     $id = $found ?? '';

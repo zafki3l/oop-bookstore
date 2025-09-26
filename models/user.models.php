@@ -19,7 +19,7 @@ class User extends Model
     private $created_at;
     private $updated_at;
 
-    public function __construct(Database $db, $id = null, $email = null, $username = null, $password = null, $address = null, $role = null, $created_at = null, $updated_at = null)
+    public function __construct($db = new Database(), $id = null, $email = null, $username = null, $password = null, $address = null, $role = null, $created_at = null, $updated_at = null)
     {
         parent::__construct($db);
 

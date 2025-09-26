@@ -112,7 +112,7 @@ function deleteUserMessage()
                                             <hr>
                                             <p>Click confirm to delete</p>
                                             <form action="../../actions/admin/deleteUser.admin.php" method="post" id="deleteForm">
-                                                <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['id']); ?>">
                                                 <button type="submit" class="submit-modal">Confirm</button>
                                                 <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($user['id']) ?>)">Cancel</button>
                                             </form>

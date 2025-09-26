@@ -9,7 +9,7 @@ class UserController
     private $user;
     private $userErrorHandler;
 
-    public function __construct(User $user, userErrorHandler $userErrorHandler)
+    public function __construct($user = new User(), userErrorHandler $userErrorHandler)
     {
         $this->user = $user;
         $this->userErrorHandler = $userErrorHandler;

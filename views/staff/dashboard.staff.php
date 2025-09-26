@@ -48,7 +48,7 @@ function loginMessage()
                     </div>
                 </div>
                 <div class="div2">
-                    <a href="books/index.books.php">
+                    <a href="books/index.books.php?page_number=1">
                         <div class="dashboard box1 book-manage">Book Management</div>
                     </a>
                     <div class="dashboard box1 category-man">Quản lý thể loại</div>

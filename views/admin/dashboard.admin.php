@@ -28,6 +28,7 @@ function deleteUserMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/admin/dashboard.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Admin Dashboard</title>
 </head>
@@ -123,8 +124,11 @@ function deleteUserMessage()
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <!-- Phân trang -->
+                <?php include_once '../layouts/pagination.layouts.php' ?>
             </div>
         </div>
+
 
         <!-- Thông báo login thành công -->
         <div class="login-message">

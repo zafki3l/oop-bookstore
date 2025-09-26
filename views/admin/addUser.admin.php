@@ -72,7 +72,7 @@ unset($_SESSION['error_password']);
                     </div>
 
                     <div class="form-group">
-                        <a href="dashboard.admin.php" class="cancel-btn">Cancel</a>
+                        <a href="dashboard.admin.php?page_number=1" class="cancel-btn">Cancel</a>
                         <input type="submit" name="submit" value="Create User" class="submit-btn">
 
                         <!-- Hiển thị lỗi -->

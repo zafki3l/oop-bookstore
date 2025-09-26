@@ -28,6 +28,7 @@ function deleteBookMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/bookIndex.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <title>Book Management</title>
     <title>Staff Dashboard</title>
 </head>
@@ -53,7 +54,7 @@ function deleteBookMessage()
                 <!-- Thanh tìm kiếm -->
                 <div class="search-add">
                     <?php include_once 'searchBook.books.php' ?>
-                    <a href="addBook.books.php">Add book</a>
+                    <a href="addBook.books.php" class="addBook">Add book</a>
                 </div>
             </div>
 
@@ -113,6 +114,9 @@ function deleteBookMessage()
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+
+                <!-- Phân trang -->
+                <?php include_once '../../layouts/pagination.layouts.php' ?>
             </div>
 
         </div>

@@ -7,10 +7,9 @@
 
 .dashboard-container {
     justify-content: center;
-    align-content: center;
     border-radius: 10px;
-    height: auto;
-    background-color: aliceblue;
+    min-height: 100vh;
+    background: #faf9ea;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);

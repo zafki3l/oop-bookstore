@@ -71,23 +71,32 @@ class User extends Model
     }
 
     // Lấy ra tất cả user
-    public function getAllUser()
+    public function getAllUser($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
 
-        $sql = $conn->execute_query("SELECT * FROM users");
+        $sql = $conn->execute_query("SELECT * FROM users LIMIT $start, $row_per_page");
 
         $data = $sql->fetch_all(MYSQLI_ASSOC);
 
         return $data;
     }
 
-    // Tìm kiếm user
-    public function findUser($id, $username)
+    public function getAllUserCount()
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT * FROM users WHERE id = ? OR username LIKE ?";
+        $sql = $conn->execute_query("SELECT * FROM users");
+
+        return $sql->num_rows;
+    }
+
+    // Tìm kiếm user
+    public function findUser($id, $username, $start, $row_per_page)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT * FROM users WHERE id = ? OR username LIKE ? LIMIT $start, $row_per_page";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('is', $id, $username);
@@ -99,6 +108,20 @@ class User extends Model
         $conn->close();
 
         return $data;
+    }
+
+    public function getFindUserCount($id, $username)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT * FROM users WHERE id = ? OR username LIKE ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $id, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows;
     }
 
     // Thêm mới 1 user

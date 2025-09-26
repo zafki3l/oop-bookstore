@@ -54,7 +54,7 @@ class Book extends Model
         $this->updated_at = $updated_at;
     }
 
-    public function getAllBook()
+    public function getAllBook($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
 
@@ -71,7 +71,8 @@ class Book extends Model
                         b.cover
                 FROM books b
                 JOIN categories c ON b.category_id = c.id
-                ORDER BY b.id ASC";
+                ORDER BY b.id ASC
+                LIMIT $start, $row_per_page";
 
         $query = $conn->execute_query($sql);
         $data = $query->fetch_all(MYSQLI_ASSOC);
@@ -79,6 +80,29 @@ class Book extends Model
         $conn->close();
 
         return $data;
+    }
+
+    public function getAllBookCount()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT id FROM books";
+        $query = $conn->execute_query($sql);
+
+        return $query->num_rows;
+    }
+
+    public function getFindBookCount($id, $bookName)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT id FROM books WHERE id = ? OR name LIKE ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $id, $bookName);
+        $stmt->execute();
+
+        return $stmt->num_rows();
     }
 
     public function addBook()
@@ -169,7 +193,7 @@ class Book extends Model
         return $data;
     }
 
-    public function getBook($idData, $usernameData)
+    public function getBook($idData, $usernameData, $start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
 
@@ -186,7 +210,8 @@ class Book extends Model
                         b.cover
                 FROM books b
                 JOIN categories c ON b.category_id = c.id
-                WHERE b.id = ? OR b.name LIKE ?";
+                WHERE b.id = ? OR b.name LIKE ?
+                LIMIT $start, $row_per_page";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('is', $idData, $usernameData);

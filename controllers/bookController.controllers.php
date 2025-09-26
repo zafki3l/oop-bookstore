@@ -2,19 +2,30 @@
 
 include_once __DIR__ . '/../models/book.models.php';
 include_once __DIR__ . '/../config/database.config.php';
+include_once __DIR__ . '/../handlers/bookErrorHandler.handlers.php';
 
 class BookController
 {
     private $book;
+    private $bookErrorHandler;
 
-    public function __construct($book = new Book())
+    public function __construct($book = new Book(), $bookErrorHandler = new BookErrorHandler())
     {
         $this->book = $book;
+        $this->bookErrorHandler = $bookErrorHandler;
     }
 
     public function create()
     {
         session_start();
+        $redirectPath = '/oop-bookstore/views/staff/books/addBook.books.php';
+
+        // Error handling
+        $this->bookErrorHandler->emptyBookName($redirectPath);
+        $this->bookErrorHandler->PageValidate($redirectPath);
+        $this->bookErrorHandler->priceValidate($redirectPath);
+        $this->bookErrorHandler->quantityValidate($redirectPath);
+
         $this->uploadFile();
         $this->book->addBook();
 
@@ -26,6 +37,14 @@ class BookController
     public function edit($id)
     {
         session_start();
+        $redirectPath = '/oop-bookstore/views/staff/books/editBook.books.php?id=' . $id;
+
+        // Error handling
+        $this->bookErrorHandler->emptyBookName($redirectPath);
+        $this->bookErrorHandler->PageValidate($redirectPath);
+        $this->bookErrorHandler->priceValidate($redirectPath);
+        $this->bookErrorHandler->quantityValidate($redirectPath);
+
         $this->uploadFile();
         $this->emptyCoverInput($id);
         $this->book->editBook($id);

@@ -1,27 +1,26 @@
-
-*{
-  margin: 0;
-  padding: 0;
-}
-
-body{
-  height: max-content;
-}
-
 .main-content {
-    justify-content: center;
+  padding-top: 20px;
 }
-
 .div1{
   display: flex;
   justify-content: center;
   align-items: center;
   .staff-info{
-    padding: 150px 200px;
+    padding: 104px 145px;
   }
   .sales-report{
     padding: 150px 170px;
   }
+}
+.info-content {
+  display: flex;
+  gap: 20px;
+}
+
+.info-content .text {
+    flex-direction: column;
+    display: block;
+    margin: 5px 0;
 }
 
 .div2{

@@ -4,6 +4,8 @@ include_once 'model.models.php';
 
 class Book extends Model
 {
+    const OUT_STOCK = 0;
+    const IN_STOCK = 1;
     private $id;
     private $name;
     private $author;
@@ -18,8 +20,22 @@ class Book extends Model
     private $created_at;
     private $updated_at;
 
-    public function __construct($db = new Database(), $id = null, $name = null, $author = null, $publisher = null, $pages = null, $category_id = null, $description = null,  $price = null,  $quantity = null,  $status = null,  $cover = null,  $created_at = null,  $updated_at = null)
-    {
+    public function __construct(
+        $db = new Database(),
+        $id = null,
+        $name = null,
+        $author = null,
+        $publisher = null,
+        $pages = null,
+        $category_id = null,
+        $description = null,
+        $price = null,
+        $quantity = 0,
+        $status = null,
+        $cover = null,
+        $created_at = null,
+        $updated_at = null
+    ) {
         parent::__construct($db);
 
         $this->id = $id;
@@ -31,7 +47,7 @@ class Book extends Model
         $this->description = $description;
         $this->price = $price;
         $this->quantity = $quantity;
-        $this->status = $status;
+        $this->status = $status ?? ($quantity > 0) ? self::IN_STOCK : self::OUT_STOCK;
         $this->cover = $cover;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
@@ -57,8 +73,9 @@ class Book extends Model
 
         $sql = "INSERT INTO books (name, author, publisher, pages, category_id, description, price, quantity, cover)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
         $stmt = $conn->prepare($sql);
+
         $stmt->bind_param('sssiisdis', $this->name, $this->author, $this->publisher, $this->pages, $this->category_id, $this->description, $this->price, $this->quantity, $this->cover);
         $stmt->execute();
 
@@ -66,32 +83,222 @@ class Book extends Model
         $conn->close();
     }
 
-    // Getter
-    public function getId() {return $this->id;}
+    public function editBook($id)
+    {
+        $conn = $this->getDb()->connect();
 
-	public function getName() {return $this->name;}
+        $sql = "UPDATE books 
+                SET name = ?, 
+                    author = ?, 
+                    publisher = ?, 
+                    pages = ?, 
+                    category_id = ?, 
+                    description = ?, 
+                    price = ?, 
+                    quantity = ?, 
+                    cover = ?
+                WHERE id = ?";
 
-	public function getAuthor() {return $this->author;}
+        $stmt = $conn->prepare($sql);
 
-	public function getPublisher() {return $this->publisher;}
+        $stmt->bind_param(
+            'sssiisdisi',
+            $this->name,
+            $this->author,
+            $this->publisher,
+            $this->pages,
+            $this->category_id,
+            $this->description,
+            $this->price,
+            $this->quantity,
+            $this->cover,
+            $id
+        );
 
-	public function getPages() {return $this->pages;}
+        $stmt->execute();
 
-	public function getCategoryId() {return $this->category_id;}
+        $stmt->close();
+        $conn->close();
+    }
 
-	public function getDescription() {return $this->description;}
+    public function deleteBook($id)
+    {
+        $conn = $this->getDb()->connect();
 
-	public function getPrice() {return $this->price;}
+        $sql = "DELETE FROM books WHERE id = ?";
 
-	public function getQuantity() {return $this->quantity;}
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
 
-	public function getStatus() {return $this->status;}
+        $stmt->close();
+        $conn->close();
+    }
 
-	public function getCover() {return $this->cover;}
+    public function getBookById($id)
+    {
+        $conn = $this->getDb()->connect();
 
-	public function getCreatedAt() {return $this->created_at;}
+        $sql = "SELECT * FROM books WHERE id = ?";
 
-	public function getUpdatedAt() {return $this->updated_at;}
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
 
-	
+        $stmt->close();
+        $conn->close();
+
+        return $data;
+    }
+
+    public function getBook($idData, $usernameData)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT * FROM books WHERE id = ? OR name LIKE ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $idData, $usernameData);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close(); 
+        $conn->close();
+
+        return $data;
+    }
+
+    // Getters & Setters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
+    public function setPublisher($publisher): void
+    {
+        $this->publisher = $publisher;
+    }
+
+    public function setPages($pages): void
+    {
+        $this->pages = $pages;
+    }
+
+    public function setCategoryId($category_id): void
+    {
+        $this->category_id = $category_id;
+    }
+
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    public function setQuantity($quantity): void
+    {
+        $this->quantity = $quantity;
+    }
+
+    public function setStatus($status): void
+    {
+        $this->status = $status;
+    }
+
+    public function setCover($cover): void
+    {
+        $this->cover = $cover;
+    }
+
+    public function setCreatedAt($created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function setUpdatedAt($updated_at): void
+    {
+        $this->updated_at = $updated_at;
+    }
 }

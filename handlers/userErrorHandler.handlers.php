@@ -1,10 +1,10 @@
 <?php
 
-class userErrorHandler
+class UserErrorHandler
 {
     private $user;
 
-    public function __construct(User $user)
+    public function __construct($user = new User())
     {
         $this->user = $user;
     }

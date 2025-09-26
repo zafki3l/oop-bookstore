@@ -2,6 +2,8 @@
 session_start();
 $username = $_SESSION['username'] ?? 'Guest';
 
+include_once '../../actions/staff/dashboard.staff.php';
+
 function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
 ?>
 
@@ -21,14 +23,24 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <?php include '../layouts/header.layouts.php' ?>
 
     <div class="main-content">
-        
         <div class="dashboard-grid">
-            <div class="dashboard-box staff-info">Thông tin nhân viên</div>
-            <div class="dashboard-box book-manage"><a href="#">Book Management</a></div>
-            <div class="dashboard-box category-man">Quản lý thể loại</div>
-            <div class="dashboard-box sales-report">Thống kê doanh số</div>
-            <div class="dashboard-box order-manage">Quản lý đơn hàng</div>
-            <div class="dashboard-box total-order">Tổng đơn hàng</div>
+            <div class="div1">
+                <div class="dashboard staff-info">
+                    <p>Thông tin nhân viên</p>
+                </div>
+                <div class="div2">
+                    <a href="books/index.books.php"><div class="dashboard box1 book-manage">Book Management</div></a>
+                    <div class="dashboard box1 category-man">Quản lý thể loại</div>
+                </div>
+            </div>
+
+            <div class="div1 bottom">
+                <div class="dashboard sales-report">Thống kê doanh số</div>
+                <div class="div2">
+                    <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>
+                    <div class="dashboard box2 total-order">Tổng đơn hàng</div>
+                </div>
+            </div>
         </div>
 
         <div class="login-message">

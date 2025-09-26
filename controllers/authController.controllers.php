@@ -9,7 +9,7 @@ class AuthController
     private $user;
     private $userErrorHandler;
 
-    public function __construct(User $user, userErrorHandler $userErrorHandler)
+    public function __construct($user = new User(), $userErrorHandler = new UserErrorHandler())
     {
         $this->user = $user;
         $this->userErrorHandler = $userErrorHandler;
@@ -155,6 +155,13 @@ class AuthController
     public function ensureAdmin()
     {
         if ($_SESSION['role'] != $this->user::ROLE_ADMIN) {
+            die('You do not have permission to visit this site!');
+        }
+    }
+
+    public function ensureAdminOrStaff()
+    {
+        if ($_SESSION['role'] != $this->user::ROLE_ADMIN && $_SESSION['role'] != $this->user::ROLE_STAFF) {
             die('You do not have permission to visit this site!');
         }
     }

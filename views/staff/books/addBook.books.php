@@ -53,7 +53,7 @@
             <input type="file" id="cover" name="cover" placeholder="cover">
 
             <br>
-            <input type="submit">
+            <input type="submit" name="submit">
         </form>
         <a href="index.books.php">Cancel</a>
     </div>

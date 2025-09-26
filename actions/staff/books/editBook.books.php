@@ -9,6 +9,7 @@ $authController = new AuthController();
 $authController->ensureLogin();
 $authController->ensureAdminOrStaff();
 
+$id = $_POST['id'];
 $name = $_POST['name'];
 $author = $_POST['author'];
 $publisher = $_POST['publisher'];
@@ -19,6 +20,6 @@ $price = $_POST['price'];
 $quantity = $_POST['quantity'];
 $cover = $_POST['cover'];
 
-$book = new Book($db = new Database(), null, $name, $author, $publisher, $pages, $category_id, $description, $price, $quantity, $cover);
+$book = new Book($db = new Database(), $id, $name, $author, $publisher, $pages, $category_id, $description, $price, $quantity, null, $cover);
 $bookController = new BookController($book);
-$bookController->create();
+$bookController->edit($id);

@@ -26,7 +26,12 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <div class="dashboard-grid">
             <div class="div1">
                 <div class="dashboard staff-info">
-                    <p>Thông tin nhân viên</p>
+                    <h2>STAFF INFORMATION</h2>
+                    <hr>
+                    <p>Staff ID: <?php echo $_SESSION['id']; ?></p>
+                    <p>Staff Username: <?php echo $username; ?></p>
+                    <p>Staff Email: <?php echo $_SESSION['email']; ?></p>
+                    <p>Role: <?php echo $_SESSION['role'] == 2 ? 'Staff' : 'Admin'; ?></p>
                 </div>
                 <div class="div2">
                     <a href="books/index.books.php"><div class="dashboard box1 book-manage">Book Management</div></a>

@@ -17,7 +17,7 @@
                 <li>
                     <div class="dropdown">
                         <button>Category</button>
-                        <div class="content">
+                        <div class="category-content">
                         <a href="#">Fiction</a>
                         <a href="#">Non-Fiction</a>
                         <a href="#">Science</a>

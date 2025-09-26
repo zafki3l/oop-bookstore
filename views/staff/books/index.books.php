@@ -53,7 +53,7 @@ function deleteBookMessage()
                 <!-- Thanh tìm kiếm -->
                 <div class="search-add">
                     <?php include_once 'searchBook.books.php' ?>
-                    <a href="addBook.books.php">Add book</a>
+                    <a href="addBook.books.php" class="addBook">Add book</a>
                 </div>
             </div>
 

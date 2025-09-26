@@ -40,7 +40,7 @@
     cursor: pointer;
 }
 
-.book-header .search-add a {
+.book-header .search-add .addBook {
     padding: 8px 16px;
     border-radius: 6px;
     border: 1px solid #ccc;

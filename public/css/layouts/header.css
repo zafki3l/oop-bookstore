@@ -35,7 +35,7 @@
 }
 
 /* Dropdown content */
-.dropdown .content {
+.dropdown .category-content {
     display: none;
     position: absolute;
     background-color: #faf9ea;
@@ -56,7 +56,7 @@
 }
 
 /* Hiển thị menu khi hover */
-.dropdown:hover .content {
+.dropdown:hover .category-content {
     display: block;
 }
 

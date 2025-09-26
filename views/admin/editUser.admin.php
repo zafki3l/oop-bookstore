@@ -76,7 +76,7 @@ unset($_SESSION['error_address']);
                     </div>
 
                     <div class="form-group">
-                        <a href="dashboard.admin.php" class="cancel-btn">Go back</a>
+                        <a href="dashboard.admin.php?page_number=1" class="cancel-btn">Go back</a>
                         <input type="submit" class="submit-btn" value="Save">
 
 

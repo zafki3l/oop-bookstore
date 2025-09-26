@@ -25,7 +25,7 @@
                     </div>
                 <li><a href="/oop-bookstore/views/homepage.views.php">Homepage</a></li>
                 <?php if($role == 3): ?> <!--admin-->
-                        <li><a href="/oop-bookstore/views/admin/dashboard.admin.php">Admin Dashboard</a></li> <!--show dashboard for admin-->
+                        <li><a href="/oop-bookstore/views/admin/dashboard.admin.php?page_number=1">Admin Dashboard</a></li> <!--show dashboard for admin-->
                         <li><a href="/oop-bookstore/views/staff/dashboard.staff.php">Staff Dashboard</a></li>
                 <?php elseif($role == 2): ?>
                         <li><a href="../staff/dashboard.php">Staff Dashboard</a></li> <!--Show dashboard for staff-->

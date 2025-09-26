@@ -19,7 +19,7 @@
         <hr>
         <div class="sidebar-content">
             <li><a href="/oop-bookstore/views/staff/dashboard.staff.php"><p>Dashboard</p></a></li>
-            <li><a href="/oop-bookstore/views/staff/books/index.books.php"><p>Book Management</p></a></li>
+            <li><a href="/oop-bookstore/views/staff/books/index.books.php?page_number=1"><p>Book Management</p></a></li>
             <li><a href="#"><p>Category Management</p></a></li>
             <li><a href="#"><p>Sales Report</p></a></li>
             <li><a href="#"><p>Order Management</p></a></li>

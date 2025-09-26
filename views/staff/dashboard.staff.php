@@ -4,11 +4,15 @@ $username = $_SESSION['username'] ?? 'Guest';
 
 include_once '../../actions/staff/dashboard.staff.php';
 
-function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
+function loginMessage()
+{
+    return htmlspecialchars($_SESSION['login_success']);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +20,8 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Staff Dashboard</title>
 </head>
+
 <body>
     <!--Header-->
     <?php include '../layouts/header.layouts.php' ?>
@@ -26,15 +30,27 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <div class="dashboard-grid">
             <div class="div1">
                 <div class="dashboard staff-info">
-                    <h2>STAFF INFORMATION</h2>
+                    <div class="info-header">
+                        <h2>STAFF INFORMATION</h2>
+                    </div>
                     <hr>
-                    <p>User ID: <?php echo $_SESSION['id']; ?></p>
-                    <p>Username: <?php echo $username; ?></p>
-                    <p>Email: <?php echo $_SESSION['email']; ?></p>
-                    <p>Role: <?php echo $_SESSION['role'] == 2 ? 'Staff' : 'Admin'; ?></p>
+                    <div class="info-content">
+                        <div class="img">
+                            <i class="fa-solid fa-user-circle fa-5x"></i>
+                        </div>
+                        <div class="text">
+                            <p>User ID: <?php echo htmlspecialchars($_SESSION['id']); ?></p>
+                            <p>Username: <?php echo htmlspecialchars($username); ?></p>
+                            <p>Email: <?php echo htmlspecialchars($_SESSION['email']); ?></p>
+                            <p>Role: <?php echo htmlspecialchars($_SESSION['role'] == 2 ? 'Staff' : 'Admin'); ?></p>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="div2">
-                    <a href="books/index.books.php"><div class="dashboard box1 book-manage">Book Management</div></a>
+                    <a href="books/index.books.php">
+                        <div class="dashboard box1 book-manage">Book Management</div>
+                    </a>
                     <div class="dashboard box1 category-man">Quản lý thể loại</div>
                 </div>
             </div>
@@ -60,4 +76,5 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <?php endif; ?>
     </div>
 </body>
+
 </html>

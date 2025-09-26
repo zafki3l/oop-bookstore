@@ -26,7 +26,10 @@ function deleteBookMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/staff/bookIndex.css">
     <title>Book Management</title>
+    <title>Staff Dashboard</title>
 </head>
 
 <body>
@@ -34,72 +37,86 @@ function deleteBookMessage()
     <?php include '../../layouts/header.layouts.php' ?>
 
     <div class="main-content">
-        <h1>HELLO</h1>
+        <!--Sidebar-->
 
-        <!-- Thanh tìm kiếm -->
-        <div class="search-add">
-            <?php include_once 'searchBook.books.php' ?>
-            <a href="addBook.books.php">Add book</a>
+        <div class="sidebar">
+            <?php include '../../layouts/sidebar.layouts.php' ?>
         </div>
 
-        <table border="1">
-            <thead>
-                <th>BOOK ID</th>
-                <th>BOOK NAME</th>
-                <th>AUTHOR</th>
-                <th>PUBLISHER</th>
-                <th>PAGES</th>
-                <th>CATEGORY ID</th>
-                <th>DESCRIPTION</th>
-                <th>PRICE</th>
-                <th>QUANTITY</th>
-                <th>STATUS</th>
-                <th>COVER</th>
-                <th>CREATED AT</th>
-                <th>UPDATED AT</th>
-                <th>ACTION</th>
-            </thead>
-            <tbody>
-                <?php foreach ($books as $book): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($book['id']) ?></td>
-                        <td><?= htmlspecialchars($book['name']) ?></td>
-                        <td><?= htmlspecialchars($book['author']) ?></td>
-                        <td><?= htmlspecialchars($book['publisher']) ?></td>
-                        <td><?= htmlspecialchars($book['pages']) ?></td>
-                        <td><?= htmlspecialchars($book['category_id']) ?></td>
-                        <td><?= htmlspecialchars($book['description']) ?></td>
-                        <td><?= htmlspecialchars($book['price']) ?></td>
-                        <td><?= htmlspecialchars($book['quantity']) ?></td>
-                        <td><?= htmlspecialchars($book['status']) ?></td>
-                        <td><?= htmlspecialchars($book['cover']) ?></td>
-                        <td><?= htmlspecialchars($book['created_at']) ?></td>
-                        <td><?= htmlspecialchars($book['updated_at']) ?></td>
-                        <td>
-                            <a href="editBook.books.php?id=<?= $book['id'] ?>" class="edit-btn"><i class="fa-solid fa-pen"></i></a>
-                            <button onclick="showConfirm(<?= htmlspecialchars($book['id']) ?>)" class="delete-btn">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+        <div class="content">
+            <div class="book-header">
+                <div class="header-text">
+                    <h2>Book Management</h2>
+                    <h3>WELCOME <?php echo htmlspecialchars($_SESSION['username']) ?></h3>
+                </div>
 
-                            <!-- Delete Modal -->
-                            <div id="confirmModal-<?= htmlspecialchars($book['id']) ?>" class="modal">
-                                <div class="modal-content">
-                                    <h2>Delete</h2>
-                                    <hr>
-                                    <p>Click confirm to delete</p>
-                                    <form action="../../../actions/staff/books/deleteBook.books.php" method="POST" id="deleteForm">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
-                                        <button type="submit" class="submit-modal">Confirm</button>
-                                        <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($book['id']) ?>)">Cancel</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="../dashboard.staff.php">Go back</a>
+                <!-- Thanh tìm kiếm -->
+                <div class="search-add">
+                    <?php include_once 'searchBook.books.php' ?>
+                    <a href="addBook.books.php">Add book</a>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>BOOK ID</th>
+                            <th>BOOK NAME</th>
+                            <th>AUTHOR</th>
+                            <th>PUBLISHER</th>
+                            <th>PAGES</th>
+                            <th>CATEGORY</th>
+                            <th>DESCRIPTION</th>
+                            <th>PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>STATUS</th>
+                            <th>COVER</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($books as $book): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($book['id']) ?></td>
+                                <td><?= htmlspecialchars($book['name']) ?></td>
+                                <td><?= htmlspecialchars($book['author']) ?></td>
+                                <td><?= htmlspecialchars($book['publisher']) ?></td>
+                                <td><?= htmlspecialchars($book['pages']) ?></td>
+                                <td><?= htmlspecialchars($book['category']) ?></td>
+                                <td><?= htmlspecialchars($book['description']) ?></td>
+                                <td><?= htmlspecialchars($book['price']) ?></td>
+                                <td><?= htmlspecialchars($book['quantity']) ?></td>
+                                <td><?= htmlspecialchars($book['status'] == 1 ? 'In stock' : 'Out stock') ?></td>
+                                <td><img src="/oop-bookstore/public/images/<?= htmlspecialchars($book['cover']) ?>" alt="<?= htmlspecialchars($book['cover']) ?>"></td>
+                                <td>
+                                    <a href="editBook.books.php?id=<?= $book['id'] ?>" class="edit-btn"><i class="fa-solid fa-pen"></i></a>
+                                    <button onclick="showConfirm(<?= htmlspecialchars($book['id']) ?>)" class="delete-btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+
+                                    <!-- Delete Modal -->
+                                    <div id="confirmModal-<?= htmlspecialchars($book['id']) ?>" class="modal">
+                                        <div class="modal-content">
+                                            <h2>Delete</h2>
+                                            <hr>
+                                            <p>Click confirm to delete</p>
+                                            <form action="../../../actions/staff/books/deleteBook.books.php" method="POST" id="deleteForm">
+                                                <input type="hidden" name="id" value="<?= htmlspecialchars($book['id']) ?>">
+                                                <button type="submit" class="submit-modal">Confirm</button>
+                                                <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($book['id']) ?>)">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
 
         <div class="add-book-message">
             <?php if (isset($_SESSION['add_book_success'])): ?>

@@ -6,6 +6,7 @@ class Book extends Model
 {
     const OUT_STOCK = 0;
     const IN_STOCK = 1;
+
     private $id;
     private $name;
     private $author;
@@ -31,7 +32,7 @@ class Book extends Model
         $description = null,
         $price = null,
         $quantity = 0,
-        $status = null,
+        $status = 0,
         $cover = null,
         $created_at = null,
         $updated_at = null
@@ -47,7 +48,7 @@ class Book extends Model
         $this->description = $description;
         $this->price = $price;
         $this->quantity = $quantity;
-        $this->status = $status ?? ($quantity > 0) ? self::IN_STOCK : self::OUT_STOCK;
+        $this->status = ($this->quantity > 0 ? self::IN_STOCK : self::OUT_STOCK) ?? $status;
         $this->cover = $cover;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
@@ -57,7 +58,20 @@ class Book extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT * FROM books";
+        $sql = "SELECT b.id, 
+                        b.name, 
+                        b.author, 
+                        b.publisher,
+                        b.pages,
+                        c.name as category,
+                        b.description,
+                        b.price,
+                        b.quantity,
+                        b.status,
+                        b.cover
+                FROM books b
+                JOIN categories c ON b.category_id = c.id
+                ORDER BY b.id ASC";
 
         $query = $conn->execute_query($sql);
         $data = $query->fetch_all(MYSQLI_ASSOC);
@@ -71,12 +85,12 @@ class Book extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "INSERT INTO books (name, author, publisher, pages, category_id, description, price, quantity, cover)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO books (name, author, publisher, pages, category_id, description, price, quantity, status, cover)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
 
-        $stmt->bind_param('sssiisdis', $this->name, $this->author, $this->publisher, $this->pages, $this->category_id, $this->description, $this->price, $this->quantity, $this->cover);
+        $stmt->bind_param('sssiisdiis', $this->name, $this->author, $this->publisher, $this->pages, $this->category_id, $this->description, $this->price, $this->quantity, $this->status, $this->cover);
         $stmt->execute();
 
         $stmt->close();
@@ -96,13 +110,14 @@ class Book extends Model
                     description = ?, 
                     price = ?, 
                     quantity = ?, 
+                    status = ?,
                     cover = ?
                 WHERE id = ?";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            'sssiisdisi',
+            'sssiisdiisi',
             $this->name,
             $this->author,
             $this->publisher,
@@ -111,6 +126,7 @@ class Book extends Model
             $this->description,
             $this->price,
             $this->quantity,
+            $this->status,
             $this->cover,
             $id
         );
@@ -157,7 +173,20 @@ class Book extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT * FROM books WHERE id = ? OR name LIKE ?";
+        $sql = "SELECT b.id, 
+                        b.name, 
+                        b.author, 
+                        b.publisher,
+                        b.pages,
+                        c.name as category,
+                        b.description,
+                        b.price,
+                        b.quantity,
+                        b.status,
+                        b.cover
+                FROM books b
+                JOIN categories c ON b.category_id = c.id
+                WHERE b.id = ? OR b.name LIKE ?";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('is', $idData, $usernameData);

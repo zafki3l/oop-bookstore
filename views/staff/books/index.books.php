@@ -28,6 +28,7 @@ function deleteBookMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/bookIndex.css">
+    <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <title>Book Management</title>
     <title>Staff Dashboard</title>

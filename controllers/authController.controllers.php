@@ -126,7 +126,7 @@ class AuthController
     }
 
     // Xác thực đầu vào
-    public function validateLoginInput($user, $loginUser)
+    private function validateLoginInput($user, $loginUser)
     {
         $inputPassword = $user->getPassword();
         $userPassword = $loginUser['password'];

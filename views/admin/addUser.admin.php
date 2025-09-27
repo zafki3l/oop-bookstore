@@ -24,6 +24,7 @@ unset($_SESSION['error_password']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
+    <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
     <link rel="stylesheet" href="/oop-bookstore/public/css/admin/addUser.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <title>Create New User</title>

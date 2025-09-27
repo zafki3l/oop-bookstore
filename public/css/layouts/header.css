@@ -19,13 +19,12 @@
     display: flex;
     gap: 50px;
 }
-/* Dropdown container */
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown button */
 .dropdown button {
     background-color: #111014;
     color: white;

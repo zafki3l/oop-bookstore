@@ -108,7 +108,8 @@ class AuthController
     private function checkRole($user)
     {
         if ($_SESSION['role'] != $user::ROLE_USER && $_SESSION['role'] != $user::ROLE_STAFF && $_SESSION['role'] != $user::ROLE_ADMIN) {
-            header('Location: /oop-bookstore/views/auth/login.auth.php?error=invaliduser');
+            $_SESSION['error'] = 'User not exist! Please create new account to sign-in!';
+            header('Location: /oop-bookstore/views/auth/login.auth.php');
             exit();
         }
     }

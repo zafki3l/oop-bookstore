@@ -22,3 +22,6 @@ $cover = $_POST['cover'];
 $book = new Book($db = new Database(), null, $name, $author, $publisher, $pages, $category_id, $description, $price, $quantity, null, $cover);
 $bookController = new BookController($book);
 $bookController->create();
+
+
+

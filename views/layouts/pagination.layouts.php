@@ -1,7 +1,6 @@
 <?php
 $search = isset($_GET['found']) ? htmlspecialchars($_GET['found']) : '';
 $data = isset($_GET['data']) ? htmlspecialchars($_GET['data']) : '';
-$currentPage = isset($_GET['page_number']) ? (int)$_GET['page_number'] : 1;
 ?>
 
 <!DOCTYPE html>

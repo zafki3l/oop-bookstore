@@ -23,7 +23,7 @@
 
             <!-- Cart icon -->
             <li class="cart-icon">
-                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/oop-bookstore/views/carts/mycart.carts.php"><i class="fas fa-shopping-cart"></i></a>
             </li>
         </ul>
     </div>

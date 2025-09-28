@@ -1,3 +1,6 @@
+<?php
+include_once '../../actions/carts/cartmanagement.cart.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,90 +55,14 @@
             </div>
       </div>
     </article>
-
-    <!-- Item 2 -->
-    <article class="card" data-price="350000">
+    <article>
+    <?php foreach ($carts as $cart): ?>
       <div class="thumb">
-        <img src="=">
+        <img src="/oop-bookstore/public/images/<?= $cart['cover']  ?>">
       </div>
 
       <div class="meta">
-        <div class="title">Charlotte Bronte</div>
-        <div class="author">Jane Eyre</div>
-        <div class="price-small">350.000</div>
-      </div>
-
-      <div class="qty-wrap">
-        <div class="col-label">Số lượng</div>
-        <div class="qty" role="group" aria-label="Quantity">
-          <button aria-label="Giảm">−</button>
-          <span class="val">1</span>
-          <button aria-label="Tăng">+</button>
-        </div>
-      </div>
-
-      <div class="money-wrap">
-        <div class="col-label">Thành tiền</div>
-        <div class="money">350.000</div>
-      </div>
-
-      <div class="action">
-            <div class="act">
-                <button class="buy">Mua ngay</button>
-            </div>
-            <div class="del">
-                <button class="trash" aria-label="Xóa">
-                   <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-      </div>
-    </article>
-
-    <!-- Item 3 -->
-    <article class="card" data-price="350000">
-      <div class="thumb">
-        <img src="">
-      </div>
-
-      <div class="meta">
-        <div class="title">Charlotte Bronte</div>
-        <div class="author">Wuthering Heights</div>
-        <div class="price-small">350.000</div>
-      </div>
-
-      <div class="qty-wrap">
-        <div class="col-label">Số lượng</div>
-        <div class="qty" role="group" aria-label="Quantity">
-          <button aria-label="Giảm">−</button>
-          <span class="val">1</span>
-          <button aria-label="Tăng">+</button>
-        </div>
-      </div>
-
-      <div class="money-wrap">
-        <div class="col-label">Thành tiền</div>
-        <div class="money">350.000</div>
-      </div>
-
-      <div class="action">
-            <div class="act">
-                <button class="buy">Mua ngay</button>
-            </div>
-            <div class="del">
-                <button class="trash" aria-label="Xóa">
-                   <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-      </div>
-    </article>
-    <!-- Item 4 -->
-    <article class="card" data-price="350000">
-      <div class="thumb">
-        <img src="">
-      </div>
-
-      <div class="meta">
-        <div class="title">War and Peace</div>
+        <div class="title"><?php echo ?></div>
         <div class="author">Leo Tolstoy</div>
         <div class="price-small">350.000</div>
       </div>
@@ -164,45 +91,10 @@
                 </button>
             </div>
       </div>
+    <?php endforeach; ?>
     </article>
 
-    <!-- Item 5 -->
-    <article class="card" data-price="350000">
-      <div class="thumb">
-        <img src="">
-      </div>
-
-      <div class="meta">
-        <div class="title">War and Peace</div>
-        <div class="author">Leo Tolstoy</div>
-        <div class="price-small">350.000</div>
-      </div>
-
-      <div class="qty-wrap">
-        <div class="col-label">Số lượng</div>
-        <div class="qty" role="group" aria-label="Quantity">
-          <button aria-label="Giảm">−</button>
-          <span class="val">1</span>
-          <button aria-label="Tăng">+</button>
-        </div>
-      </div>
-
-      <div class="money-wrap">
-        <div class="col-label">Thành tiền</div>
-        <div class="money">350.000</div>
-      </div>
-
-      <div class="action">
-            <div class="act">
-                <button class="buy">Mua ngay</button>
-            </div>
-            <div class="del">
-                <button class="trash" aria-label="Xóa">
-                   <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-      </div>
-    </article>
+    
  
     <script>
     // Helper for VN number format: 350000 -> "350.000"

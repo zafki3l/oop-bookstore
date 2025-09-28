@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Nếu người dùng truy cập bằng đường dẫn gốc thì trỏ tới trang index.php
+RewriteRule ^/?$ /oop-bookstore/index.php [L]
+# Chỉ cho phép những file/folder này được phép truy cập trên web
+RewriteCond %{REQUEST_URI} ^/oop-bookstore/(public|views|actions|index\.php)
+RewriteRule ^ - [L]
+
+# Chặn truy cập tất cả các file/folder không được phép
+RewriteRule ^ - [F,L]

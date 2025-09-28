@@ -45,8 +45,7 @@
             $stmt = $conn->prepare($sql);
 
             $stmt->bind_param(
-                'ssi',
-                $this->name,
+                'si',
                 $this->status,
                 $id
             );
@@ -111,6 +110,22 @@
             $conn->close();
 
             return $data['TotalPrice'] ?? 0;
+        }
+
+        public function getAllOrder()
+        {
+            $conn = $this->getDb()->connect();
+
+            $sql = "SELECT id, order_id, status, create_at, update_at 
+                    FROM orders
+                    ORDER BY id ASC";
+
+            $query = $conn->execute_query($sql);
+            $data = $query->fetch_all(MYSQLI_ASSOC);
+
+            $conn->close();
+            
+            return $data;
         }
     }
 ?>

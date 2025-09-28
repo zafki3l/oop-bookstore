@@ -37,6 +37,34 @@ class Category extends Model
         return $data;
     }
 
+    public function getAllCategory()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = $conn->execute_query("SELECT * FROM categories");
+        $data = $sql->fetch_all(MYSQLI_ASSOC);
+
+        $sql->close();
+        $conn->close();
+
+        return $data;
+    }
+
+    public function createCategory()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "INSERT INTO categories (name)
+                VALUES (?)";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $this->name);
+        $stmt->execute();
+        
+        $stmt->close();
+        $conn->close();
+    }
+
     // Getters & Setters
     public function getId()
     {

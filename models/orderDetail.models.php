@@ -2,10 +2,10 @@
 
 include_once 'model.models.php';
 
-class Cart extends Model
+class OrderDetail extends Model
 {
     private $id;
-    private $user_id;
+    private $order_id;
     private $book_id;
     private $price;
     private $quantity;
@@ -15,17 +15,17 @@ class Cart extends Model
     public function __construct(
         $db = new Database(),
         $id = null,
-        $user_id = null,
-        $book_id = null,
-        $price = null,
-        $quantity = null,
-        $created_at = null,
-        $updated_at = null
+        $order_id = null,
+        $book_id  = null,
+        $price  = null,
+        $quantity  = null,
+        $created_at  = null,
+        $updated_at  = null
     ) {
         parent::__construct($db);
 
         $this->id = $id;
-        $this->user_id = $user_id;
+        $this->order_id = $order_id;
         $this->book_id = $book_id;
         $this->price = $price;
         $this->quantity = $quantity;
@@ -33,41 +33,22 @@ class Cart extends Model
         $this->updated_at = $updated_at;
     }
 
-    // Lấy ra giỏ hàng của user
-    public function getusercart()
+    // Tạo 1 chi tiết đơn hàng khi người dùng click mua hàng
+    public function createOrderItem()
     {
         $conn = $this->getDb()->connect();
 
-        $sql = $conn->execute_query("
-            SELECT 
-                c.id as 'id',
-                b.name as 'book_name', 
-                b.author as 'author',
-                c.price as 'price',
-                c.quantity as 'quantity',
-                (c.price * c.quantity) as 'total_price',
-                b.cover as 'cover'
-            FROM carts c
-            JOIN users u ON u.id = c.user_id
-            JOIN books b ON b.id = c.book_id
-        ");
+        $stmt = $conn->prepare("INSERT INTO orderDetails (order_id, book_id, price, quantity)
+                                VALUES (?, ?, ?, ?)");
+        
+        $stmt->bind_param(
+            'iidi', 
+            $this->order_id, 
+            $this->book_id, 
+            $this->price, 
+            $this->quantity
+        );
 
-        $data = $sql->fetch_all(MYSQLI_ASSOC);
-
-        $sql->close();
-        $conn->close();
-
-        return $data;
-    }
-
-    // Xóa giỏ hàng của user
-    public function deleteCart($id)
-    {
-        $conn = $this->getDb()->connect();
-
-        $stmt = $conn->prepare("DELETE FROM carts WHERE id = ?");
-
-        $stmt->bind_param('i', $id);
         $stmt->execute();
 
         $stmt->close();
@@ -80,9 +61,9 @@ class Cart extends Model
         return $this->id;
     }
 
-    public function getUserId()
+    public function getOrderId()
     {
-        return $this->user_id;
+        return $this->order_id;
     }
 
     public function getBookId()
@@ -115,9 +96,9 @@ class Cart extends Model
         $this->id = $id;
     }
 
-    public function setUserId($user_id): void
+    public function setOrderId($order_id): void
     {
-        $this->user_id = $user_id;
+        $this->order_id = $order_id;
     }
 
     public function setBookId($book_id): void

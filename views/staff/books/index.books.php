@@ -31,7 +31,6 @@ function deleteBookMessage()
     <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <title>Book Management</title>
-    <title>Staff Dashboard</title>
 </head>
 
 <body>
@@ -87,7 +86,7 @@ function deleteBookMessage()
                                 <td><?= htmlspecialchars($book['pages']) ?></td>
                                 <td><?= htmlspecialchars($book['category']) ?></td>
                                 <td><?= htmlspecialchars($book['description']) ?></td>
-                                <td><?= htmlspecialchars($book['price']) ?></td>
+                                <td><?= htmlspecialchars($book['price']) ?> đ</td>
                                 <td><?= htmlspecialchars($book['quantity']) ?></td>
                                 <td><?= htmlspecialchars($book['status'] == 1 ? 'In stock' : 'Out stock') ?></td>
                                 <td><img src="/oop-bookstore/public/images/<?= htmlspecialchars($book['cover']) ?>" alt="<?= htmlspecialchars($book['cover']) ?>"></td>

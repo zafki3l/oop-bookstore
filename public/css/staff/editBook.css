@@ -49,6 +49,10 @@
     transition: border 0.3s;
 }
 
+.container-content option {
+    background: #ca122f;
+}
+
 .container-content textarea {
     height: 200px;
 }

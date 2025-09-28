@@ -14,8 +14,7 @@ HƯỚNG DẪN VÀ VAI TRÒ CỦA CÁC THƯ MỤC
     - Ví dụ: Book.Model.php lấy dữ liệu sách từ database.
 
 4. views
-    - Chứa các file giao diện người dùng (HTML, PHP template).
-    - Hiển thị thông tin do controller cung cấp.
+    - Chứa các file giao diện người dùng (Ví dụ homepage.views.php).
 
 5. controllers
     - Chứa các file xử lý logic của ứng dụng và các request từ người dùng.
@@ -23,7 +22,6 @@ HƯỚNG DẪN VÀ VAI TRÒ CỦA CÁC THƯ MỤC
 
 6. actions
     - Chứa các file trả kết quả từ controller về view.
-    - Ví dụ: trả dữ liệu JSON hoặc render trang HTML.
 
 7. public
     - Chứa các file công khai mà người dùng có thể truy cập trực tiếp.

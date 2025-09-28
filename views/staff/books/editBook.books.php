@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once '../../../models/book.models.php';
+include_once '../../../models/category.models.php';
+
+$category = new Category();
+$categories = $category->getCategoryName();
 
 $book = new Book();
 $bookData = $book->getBookById($_GET['id']);
@@ -19,7 +23,7 @@ $bookData = $book->getBookById($_GET['id']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/editBook.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
-    <title>Document</title>
+    <title>Edit Book</title>
 </head>
 
 <body>
@@ -66,9 +70,14 @@ $bookData = $book->getBookById($_GET['id']);
                     </div>
 
                     <div class="form-group">
-                        <label for="category-id">Category id</label>
+                        <label for="category-id">Category:</label>
                         <select name="category-id" id="category-id">
-                            <option value="1" <?php echo htmlspecialchars($bookData['category_id'] == 1 ? 'selected' : '') ?>>Fiction</option>
+                            <?php foreach($categories as $category): ?>
+                                <option value="<?= $category['id'] ?>" 
+                                <?php echo htmlspecialchars($bookData['category_id'] == $category['id'] ? 'selected' : '') ?>>
+                                    <?= $category['name'] ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 

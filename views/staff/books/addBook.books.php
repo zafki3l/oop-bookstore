@@ -1,4 +1,12 @@
-<?php session_start() ?>
+<?php 
+
+session_start();
+include_once '../../../models/category.models.php';
+
+$category = new Category();
+$categories = $category->getCategoryName();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,9 +64,10 @@
                     <div class="form-group">
                         <label for="category-id">Category:</label>
                         <select name="category-id" id="category-id">
-                            <option value="1">Fiction</option>
+                            <?php foreach($categories as $category): ?>
+                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                            <?php endforeach; ?>
                         </select>
-
                     </div>
 
                     <div class="form-group">

@@ -37,6 +37,7 @@ class Category extends Model
         return $data;
     }
 
+    // Getters & Setters
     public function getId()
     {
         return $this->id;

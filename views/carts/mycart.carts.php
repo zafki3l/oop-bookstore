@@ -24,50 +24,67 @@ include_once '../../actions/carts/cartmanagement.carts.php';
 
     <div class="main-content">
         <main class="page">
+            <?php
+            $total = 0;
+            foreach ($carts as $cart) {
+                $total++;
+            }
+            ?>
 
-            <?php foreach ($carts as $cart): ?>
-                <article class="card">
-                    <div class="thumb">
-                        <img src="/oop-bookstore/public/images/<?= $cart['cover']  ?>">
-                    </div>
+            <h1>Tổng số sản phẩm <?= $total ?> </h1>
 
-                    <div class="meta">
-                        <div class="book-name"><?= $cart['book_name'] ?> </div>
-                        <div class="author"><?= $cart['author'] ?> </div>
-                        <div class="price-small"><?= $cart['price'] ?> </div>
-                    </div>
-
-                    <div class="qty-wrap">
-                        <div class="col-label">Số lượng</div>
-                        <div class="qty" role="group" aria-label="Quantity">
-                            <button aria-label="Giảm">-</button>
-                            <span class="val"><?= $cart['quantity'] ?></span>
-                            <button aria-label="Tăng">+</button>
+            <?php if (!empty($carts)): ?>
+                <?php foreach ($carts as $cart): ?>
+                    <article class="card">
+                        <div class="thumb">
+                            <img src="/oop-bookstore/public/images/<?= $cart['cover']  ?>">
                         </div>
-                    </div>
 
-                    <div class="money-wrap">
-                        <div class="col-label">Thành tiền</div>
-                        <div class="money"><?= $cart['total_price'] ?> </div>
-                    </div>
-
-                    <div class="action">
-                        <div class="act">
-                            <button class="buy">Mua ngay</button>
+                        <div class="meta">
+                            <div class="book-name"><?= $cart['book_name'] ?> </div>
+                            <div class="author"><?= $cart['author'] ?> </div>
+                            <div class="price-small"><?= $cart['price'] ?> </div>
                         </div>
-                        <div class="del">
-                            <button class="trash" aria-label="Xóa">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            <?php endforeach; ?>
 
+                        <div class="qty-wrap">
+                            <div class="col-label">Số lượng</div>
+                            <div class="qty" role="group" aria-label="Quantity">
+                                <button class="minus">-</button>
+                                <span class="val"><?= $cart['quantity'] ?></span>
+                                <button class="plus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="money-wrap">
+                            <div class="col-label">Thành tiền</div>
+                            <div class="money"><?= $cart['total_price'] ?> </div>
+                        </div>
+
+                        <div class="action">
+                            <form action="../../actions/buyNow.actions.php" method="post">
+                                <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
+                                <div class="act">
+                                    <button type="submit" class="buy">Mua ngay</button>
+                                </div>
+                            </form>
+                            
+                            <div class="del">
+                                <a href="../../actions/carts/deleteCart.carts.php?id=<?= $cart['id'] ?>" class="trash">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <h3>There's no products in cart</h3>
+            <?php endif; ?>
         </main>
     </div>
     <!--footer-->
     <?php include '../layouts/footer.layouts.php' ?>
+
+    <script src="/oop-bookstore/public/js/quantityUpdater.js"></script>
 </body>
 
 </html>

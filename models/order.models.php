@@ -33,6 +33,22 @@ class Order extends Model
         $this->update_at = $update_at;
     }
 
+    public function getAllOrder()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT id, user_id, status, created_at, updated_at 
+                FROM orders
+                ORDER BY id ASC";
+
+        $query = $conn->execute_query($sql);
+        $data = $query->fetch_all(MYSQLI_ASSOC);
+
+        $conn->close();
+        
+        return $data;
+    }
+
     // Tạo 1 đơn hàng mới khi người dùng nhấn mua hàng
     public function createOrder()
     {
@@ -129,6 +145,7 @@ class Order extends Model
         return $data['TotalPrice'] ?? 0;
     }
 
+    // Getters & Setters
     public function getId()
     {
         return $this->id;
@@ -138,26 +155,6 @@ class Order extends Model
     {
         return $this->user_id;
     }
-
-
-            return $data['TotalPrice'] ?? 0;
-        }
-
-        public function getAllOrder()
-        {
-            $conn = $this->getDb()->connect();
-
-            $sql = "SELECT id, order_id, status, create_at, update_at 
-                    FROM orders
-                    ORDER BY id ASC";
-
-            $query = $conn->execute_query($sql);
-            $data = $query->fetch_all(MYSQLI_ASSOC);
-
-            $conn->close();
-            
-            return $data;
-        }
 
     public function getStatus()
     {

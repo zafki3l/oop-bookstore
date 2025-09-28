@@ -14,5 +14,5 @@ $order = new Order();
 
 
 
-    $orders = $order->getAllOrder();
+$orders = $order->getAllOrder();
 ?>

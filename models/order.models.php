@@ -59,11 +59,13 @@ class Order extends Model
 
         $stmt = $conn->prepare($sql);
 
-        $stmt->bind_param(
-            'ssi',
-            $this->status,
-            $this->id
-        );
+
+            $stmt->bind_param(
+                'si',
+                $this->status,
+                $id
+            );
+
 
         $stmt->execute();
 
@@ -137,6 +139,26 @@ class Order extends Model
         return $this->user_id;
     }
 
+
+            return $data['TotalPrice'] ?? 0;
+        }
+
+        public function getAllOrder()
+        {
+            $conn = $this->getDb()->connect();
+
+            $sql = "SELECT id, order_id, status, create_at, update_at 
+                    FROM orders
+                    ORDER BY id ASC";
+
+            $query = $conn->execute_query($sql);
+            $data = $query->fetch_all(MYSQLI_ASSOC);
+
+            $conn->close();
+            
+            return $data;
+        }
+
     public function getStatus()
     {
         return $this->status;
@@ -150,5 +172,6 @@ class Order extends Model
     public function getUpdateAt()
     {
         return $this->update_at;
+
     }
 }

@@ -22,7 +22,7 @@ Dự án được phát triển và chạy trên:
 
 ### 1. Clone dự án
 ```bash
-git clone https://github.com/zafki3l/oop-bookstore
+git clone https://github.com/zafki3l/oop-bookstore.git
 
 -> Sau đó Di chuyển project tới folder htdocs của xampp: C:\xampp\htdocs\oop-bookstore
 ```
@@ -33,27 +33,9 @@ git clone https://github.com/zafki3l/oop-bookstore
 - Chỉnh sửa thông tin kết nối database (host, username, password, dbname) theo môi trường của bạn.
 
 ### 3. Khởi tạo Database
-- Trong thư mục `migrations/`, có các file PHP để khởi tạo cơ sở dữ liệu:
-  - `20250917233233_create_mvc_bookstore_database.php`
-  - `20250917233341_create_users_table.php`
-  - `20250921004647_create_books_table.php`
-  - `20250921004951_create_categories_table.php`
-  - `20250921005950_create_orders_table.php`
-  - `20250921010440_create_orderDetails_table.php`
-  - `20250921010727_create_carts_table.php`
-  - `20250921170733_add_pages_to_table.php`
-
-- Chạy các file này trên phpMyAdmin hoặc qua terminal:
-  - Di chuyển đến thư mục `migrations/`:
-    ```bash
-    cd migrations
-    ```
-  - Chạy từng file ví dụ:
-    ```bash
-    php 20250921004951_create_categories_table.php
-    ```
-- **Lưu ý**: Nếu chạy file php trên terminal, hãy đảm bảo máy bạn đã cài đặt sẵn môi trường cho PHP (Check php -v trong terminal).
-- **Lưu ý**: Một số file có thể chứa lệnh DROP hoặc DELETE, hãy đọc kỹ trước khi chạy. Có thể chỉnh sửa cấu trúc database trong thư mục này nếu cần.
+- Trong phpmyadmin, tạo 1 database mới tên là `mvc_book_store`
+- Trong thư mục `sql/`, đã có sẵn file `mvc_book_store.sql`
+- import file `mvc_book_store.sql` vào trong database `mvc_book_store`, dữ liệu sẽ được tự động khởi tạo
 
 ### 4. Chạy ứng dụng
 - Đặt thư mục dự án vào thư mục gốc của máy chủ web (ví dụ: `htdocs` của XAMPP).
@@ -81,6 +63,13 @@ oop-bookstore/
 │  │  ├─ login.auth.php
 │  │  ├─ logout.auth.php
 │  │  └─ register.auth.php
+│  ├─ staff/
+│  │  ├─ books/
+│  │  │  ├─ addBook.books.php
+│  │  │  ├─ deleteBook.books.php
+│  │  │  ├─ editBook.books.php
+│  │  │  └─ index.books.php
+│  │  └─ dashboard.staff.php
 │  └─ homepage.actions.php
 ├─ config/
 │  ├─ .htaccess
@@ -89,8 +78,10 @@ oop-bookstore/
 │  └─ database.config.php
 ├─ controllers/
 │  ├─ authController.controllers.php
+│  ├─ bookController.controllers.php
 │  └─ userController.controllers.php
 ├─ handlers/
+│  ├─ bookErrorHandler.handlers.php
 │  └─ userErrorHandler.handlers.php
 ├─ migrations/
 │  ├─ 20250917233233_create_mvc_bookstore_database.php
@@ -104,6 +95,7 @@ oop-bookstore/
 │  ├─ create.ps1
 │  └─ migration.migrations.php
 ├─ models/
+│  ├─ book.models.php
 │  ├─ model.models.php
 │  └─ user.models.php
 ├─ public/
@@ -118,19 +110,50 @@ oop-bookstore/
 │  │  ├─ layouts/
 │  │  │  ├─ footer.css
 │  │  │  ├─ header.css
-│  │  │  └─ searchbar.css
+│  │  │  ├─ pagination.css
+│  │  │  ├─ searchbar.css
+│  │  │  └─ sidebar.css
+│  │  ├─ staff/
+│  │  │  ├─ addBook.css
+│  │  │  ├─ bookIndex.css
+│  │  │  ├─ dashboard.css
+│  │  │  └─ editBook.css
 │  │  ├─ homepage.css
 │  │  ├─ noti.css
 │  │  └─ rule.css
+│  ├─ icon/
+│  │  └─ birdcage.png
 │  ├─ images/
-│  ├─ js/
-│  │  ├─ confirmDeleteUser.js
-│  │  ├─ createUserMessage.js
-│  │  ├─ deleteUserMessage.js
-│  │  ├─ editUserMessage.js
-│  │  ├─ loginMessage.js
-│  │  └─ registerMessage.js
-│  └─ hello.txt
+│  │  ├─ 0ff0f3bac1a921ba5c70918084b1962320250926104718.png
+│  │  ├─ 0gzoylpn1758871778.png
+│  │  ├─ 0gzoylpn20250926093110.png
+│  │  ├─ 0gzoylpn20250926093901.png
+│  │  ├─ 0gzoylpn20250926094040.png
+│  │  ├─ 0gzoylpn20250926094337.png
+│  │  ├─ 0gzoylpn20250926102624.png
+│  │  ├─ 0gzoylpn20250926103004.png
+│  │  ├─ 0gzoylpn20250926104730.png
+│  │  ├─ 0gzoylpn20250926192513.png
+│  │  ├─ 1758870202.jpg
+│  │  ├─ 1758870214.jpg
+│  │  ├─ 1758870870.png
+│  │  ├─ 1758870971.png
+│  │  ├─ 1758871656.png
+│  │  ├─ 415SkSLLrzL20250926162534.jpg
+│  │  └─ Kurumi Tokisaki20250926234920.jpg
+│  └─ js/
+│     ├─ addBookMessage.js
+│     ├─ confirmDeleteBook.js
+│     ├─ confirmDeleteUser.js
+│     ├─ createUserMessage.js
+│     ├─ deleteBookMessage.js
+│     ├─ deleteUserMessage.js
+│     ├─ editBookMessage.js
+│     ├─ editUserMessage.js
+│     ├─ loginMessage.js
+│     └─ registerMessage.js
+├─ sql/
+│  └─ mvc_book_store.sql
 ├─ views/
 │  ├─ admin/
 │  │  ├─ addUser.admin.php
@@ -143,12 +166,20 @@ oop-bookstore/
 │  ├─ layouts/
 │  │  ├─ footer.layouts.php
 │  │  ├─ header.layouts.php
-│  │  └─ searchbar.layouts.php
+│  │  ├─ pagination.layouts.php
+│  │  ├─ searchbar.layouts.php
+│  │  └─ sidebar.layouts.php
 │  ├─ staff/
+│  │  ├─ books/
+│  │  │  ├─ addBook.books.php
+│  │  │  ├─ editBook.books.php
+│  │  │  ├─ index.books.php
+│  │  │  └─ searchBook.books.php
 │  │  └─ dashboard.staff.php
 │  └─ homepage.views.php
 ├─ .gitattributes
 ├─ .gitignore
+├─ .htaccess
 ├─ index.php
 ├─ instructions.txt
 ├─ README.md

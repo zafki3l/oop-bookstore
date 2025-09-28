@@ -22,8 +22,10 @@ Dự án được phát triển và chạy trên:
 
 ### 1. Clone dự án
 ```bash
-git clone https://github.com/zafki3l/oop-bookstore.git
+git clone https://github.com/zafki3l/oop-bookstore
 cd oop-bookstore
+
+Lưu ý: Vui lòng đổi tên folder project thành `oop-bookstore` trước khi chạy, để các đường dẫn BASE_URL hoạt động chính xác.
 ```
 
 ### 2. Tạo file cấu hình

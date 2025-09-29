@@ -19,4 +19,20 @@ class CategoryController
         header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
         exit();
     }
+
+    public function edit()
+    {
+        $this->category->editCategory();
+
+        header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
+        exit();
+    }
+
+    public function delete()
+    {
+        $this->category->deleteCategory();
+
+        header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
+        exit();
+    }
 }

@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: end;
 }
-
+    
 .category-header .add input {
     flex: 1;
     padding: 8px 10px;

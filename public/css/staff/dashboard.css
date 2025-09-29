@@ -5,22 +5,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   .staff-info{
     padding: 104px 145px;
+    max-width: 570px;
+    max-height: 320px;
+    box-sizing: border-box;
+
+    .info-header{
+      width: max-content;
+      position: relative;
+      bottom: 70px;
+      right: 120px;
+    }
   }
+
   .sales-report{
     padding: 150px 170px;
+    max-width: 570px;
   }
 }
 .info-content {
   display: flex;
   gap: 20px;
+
+  .img {
+    font-size: 35px;
+    position: relative;
+    bottom: 40px;
+    right: 120px;
+  }
 }
 
 .info-content .text {
     flex-direction: column;
     display: block;
     margin: 5px 0;
+    position: relative;
+    right: 100px;
+    bottom: 30px;
+    p{
+      width: max-content;
+      line-height: 1.7;
+      font-size: 20px;
+    }
 }
 
 .div2{
@@ -52,5 +80,4 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   font-size: 18px;
   font-weight: bold;
-  text-align: center;
 }

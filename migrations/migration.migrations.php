@@ -6,7 +6,7 @@ abstract class Migration
 {
     private $db;
 
-    public function __construct(Database $db)
+    public function __construct($db = new Database())
     {
         $this->db = $db;
     }

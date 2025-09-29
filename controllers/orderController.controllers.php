@@ -28,7 +28,7 @@ class OrderController
         $this->order->deleteOrder($id);
 
         $_SESSION['delete_order_success'] = 'Delete order successfully';
-        header('Location: /oop-bookstore/views/staff/orders/index.oders.php');
+        header('Location: /oop-bookstore/views/staff/orders/index.orders.php');
         exit();
     }
 

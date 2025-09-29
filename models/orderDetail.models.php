@@ -55,6 +55,79 @@ class OrderDetail extends Model
         $conn->close();
     }
 
+ public function getAllOrderDetails()
+{
+    $conn = $this->getDb()->connect();
+
+    $sql = "
+        SELECT 
+            o.id AS order_id,
+            u.username AS user_name,   -- sửa ở đây
+            b.name AS book_name,       -- nếu bảng books dùng 'title' thì đổi lại
+            od.quantity,
+            o.status,
+            (od.price * od.quantity) AS total,
+            o.created_at,
+            o.updated_at
+        FROM orders o
+        JOIN users u ON o.user_id = u.id
+        JOIN orderDetails od ON o.id = od.order_id
+        JOIN books b ON od.book_id = b.id
+        ORDER BY o.id DESC
+    ";
+
+    $result = $conn->query($sql);
+    $data = [];
+
+    if ($result) {
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
+    }
+
+    $conn->close();
+    return $data;
+}
+
+public function getOrderDetailById($id)
+{
+    $conn = $this->getDb()->connect();
+
+    $sql = "
+        SELECT 
+            o.id AS order_id,
+            u.username AS user_name,   -- sửa ở đây
+            b.name AS book_name,       -- hoặc b.title nếu cột là 'title'
+            od.quantity,
+            o.status,
+            (od.price * od.quantity) AS total,
+            o.created_at,
+            o.updated_at
+        FROM orders o
+        JOIN users u ON o.user_id = u.id
+        JOIN orderDetails od ON o.id = od.order_id
+        JOIN books b ON od.book_id = b.id
+        WHERE o.id = ?
+    ";
+
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        $conn->close();
+        return [];
+    }
+
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+
+    $res = $stmt->get_result();
+    $data = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+
+    $stmt->close();
+    $conn->close();
+
+    return $data;
+}
+
+
     // Getters & Setters
     public function getId()
     {

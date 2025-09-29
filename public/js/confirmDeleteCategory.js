@@ -1,7 +1,7 @@
-function showConfirm(categoryId) {
+function showConfirmDelete(categoryId) {
     document.getElementById('confirmModal-' + categoryId).style.display = 'block';
 }
 
-function closeModal(categoryId) {
+function closeDeleteModal(categoryId) {
     document.getElementById('confirmModal-' + categoryId).style.display = 'none';
 }

@@ -32,6 +32,7 @@ include '../../../actions/staff/orders/index.orders.php';
                 <h2>Order Management</h2>
 
                 <div class="search-add">
+
                 </div>
             </div>
 
@@ -54,22 +55,15 @@ include '../../../actions/staff/orders/index.orders.php';
                                 <td><?php echo htmlspecialchars($order['id']) ?></td>
                                 <td><?php echo htmlspecialchars($order['user_id']) ?></td>
                                 <td>
-                                    <?php
-                                    switch ($order['status']) {
-                                        case 0:
-                                            $statusName = 'Pending';
-                                            break;
-                                        case 1:
-                                            $statusName = 'In Transis';
-                                            break;
-                                        case 2:
-                                            $statusName = 'Completed';
-                                            break;
-                                        default:
-                                            $statusName = 'Unknown';
-                                    }
-                                    echo htmlspecialchars($statusName);
-                                    ?>
+                                    <form method="POST" action="/oop-bookstore/actions/staff/orders/index.orders.php">
+                                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']); ?>">
+
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="0" <?php echo ($order['status'] == 0) ? 'selected' : ''; ?>>Pending</option>
+                                            <option value="1" <?php echo ($order['status'] == 1) ? 'selected' : ''; ?>>In Transit</option>
+                                            <option value="2" <?php echo ($order['status'] == 2) ? 'selected' : ''; ?>>Completed</option>
+                                        </select>
+                                    </form>
                                 </td>
                                 <td><?php echo htmlspecialchars($order['created_at'])  ?></td>
                                 <td><?php echo htmlspecialchars($order['updated_at']) ?></td>

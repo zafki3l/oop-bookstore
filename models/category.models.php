@@ -65,6 +65,36 @@ class Category extends Model
         $conn->close();
     }
 
+    public function editCategory()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "UPDATE categories
+                SET name = ?
+                WHERE id = ?";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $this->name, $this->id);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+    }
+
+    public function deleteCategory()
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "DELETE FROM categories WHERE id = ?";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $this->id);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+    }
+
     // Getters & Setters
     public function getId()
     {

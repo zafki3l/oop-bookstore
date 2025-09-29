@@ -59,15 +59,30 @@ include_once '../../../actions/staff/categories/index.categories.php';
                         <?php foreach ($categories as $category): ?>
                             <tr>
                                 <td><?= htmlspecialchars($category['id']) ?></td>
-                                <td><?= htmlspecialchars($category['name']) ?></td>
+                                <td>
+                                    <?= htmlspecialchars($category['name']) ?>
+                                    <a href="#" class="edit-btn"><i class="fa-solid fa-pen"></i></a>    
+                                </td>
                                 <td><?= htmlspecialchars($category['created_at']) ?></td>
                                 <td><?= htmlspecialchars($category['updated_at']) ?></td>
                                 <td>
-                                    <a href="#" class="edit-btn"><i class="fa-solid fa-pen"></i></a>
                                     <button onclick="showConfirm(<?= htmlspecialchars($category['id']) ?>)" class="delete-btn">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
 
+                                    <!-- Delete Modal -->
+                                    <div id="confirmModal-<?php echo htmlspecialchars($category['id']) ?>" class="modal">
+                                        <div class="modal-content">
+                                            <h2>Delete</h2>
+                                            <hr>
+                                            <p>Click confirm to delete</p>
+                                            <form action="../../../actions/staff/categories/delete.categories.php" method="post" id="deleteForm">
+                                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id']); ?>">
+                                                <button type="submit" class="submit-modal">Confirm</button>
+                                                <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($category['id']) ?>)">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -75,6 +90,7 @@ include_once '../../../actions/staff/categories/index.categories.php';
                 </table>
             </div>
 
+            <script src="/oop-bookstore/public/js/confirmDeleteCategory.js"></script>
         </div>
     </div>
 

@@ -1,5 +1,10 @@
 <?php
 include '../../../actions/staff/orders/index.orders.php';
+
+function deleteOrderMessage()
+{
+    return $_SESSION['delete_order_success'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,16 +72,67 @@ include '../../../actions/staff/orders/index.orders.php';
                                 </td>
                                 <td><?php echo htmlspecialchars($order['created_at'])  ?></td>
                                 <td><?php echo htmlspecialchars($order['updated_at']) ?></td>
-                                <td class="action-btn">
-                                    <a href="editOrder.orders.php?id=<?php echo htmlspecialchars($order['id']) ?>" class="edit-btn">Edit</a>
-                                    <button onclick="showConfirm(<?php echo htmlspecialchars($order['id']) ?>" class="delete-btn">Delete</button>
+                                <td>
+                                    <div class="action-btn">
+                                        <button type="button" onclick="showDetail(<?php echo htmlspecialchars($order['id']) ?>)" class="info-btn">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </button>
+
+                                        <button type="button" onclick="showConfirm(<?php echo htmlspecialchars($order['id']) ?>)" class="delete-btn">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+
+                                        <!-- Detail Modal -->
+                                        <div id="detailModal-<?php echo $order['id']; ?>" class="modal">
+                                            <div class="modal-content">
+                                                <h2>Order Detail</h2>
+                                                <hr>
+                                                <div class="detail-body">
+                                                    <!-- noi dung -->
+                                                </div>
+                                                <button onclick="closeDetail(<?php echo $order['id']; ?>)">Close</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Delete Modal -->
+                                        <div id="confirmModal-<?= htmlspecialchars($order['id']) ?>" class="modal">
+                                            <div class="modal-content">
+                                                <h2>Delete</h2>
+                                                <hr>
+                                                <p>Click confirm to delete</p>
+                                                <form action="../../../actions/staff/orders/deleteOrder.orders.php" method="POST" id="deleteForm">
+                                                    <input type="hidden" name="id" value="<?= htmlspecialchars($order['id']) ?>">
+                                                    <button type="submit" class="submit-modal">Confirm</button>
+                                                    <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($order['id']) ?>)">Cancel</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+
+                <?php include_once '../../layouts/pagination.layouts.php' ?>
             </div>
         </div>
+
+        <div class="delete-order-message">
+            <?php if (isset($_SESSION['delete_order_success'])): ?>
+                <?php echo deleteOrderMessage(); ?>
+            <?php endif; ?>
+        </div>
+
+        <?php if (!empty($_SESSION['delete_order_success'])): ?>
+            <script src="/oop-bookstore/public/js/deleteOrderMessage.js"></script>
+            <?php unset($_SESSION['delete_order_success']); ?>
+        <?php endif; ?>
+
+        <script src="/oop-bookstore/public/js/confirmDeleteOrder.js"></script>
+
+        <script src="/oop-bookstore/public/js/showOrderDetail.js"></script>
+
 
     </div>
 

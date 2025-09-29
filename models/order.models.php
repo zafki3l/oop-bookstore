@@ -13,24 +13,24 @@ class Order extends Model
     private $id;
     private $user_id;
     private $status;
-    private $create_at;
-    private $update_at;
+    private $created_at;
+    private $updated_at;
 
     public function __construct(
         $db = new Database,
         $id = null,
         $user_id = null,
         $status = null,
-        $create_at = null,
-        $update_at = null
+        $created_at = null,
+        $updated_at = null
     ) {
         parent::__construct($db);
 
         $this->id = $id;
         $this->user_id = $user_id;
         $this->status = $status;
-        $this->create_at = $create_at;
-        $this->update_at = $update_at;
+        $this->create_at = $created_at;
+        $this->update_at = $updated_at;
     }
 
     public function getAllOrder()
@@ -76,11 +76,11 @@ class Order extends Model
         $stmt = $conn->prepare($sql);
 
 
-            $stmt->bind_param(
-                'si',
-                $this->status,
-                $id
-            );
+        $stmt->bind_param(
+            'ii',
+            $this->status,
+            $this->id
+        );
 
 
         $stmt->execute();
@@ -163,12 +163,21 @@ class Order extends Model
 
     public function getCreateAt()
     {
-        return $this->create_at;
+        return $this->created_at;
     }
 
     public function getUpdateAt()
     {
-        return $this->update_at;
+        return $this->updated_at;
 
     }
+
+    public function setId($id) {
+    $this->id = $id;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
 }

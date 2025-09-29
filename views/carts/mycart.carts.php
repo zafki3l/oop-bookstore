@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../../actions/carts/cartmanagement.carts.php';
 ?>
 <!DOCTYPE html>

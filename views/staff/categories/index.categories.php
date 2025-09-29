@@ -1,5 +1,21 @@
 <?php
+session_start();
 include_once '../../../actions/staff/categories/index.categories.php';
+
+function addCategoryMessage()
+{
+    return $_SESSION['add-category'];
+}
+
+function deleteCategoryMessage()
+{
+    return $_SESSION['delete-category'];
+}
+
+function editCategoryMessage()
+{
+    return $_SESSION['edit-category'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,12 +77,37 @@ include_once '../../../actions/staff/categories/index.categories.php';
                                 <td><?= htmlspecialchars($category['id']) ?></td>
                                 <td>
                                     <?= htmlspecialchars($category['name']) ?>
-                                    <a href="#" class="edit-btn"><i class="fa-solid fa-pen"></i></a>    
+                                    <!-- Edit -->
+                                    <button onclick="showEditModal(<?= htmlspecialchars($category['id']) ?>)" class="edit-btn">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <div id="edit-<?php echo htmlspecialchars($category['id']) ?>" class="modal">
+                                        <div class="modal-content" id="edit-modal">
+                                            <h2>Edit Category</h2>
+                                            <hr>
+                                            <br>
+                                            <br>
+                                            <form action="../../../actions/staff/categories/edit.categories.php" method="post" id="editForm">
+                                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id']); ?>">
+                                                <div class="form-group">
+                                                    <label for="">Category Name:</label>
+                                                    <input type="text" name="name" placeholder="Category" value="<?= htmlspecialchars($category['name']) ?>">
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <button type="button" class="cancel-modal" onclick="closeEditModal(<?php echo htmlspecialchars($category['id']) ?>)">Cancel</button>
+                                                    <button type="submit" class="submit-modal">Confirm</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td><?= htmlspecialchars($category['created_at']) ?></td>
                                 <td><?= htmlspecialchars($category['updated_at']) ?></td>
                                 <td>
-                                    <button onclick="showConfirm(<?= htmlspecialchars($category['id']) ?>)" class="delete-btn">
+                                    <button onclick="showConfirmDelete(<?= htmlspecialchars($category['id']) ?>)" class="delete-btn">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
 
@@ -79,7 +120,7 @@ include_once '../../../actions/staff/categories/index.categories.php';
                                             <form action="../../../actions/staff/categories/delete.categories.php" method="post" id="deleteForm">
                                                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id']); ?>">
                                                 <button type="submit" class="submit-modal">Confirm</button>
-                                                <button type="button" class="cancel-modal" onclick="closeModal(<?php echo htmlspecialchars($category['id']) ?>)">Cancel</button>
+                                                <button type="button" class="cancel-modal" onclick="closeDeleteModal(<?php echo htmlspecialchars($category['id']) ?>)">Cancel</button>
                                             </form>
                                         </div>
                                     </div>
@@ -90,7 +131,41 @@ include_once '../../../actions/staff/categories/index.categories.php';
                 </table>
             </div>
 
+            <div class="add-category-message">
+                <?php if (isset($_SESSION['add-category'])): ?>
+                    <?php echo addCategoryMessage(); ?>
+                <?php endif; ?>
+            </div>
+
+            <?php if (!empty($_SESSION['add-category'])): ?>
+                <script src="/oop-bookstore/public/js/addCategoryMessage.js"></script>
+                <?php unset($_SESSION['add-category']); ?>
+            <?php endif; ?>
+
+            <div class="delete-category-message">
+                <?php if (isset($_SESSION['delete-category'])): ?>
+                    <?php echo deleteCategoryMessage(); ?>
+                <?php endif; ?>
+            </div>
+
+            <?php if (!empty($_SESSION['delete-category'])): ?>
+                <script src="/oop-bookstore/public/js/deleteCategoryMessage.js"></script>
+                <?php unset($_SESSION['delete-category']); ?>
+            <?php endif; ?>
+
+            <div class="edit-category-message">
+                <?php if (isset($_SESSION['edit-category'])): ?>
+                    <?php echo editCategoryMessage(); ?>
+                <?php endif; ?>
+            </div>
+
+            <?php if (!empty($_SESSION['edit-category'])): ?>
+                <script src="/oop-bookstore/public/js/editCategoryMessage.js"></script>
+                <?php unset($_SESSION['edit-category']); ?>
+            <?php endif; ?>
+
             <script src="/oop-bookstore/public/js/confirmDeleteCategory.js"></script>
+            <script src="/oop-bookstore/public/js/editCategoryModal.js"></script>
         </div>
     </div>
 

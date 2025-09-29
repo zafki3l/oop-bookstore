@@ -14,24 +14,30 @@ class CategoryController
 	
     public function create()
     {
+        session_start();
         $this->category->createCategory();
 
+        $_SESSION['add-category'] = 'Add new Category successfully!';
         header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
         exit();
     }
 
     public function edit()
     {
+        session_start();
         $this->category->editCategory();
 
+        $_SESSION['edit-category'] = 'Updated Category successfully!';
         header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
         exit();
     }
 
     public function delete()
     {
+        session_start();
         $this->category->deleteCategory();
 
+        $_SESSION['delete-category'] = 'Delete Category successfully!';
         header('Location: /oop-bookstore/views/staff/categories/index.categories.php');
         exit();
     }

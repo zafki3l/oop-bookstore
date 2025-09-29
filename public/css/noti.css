@@ -143,4 +143,53 @@
     opacity: 1;
 }
 
+.add-category-message {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+.add-category-message.show {
+    opacity: 1;
+}
 
+.delete-category-message {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+.delete-category-message.show {
+    opacity: 1;
+}
+
+.edit-category-message {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+.edit-category-message.show {
+    opacity: 1;
+}

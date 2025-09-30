@@ -18,12 +18,10 @@
         </div>
         <hr>
         <div class="sidebar-content">
-            <li><a href="/oop-bookstore/views/staff/dashboard.staff.php"><p>Dashboard</p></a></li>
             <li><a href="/oop-bookstore/views/staff/books/index.books.php?page_number=1"><p>Book Management</p></a></li>
             <li><a href="/oop-bookstore/views/staff/categories/index.categories.php"><p>Category Management</p></a></li>
-            <li><a href="#"><p>Sales Report</p></a></li>
-            <li><a href="/oop-bookstore/views/staff/orders/index.orders.php?page_number=1"><p>Order Management</p></a></li>
-            <li><a href="#"><p>Total Orders</p></a></li>
+            <li><a href="/oop-bookstore/views/staff/orders/index.orders.php"><p>Order Management</p></a></li>
+            <li><a href="/oop-bookstore/views/staff/salesReport/monthly.salesReport.php"><p>Sales Report</p></a></li>
         </div>
 
     </ul>

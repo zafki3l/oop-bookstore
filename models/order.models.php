@@ -37,15 +37,29 @@ class Order extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT id, user_id, status, created_at, updated_at 
-                FROM orders
-                ORDER BY id ASC";
+        $sql = "SELECT o.id as 'id', 
+                        u.id as 'user_id', 
+                        u.username as 'username',
+                        SUM(od.quantity * od.price) as 'total_price',
+                        o.status as 'status', 
+                        o.created_at as 'created_at', 
+                        o.updated_at as 'updated_at' 
+                FROM orders o
+                JOIN users u ON u.id = o.user_id
+                JOIN orderdetails od ON o.id = od.order_id
+                GROUP BY o.id
+                ORDER BY o.id ASC";
 
         $query = $conn->execute_query($sql);
-        $data = $query->fetch_all(MYSQLI_ASSOC);
+
+        $data = [];
+
+        while ($row = $query->fetch_assoc()) {
+            $data[] = $row;
+        }
 
         $conn->close();
-        
+
         return $data;
     }
 
@@ -103,50 +117,45 @@ class Order extends Model
         $conn->close();
     }
 
-    //tinh tong don hang
-    public function totalPrice($id)
-    {
-        $conn = $this->getDb()->connect();
-
-        $stmt = $conn->prepare(
-            $sql = "SELECT o.id, SUM(od.price*od.quantity) AS 'TotalPrice'
-                        FROM orders o
-                        JOIN orderDetails od
-                        ON o.id = od.order_id
-                        WHERE o.id = ?"
-        );
-
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_assoc();
-
-        $stmt->close();
-        $conn->close();
-
-        return $data['TotalPrice'] ?? 0;
-    }
-
     //tinh doanh thu
     public function createSalesReport()
     {
         $conn = $this->getDb()->connect();
 
-        $stmt = $conn->prepare(
-            "SELECT SUM(od.price*od.quantity) AS 'TotalPrice'
+        $query = $conn->execute_query(
+            "SELECT MONTH(o.created_at) as 'month', 
+                    YEAR(o.created_at) as 'year',
+                    SUM(od.quantity * od.price) as 'income'
             FROM orders o
-            JOIN orderDetails od ON o.id = od.oder_id
-            WHERE MONTH(o.create_at) = ?"
+            JOIN orderdetails od ON o.id = od.order_id
+            GROUP BY MONTH(o.created_at), YEAR(o.created_at)
+            ORDER BY MONTH(o.created_at), YEAR(o.created_at)"
         );
 
-        $month = (empty($_POST['month'])) ? date('m') : $_POST['month'];
+        $data = [];
 
-        $stmt->bind_param('i', $month);
-        $stmt->execute();
-        $stmt->close();
+        while ($row = $query->fetch_assoc()) {
+            $month = $row['month'];
+            $data[$month] = $row;
+        }
+
+        $query->close();
         $conn->close();
 
-        return $data['TotalPrice'] ?? 0;
+        $finalData = [];
+        for ($m = 1; $m <= 12; $m++) {
+            if (isset($data[$m])) {
+                $finalData[] = $data[$m];
+            } else {
+                $finalData[] = [
+                    'month' => $m,
+                    'year' => date('Y'), 
+                    'income' => 0
+                ];
+            }
+        }
+
+        return $finalData;
     }
 
     // Getters & Setters
@@ -173,15 +182,15 @@ class Order extends Model
     public function getUpdateAt()
     {
         return $this->updated_at;
-
     }
 
-    public function setId($id) {
-    $this->id = $id;
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
-
 }

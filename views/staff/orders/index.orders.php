@@ -47,6 +47,7 @@ function deleteOrderMessage()
                         <tr>
                             <th>ORDER ID</th>
                             <th>USER ID</th>
+                            <th>TOTAL PRICE</th>
                             <th>STATUS</th>
                             <th>CREATE AT</th>
                             <th>UPDATE AT</th>
@@ -59,6 +60,7 @@ function deleteOrderMessage()
                             <tr>
                                 <td><?php echo htmlspecialchars($order['id']) ?></td>
                                 <td><?php echo htmlspecialchars($order['user_id']) ?></td>
+                                <td><?php echo htmlspecialchars(0) ?></td>
                                 <td>
                                     <form method="POST" action="/oop-bookstore/actions/staff/orders/index.orders.php">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']); ?>">

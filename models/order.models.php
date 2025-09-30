@@ -29,8 +29,8 @@ class Order extends Model
         $this->id = $id;
         $this->user_id = $user_id;
         $this->status = $status;
-        $this->create_at = $created_at;
-        $this->update_at = $updated_at;
+        $this->created_at = $created_at;
+        $this->updated_at = $updated_at;
     }
 
     public function getAllOrder()
@@ -104,11 +104,11 @@ class Order extends Model
     }
 
     //tinh tong don hang
-    public function totalPrice($mysqli, $order_id)
+    public function totalPrice($order_id)
     {
         $conn = $this->getDb()->connect();
 
-        $stmt = $mysqli->prepare(
+        $stmt = $conn->prepare(
             $sql = "SELECT order_id, SUM(od.price*od.quantity) AS 'TotalPrice'
                         FROM orderDetails
                         WHERE order_id = ?"
@@ -124,11 +124,11 @@ class Order extends Model
     }
 
     //tinh doanh thu
-    public function createSalesReport($mysqli)
+    public function createSalesReport()
     {
         $conn = $this->getDb()->connect();
 
-        $stmt = $mysqli->prepare(
+        $stmt = $conn->prepare(
             "SELECT SUM(od.price*od.quantity) AS 'TotalPrice'
             FROM orders o
             JOIN orderDetails od ON o.id = od.oder_id

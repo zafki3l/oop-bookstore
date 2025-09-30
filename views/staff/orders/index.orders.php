@@ -34,10 +34,9 @@ function deleteOrderMessage()
 
         <div class="content">
             <div class="order-header">
-                <h2>Order Management</h2>
-
-                <div class="search-add">
-
+                <div class="header-text">
+                    <h2>Book Management</h2>
+                    <h3>WELCOME <?php echo htmlspecialchars($_SESSION['username']) ?></h3>
                 </div>
             </div>
 
@@ -47,6 +46,7 @@ function deleteOrderMessage()
                         <tr>
                             <th>ORDER ID</th>
                             <th>USER ID</th>
+                            <th>USERNAME</th>
                             <th>TOTAL PRICE</th>
                             <th>STATUS</th>
                             <th>CREATE AT</th>
@@ -60,8 +60,9 @@ function deleteOrderMessage()
                             <tr>
                                 <td><?php echo htmlspecialchars($order['id']) ?></td>
                                 <td><?php echo htmlspecialchars($order['user_id']) ?></td>
+                                <td><?php echo htmlspecialchars($order['username']) ?></td>
                                 <td>
-                                    <?php echo ($order['totalPrice'] !== null && $order['totalPrice'] > 0) ? number_format($order['totalPrice'], 0, ',', '.') . '₫' : '0₫'; ?>
+                                    <?php echo htmlspecialchars($order['total_price']) . 'đ' ?></td>
                                 <td>
                                     <form method="POST" action="/oop-bookstore/actions/staff/orders/index.orders.php">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']); ?>">

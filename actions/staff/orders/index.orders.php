@@ -30,11 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 }
 
 $orders = $order->getAllOrder();
-
-//get TotalPrice
-foreach ($orders as &$orderItem) {
-    $orderItem['totalPrice'] = $order->totalPrice($orderItem['id']);
-}
-unset($orderItem);
-
 ?>

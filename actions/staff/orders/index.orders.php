@@ -22,6 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['status'
     exit();
 }
 
+//delete order 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $orderModel = new Order();
+    $orderModel->deleteOrder((int)$_POST['id']);
+    $_SESSION['delete_order_success'] = 'Delete order successful';
+}
+
+
 
 $orders = $order->getAllOrder();
 ?>

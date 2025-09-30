@@ -32,9 +32,8 @@ function loginMessage()
             <div class="div1">
                 <div class="dashboard staff-info">
                     <div class="info-header">
-                        <h2>STAFF INFORMATION</h2>
+                        <h3>STAFF INFORMATION</h3>
                     </div>
-                    <hr>
                     <div class="info-content">
                         <div class="img">
                             <i class="fa-solid fa-user-circle fa-5x"></i>
@@ -59,7 +58,9 @@ function loginMessage()
             <div class="div1 bottom">
                 <div class="dashboard sales-report">Thống kê doanh số</div>
                 <div class="div2">
-                    <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>
+                    <a href="orders/index.orders.php?page_number=1">
+                        <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>
+                    </a>
                     <div class="dashboard box2 total-order">Tổng đơn hàng</div>
                 </div>
             </div>

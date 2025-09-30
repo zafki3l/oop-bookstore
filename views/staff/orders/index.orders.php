@@ -60,7 +60,8 @@ function deleteOrderMessage()
                             <tr>
                                 <td><?php echo htmlspecialchars($order['id']) ?></td>
                                 <td><?php echo htmlspecialchars($order['user_id']) ?></td>
-                                <td><?php echo htmlspecialchars(0) ?></td>
+                                <td>
+                                    <?php echo ($order['totalPrice'] !== null && $order['totalPrice'] > 0) ? number_format($order['totalPrice'], 0, ',', '.') . '₫' : '0₫'; ?>
                                 <td>
                                     <form method="POST" action="/oop-bookstore/actions/staff/orders/index.orders.php">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']); ?>">

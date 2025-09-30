@@ -104,18 +104,22 @@ class Order extends Model
     }
 
     //tinh tong don hang
-    public function totalPrice($order_id)
+    public function totalPrice($id)
     {
         $conn = $this->getDb()->connect();
 
         $stmt = $conn->prepare(
-            $sql = "SELECT order_id, SUM(od.price*od.quantity) AS 'TotalPrice'
-                        FROM orderDetails
-                        WHERE order_id = ?"
+            $sql = "SELECT o.id, SUM(od.price*od.quantity) AS 'TotalPrice'
+                        FROM orders o
+                        JOIN orderDetails od
+                        ON o.id = od.order_id
+                        WHERE o.id = ?"
         );
 
-        $stmt->bind_param('i', $order_id);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
 
         $stmt->close();
         $conn->close();

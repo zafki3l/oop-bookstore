@@ -29,7 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $_SESSION['delete_order_success'] = 'Delete order successful';
 }
 
-
-
 $orders = $order->getAllOrder();
+
+//get TotalPrice
+foreach ($orders as &$orderItem) {
+    $orderItem['totalPrice'] = $order->totalPrice($orderItem['id']);
+}
+unset($orderItem);
+
 ?>

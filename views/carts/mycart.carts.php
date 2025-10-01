@@ -36,7 +36,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
 
             <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $cart): ?>
-                    <article class="card">
+                        <form action="../../actions/buyNow.actions.php" method="post" class="card">
                         <div class="thumb">
                             <img src="/oop-bookstore/public/images/<?= $cart['cover']  ?>">
                         </div>
@@ -44,48 +44,45 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                         <div class="meta">
                             <div class="book-name"><?= $cart['book_name'] ?> </div>
                             <div class="author"><?= $cart['author'] ?> </div>
-                            <div class="price-small"><?= $cart['price'] ?> </div>
+                            <div class="price-small"><?= number_format($cart['price'], 0, ',', '.') ?> </div>
                         </div>
 
                         <div class="qty-wrap">
-                            <div class="col-label">Số lượng</div>
-                            <div class="qty" role="group" aria-label="Quantity">
-                                <button class="minus">-</button>
-                                <span class="val"><?= $cart['quantity'] ?></span>
-                                <button class="plus">+</button>
+                            <div class="qty">
+                            <button type="button" class="minus">-</button>
+                            <span class="val"><?= $cart['quantity'] ?></span>
+                            <input type="hidden" name="quantity" value="<?= $cart['quantity'] ?>" class="quantity-input">
+                            <button type="button" class="plus">+</button>
                             </div>
                         </div>
 
                         <div class="money-wrap">
-                            <div class="col-label">Thành tiền</div>
-                            <div class="money"><?= $cart['total_price'] ?> </div>
+                            <div class="col-label">Total</div>
+                            <div class="money"><?= number_format($cart['total_price'], 0, ',', '.') ?> </div>
                         </div>
 
                         <div class="action">
-                            <form action="../../actions/buyNow.actions.php" method="post">
-                                <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
-                                <div class="act">
-                                    <button type="submit" class="buy">Mua ngay</button>
-                                </div>
-                            </form>
-                            
-                            <div class="del">
-                                <a href="../../actions/carts/deleteCart.carts.php?id=<?= $cart['id'] ?>" class="trash">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </div>
+                            <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
+                            <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
+                            <input type="hidden" name="price" value="<?= $cart['price'] ?>">
+                            <button type="submit" class="buy">Mua ngay</button>
+
+                            <a href="../../actions/carts/deleteCart.carts.php?id=<?= $cart['id'] ?>" class="trash">
+                            <i class="fa-solid fa-trash"></i>
+                            </a>
                         </div>
-                    </article>
+                        </form>
+
                 <?php endforeach; ?>
             <?php else: ?>
                 <h3>There's no products in cart</h3>
             <?php endif; ?>
         </main>
     </div>
-    <!--footer-->
-    <?php include '../layouts/footer.layouts.php' ?>
+        <!--footer-->
+        <?php include '../layouts/footer.layouts.php' ?>
 
-    <script src="/oop-bookstore/public/js/quantityUpdater.js"></script>
+        <script src="/oop-bookstore/public/js/quantityUpdater.js"></script>
 </body>
 
 </html>

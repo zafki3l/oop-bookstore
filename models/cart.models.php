@@ -41,6 +41,7 @@ class Cart extends Model
         $sql = $conn->execute_query("
             SELECT 
                 c.id as 'id',
+                b.id as 'book_id',
                 b.name as 'book_name', 
                 b.author as 'author',
                 c.price as 'price',

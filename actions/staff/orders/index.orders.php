@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 include_once '../../../models/order.models.php';
@@ -29,5 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $_SESSION['delete_order_success'] = 'Delete order successful';
 }
 
-$orders = $order->getAllOrder();
-?>
+$start = 0;
+$row_per_page = 10;
+
+// Lấy ra tổng số bản ghi
+$records = $order->getAllOrderCount();
+
+// Tính số trang
+$pages = (ceil($records / $row_per_page) <= 1) ? 1 : ceil($records / $row_per_page);
+
+if (isset($_GET['page_number'])) {
+    $page = $_GET['page_number'] - 1;
+    $start = $page * $row_per_page;
+}
+$orders = $order->getAllOrder($start, $row_per_page);

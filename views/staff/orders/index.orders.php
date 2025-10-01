@@ -17,7 +17,7 @@ function deleteOrderMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/sidebar.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
-
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/orderIndex.css">
     <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
 

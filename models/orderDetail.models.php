@@ -34,7 +34,7 @@ class OrderDetail extends Model
     }
 
     // Tạo 1 chi tiết đơn hàng khi người dùng click mua hàng
-    public function createOrderItem()
+    public function createOrderItem($order_id)
     {
         $conn = $this->getDb()->connect();
 
@@ -43,7 +43,7 @@ class OrderDetail extends Model
         
         $stmt->bind_param(
             'iidi', 
-            $this->order_id, 
+            $order_id, 
             $this->book_id, 
             $this->price, 
             $this->quantity

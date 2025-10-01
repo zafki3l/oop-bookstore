@@ -74,18 +74,22 @@ class Order extends Model
     }
 
     // Tạo 1 đơn hàng mới khi người dùng nhấn mua hàng
-    public function createOrder()
+    public function createOrder($user_id)
     {
         $conn = $this->getDb()->connect();
 
         $stmt = $conn->prepare("INSERT INTO orders (user_id)
                                 VALUES (?)");
 
-        $stmt->bind_param('i', $this->user_id);
+        $stmt->bind_param('i', $user_id);
         $stmt->execute();
+
+        $order_id = $conn->insert_id;
 
         $stmt->close();
         $conn->close();
+
+        return $order_id;
     }
 
     //sua don hang

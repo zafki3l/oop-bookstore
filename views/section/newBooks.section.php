@@ -12,11 +12,11 @@ $books = $book->newBooks();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/homepage/homepage.css">
     <link rel="stylesheet" href="../../public/css/homepage/bookSection.css">
-    <title>ON SALES</title>
+    <title>NEW BOOKS</title>
 </head>
 
 <body>
-    <h2 class="section">ON SALES</h2>
+    <h2 class="section">NEW BOOKS</h2>
 
     <div class="book-grid">
         <?php foreach ($books as $book): ?>
@@ -37,8 +37,20 @@ $books = $book->newBooks();
 
                 <!-- Nếu khách hàng đã đăng nhập -->
                 <?php if (isset($_SESSION['id'])): ?>
-                    <form action="#" method="post">
+                    <form action="buyform.views.php" method="post">
+                        <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
+                        <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
+                        <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
+                        <input type="hidden" name="price" value="<?php echo $price; ?>">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="btn-buy-now">Buy now</button>
+                    </form>
+                <?php else: ?>
+                    <form action="buyform.views.php" method="post">
+                        <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
+                        <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
+                        <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
                         <input type="hidden" name="price" value="<?php echo $price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>

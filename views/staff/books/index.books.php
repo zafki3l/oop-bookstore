@@ -86,7 +86,7 @@ function deleteBookMessage()
                                 <td><?= htmlspecialchars($book['pages']) ?></td>
                                 <td><?= htmlspecialchars($book['category']) ?></td>
                                 <td><?= htmlspecialchars($book['description']) ?></td>
-                                <td><?= htmlspecialchars($book['price']) ?> đ</td>
+                                <td><?= number_format(htmlspecialchars($book['price']), 0, ',', '.') ?>VNĐ</td>
                                 <td><?= htmlspecialchars($book['quantity']) ?></td>
                                 <td><?= htmlspecialchars($book['status'] == 1 ? 'In stock' : 'Out stock') ?></td>
                                 <td><img src="/oop-bookstore/public/images/<?= htmlspecialchars($book['cover']) ?>" alt="<?= htmlspecialchars($book['cover']) ?>"></td>

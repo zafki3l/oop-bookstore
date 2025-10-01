@@ -38,6 +38,15 @@ function deleteOrderMessage()
                     <h2>Book Management</h2>
                     <h3>WELCOME <?php echo htmlspecialchars($_SESSION['username']) ?></h3>
                 </div>
+
+                <div class="search-add">
+                    <!-- Thanh tìm kiếm -->
+                    <form action="#" method="get">
+                        <input type="hidden" name="page_number" value="1">
+                        <button type="submit" name="found"><i class="fas fa-search"></i></button>
+                        <input type="text" name="data" placeholder="Find order">
+                    </form>
+                </div>
             </div>
 
             <div class="table">
@@ -62,7 +71,7 @@ function deleteOrderMessage()
                                 <td><?php echo htmlspecialchars($order['user_id']) ?></td>
                                 <td><?php echo htmlspecialchars($order['username']) ?></td>
                                 <td>
-                                    <?php echo htmlspecialchars($order['total_price']) . 'đ' ?></td>
+                                    <?php echo number_format(htmlspecialchars($order['total_price']), 0, ',', '.') . 'VNĐ' ?></td>
                                 <td>
                                     <form method="POST" action="/oop-bookstore/actions/staff/orders/index.orders.php">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($order['id']); ?>">

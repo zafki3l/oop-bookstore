@@ -78,6 +78,31 @@ th {
     background: rgba(0, 0, 0, .5);
 }
 
+.order-header .search-add {
+    display: flex;
+    gap: 20px;
+    padding: 4px 20px;
+    align-items: center;
+    justify-content: end;
+}
+
+.order-header .search-add input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: #faf9ea;
+    width: 350px;
+    border: 1px solid #ccc;
+}
+
+.order-header .search-add button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #faf9ea;
+    cursor: pointer;
+}
+
 .modal-content {
     background: #fff;
     padding: 20px;

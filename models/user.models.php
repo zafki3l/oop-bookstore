@@ -136,8 +136,12 @@ class User extends Model
         $stmt->bind_param('ssssi', $this->username, $this->email, $this->password, $this->address, $this->role);
         $stmt->execute();
 
+        $id = $conn->insert_id;
+        
         $stmt->close();
         $conn->close();
+
+        return $id;
     }
 
     // Lấy ra id của user để edit

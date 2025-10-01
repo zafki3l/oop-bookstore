@@ -30,7 +30,8 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
                 <?php echo loginMessage(); ?>
             <?php endif; ?>
         </div>
-        <h1>WELCOME <?php echo htmlspecialchars($username) ?></h1>
+        <!-- NEW BOOKS -->
+        <?php include_once 'section/newBooks.section.php' ?>
 
         <?php if (!empty($_SESSION['login_success'])): ?>
             <script src="/oop-bookstore/public/js/loginMessage.js"></script>

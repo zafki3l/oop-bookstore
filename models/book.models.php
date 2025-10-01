@@ -54,6 +54,21 @@ class Book extends Model
         $this->updated_at = $updated_at;
     }
 
+    public function newBooks()
+    {
+        $conn = $this->getDb()->connect();
+
+        $query = $conn->execute_query("SELECT * FROM books ORDER BY id DESC LIMIT 10");
+        
+        $data = [];
+
+        while ($row = $query->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
     public function getAllBook($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();

@@ -56,7 +56,14 @@ function loginMessage()
             </div>
 
             <div class="div1 bottom">
-                <div class="dashboard sales-report">Thống kê doanh số</div>
+                <div class="dashboard sales-report">
+                    <div class="chart">
+                <canvas id="myChart"></canvas>
+                </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="/oop-bookstore/public/js/chart.js"></script>
+                </div>
                 <div class="div2">
                     <a href="orders/index.orders.php?page_number=1">
                         <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>

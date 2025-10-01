@@ -28,13 +28,18 @@ $books = $book->newBooks();
                 </a>
                 <h3 class="book-title"><?php echo htmlspecialchars($book['name']) ?></h3>
                 <p class="book-author"><?php echo htmlspecialchars($book['author']) ?></p>
-                <p class="book-price"><?php echo htmlspecialchars($book['price']) ?> VND</p>
+                <p class="book-price">
+                    <?php
+                    $price = $book['price'] * (1 + 0.2);
+                    echo number_format($price, 0, ',', '.');
+                    ?> VND
+                </p>
 
                 <!-- Nếu khách hàng đã đăng nhập -->
                 <?php if (isset($_SESSION['id'])): ?>
                     <form action="#" method="post">
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
-                        <input type="hidden" name="price" value="<?php echo $book['price']; ?>">
+                        <input type="hidden" name="price" value="<?php echo $price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>
                     </form>

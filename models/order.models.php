@@ -33,7 +33,7 @@ class Order extends Model
         $this->updated_at = $updated_at;
     }
 
-    public function getAllOrder()
+    public function getAllOrder($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
 
@@ -48,7 +48,8 @@ class Order extends Model
                 JOIN users u ON u.id = o.user_id
                 JOIN orderdetails od ON o.id = od.order_id
                 GROUP BY o.id
-                ORDER BY o.id ASC";
+                ORDER BY o.id ASC
+                LIMIT $start, $row_per_page";
 
         $query = $conn->execute_query($sql);
 
@@ -61,6 +62,15 @@ class Order extends Model
         $conn->close();
 
         return $data;
+    }
+
+    public function getAllOrderCount() 
+    {
+        $conn = $this->getDb()->connect();
+
+        $query = $conn->execute_query("SELECT id FROM orders");
+
+        return $query->num_rows;
     }
 
     // Tạo 1 đơn hàng mới khi người dùng nhấn mua hàng

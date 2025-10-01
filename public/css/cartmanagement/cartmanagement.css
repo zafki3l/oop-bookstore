@@ -12,27 +12,6 @@
   --shadow: 0 8px 20px rgba(17, 16, 20, .08);
 }
 
-* {
-  box-sizing: border-box
-}
-
-html,
-body {
-  height: 100%
-}
-
-body {
-  margin: 0;
-  color: var(--ink);
-  background: var(--red);
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
-
 /* Page Title */
 .page {
   max-width: 1100px;
@@ -54,10 +33,11 @@ h1 {
   box-shadow: var(--shadow);
   padding: 18px 22px;
   display: grid;
-  grid-template-columns: 92px 1fr auto auto auto;
+  grid-template-columns: 92px 1fr 120px 120px 150px;
   align-items: center;
   gap: 22px;
   border: 1px solid var(--line);
+  padding-right: 40px;
 }
 
 .card {
@@ -158,6 +138,7 @@ h1 {
   display: grid;
   place-items: center;
   cursor: pointer;
+  color: #111014;
 }
 
 .action {
@@ -166,3 +147,4 @@ h1 {
   justify-content: flex-end;
   gap: 10px;
 }
+

@@ -1,18 +1,22 @@
-const plus = document.querySelector(".plus");
-const minus = document.querySelector(".minus");
-const num = document.querySelector(".val");
+document.querySelectorAll('.card').forEach(card => {
+    const plus = card.querySelector('.plus');
+    const minus = card.querySelector('.minus');
+    const val = card.querySelector('.val');
+    const hiddenInput = card.querySelector('input[name="quantity"]');
 
-let a = 1;
-plus.addEventListener("click", function () {
-    a++;
-    num.innerText = a;
-    a = (a < 10) ? "0" + a : a;
-});
+    let quantity = parseInt(val.innerText);
 
-minus.addEventListener("click", function () {
-    if (a > 1) {
-        a--;
-        num.innerText = a;
-        a = (a < 10) ? "0" + a : a;
-    }
+    plus.addEventListener('click', () => {
+        quantity++;
+        val.innerText = quantity;
+        hiddenInput.value = quantity;
+    });
+
+    minus.addEventListener('click', () => {
+        if (quantity > 1) {
+            quantity--;
+            val.innerText = quantity;
+            hiddenInput.value = quantity;
+        }
+    });
 });

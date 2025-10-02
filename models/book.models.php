@@ -69,6 +69,44 @@ class Book extends Model
         return $data;
     }
 
+    public function onSales()
+    {
+        $conn = $this->getDb()->connect();
+
+        $query = $conn->execute_query("SELECT * FROM books ORDER BY RAND() LIMIT 10");
+        
+        $data = [];
+
+        while ($row = $query->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function bestSeller()
+    {
+        $conn = $this->getDb()->connect();
+
+        $query = $conn->execute_query(
+            "SELECT b.id, b.name, b.author, b.publisher, b.price, b.cover, SUM(od.quantity) as 'total_sold'
+            FROM books b
+            JOIN orderdetails od ON b.id = od.book_id
+            JOIN orders o ON o.id = od.order_id
+            WHERE o.status = 2
+            GROUP by b.id
+            LIMIT 10"
+        );
+        
+        $data = [];
+
+        while ($row = $query->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
     public function getAllBook($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();

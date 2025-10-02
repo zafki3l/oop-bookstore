@@ -215,6 +215,104 @@ class Order extends Model
         return $data;
     }
 
+    public function getAllUserOrder()
+    {
+        $conn = $this->getDb()->connect();
+
+        $id = $_SESSION['id'];
+        $sql = "SELECT o.id as 'order_id',
+                        o.status as 'status',
+                        b.name as 'book_name',
+                        b.author as 'author',
+                        od.price as 'price',
+                        od.quantity as 'quantity',
+                        b.cover as 'cover',
+                        (od.price * od.quantity) as 'total_price' 
+                FROM books b
+                JOIN orderdetails od ON b.id = od.book_id
+                JOIN orders o ON o.id = od.order_id
+                WHERE o.user_id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function getUserOrderByStatus($status)
+    {
+        $conn = $this->getDb()->connect();
+
+        $id = $_SESSION['id'];
+        $sql = "SELECT o.id as 'order_id',
+                        o.status as 'status',
+                        b.name as 'book_name',
+                        b.author as 'author',
+                        od.price as 'price',
+                        od.quantity as 'quantity',
+                        b.cover as 'cover',
+                        (od.price * od.quantity) as 'total_price' 
+                FROM books b
+                JOIN orderdetails od ON b.id = od.book_id
+                JOIN orders o ON o.id = od.order_id
+                WHERE o.user_id = ? AND o.status = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii', $id, $status);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function countAllUserOrder()
+    {
+        $conn = $this->getDb()->connect();
+
+        $id = $_SESSION['id'];
+        $sql = "SELECT o.id as 'order_id'
+                FROM orders o
+                WHERE o.user_id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows;
+    }
+
+    public function countUserOrderByStatus($status)
+    {
+        $conn = $this->getDb()->connect();
+
+        $id = $_SESSION['id'];
+        $sql = "SELECT o.id as 'order_id'
+                FROM orders o
+                WHERE o.user_id = ? AND o.status = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii', $id, $status);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->num_rows;
+    }
+
     // Getters & Setters
     public function getId()
     {

@@ -32,7 +32,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
             }
             ?>
 
-            <h1>Tổng số sản phẩm <?= $total ?> </h1>
+            <h1>Total Cart Item <?= $total ?> </h1>
 
             <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $cart): ?>
@@ -65,7 +65,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                             <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                             <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
                             <input type="hidden" name="price" value="<?= $cart['price'] ?>">
-                            <button type="submit" class="buy">Mua ngay</button>
+                            <button type="submit" class="buy">Buy Now</button>
 
                             <a href="../../actions/carts/deleteCart.carts.php?id=<?= $cart['id'] ?>" class="trash">
                             <i class="fa-solid fa-trash"></i>
@@ -78,6 +78,9 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                 <h3>There's no products in cart</h3>
             <?php endif; ?>
         </main>
+        <br>
+        <br>
+        <br>
     </div>
         <!--footer-->
         <?php include '../layouts/footer.layouts.php' ?>

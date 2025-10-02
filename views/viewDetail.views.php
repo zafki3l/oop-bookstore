@@ -46,7 +46,11 @@ $quantity = 1;
                     <p><?php echo htmlspecialchars($bookData['author']); ?></p>
                 </div>
                 <div class="price">
-                    <p><strong><?php echo htmlspecialchars(number_format(($bookData['price'] * (1 + 0.2)), 0, ',', '.')); ?> VNĐ</strong></p>
+                    <?php if (!empty($_GET['discounted'])): ?>
+                        <p><strong><?php echo htmlspecialchars(number_format(($bookData['price'] * (1 + 0.2) / (1 + 0.2)), 0, ',', '.')); ?> VNĐ</strong></p>
+                    <?php else: ?>
+                        <p><strong><?php echo htmlspecialchars(number_format(($bookData['price'] * (1 + 0.2)), 0, ',', '.')); ?> VNĐ</strong></p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="qty-wrap">

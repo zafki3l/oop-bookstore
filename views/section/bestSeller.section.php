@@ -2,7 +2,7 @@
 include_once '../models/book.models.php';
 
 $book = new Book();
-$books = $book->newBooks();
+$books = $book->bestSeller();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +10,10 @@ $books = $book->newBooks();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW BOOKS</title>
 </head>
 
 <body>
-    <h2 class="section">NEW BOOKS</h2>
+    <h2 class="section">BEST SELLER</h2>
 
     <div class="book-grid">
         <?php foreach ($books as $book): ?>

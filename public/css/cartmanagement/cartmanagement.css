@@ -4,11 +4,11 @@
   --ink: #111014;
   --muted: #777;
   --line: #e7e3d6;
-  --btn: #e53952;
-  --btn-hover: #c32a40;
+  --btn: #ca122f;
+  --btn-hover: #ca122f;
   --chip: #f0efe6;
-  --radius: 18px;
-  --radius-sm: 12px;
+  --radius: 8px;
+  --radius-sm: 8px;
   --shadow: 0 8px 20px rgba(17, 16, 20, .08);
 }
 
@@ -16,11 +16,11 @@
 .page {
   max-width: 1100px;
   margin: 28px auto;
-  padding: 0 20px 80px;
+  padding: 60px 80px 60px;
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 40 px;
   letter-spacing: .3px;
   margin: 10px 0 22px;
 }
@@ -164,5 +164,6 @@ h1 {
   max-width:140px; 
 } 
 
-
-
+.money-wrap {
+  transform: translateY(-10px);
+}

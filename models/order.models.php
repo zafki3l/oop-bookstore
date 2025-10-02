@@ -167,6 +167,35 @@ class Order extends Model
         return $finalData;
     }
 
+    public function findOrder($id, $username, $start, $row_per_page)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT o.id as 'id', 
+                                u.id as 'user_id', 
+                                u.username as 'username',
+                                SUM(od.quantity * od.price) as 'total_price',
+                                o.status as 'status', 
+                                o.created_at as 'created_at', 
+                                o.updated_at as 'updated_at' 
+                        FROM orders o
+                        JOIN users u ON u.id = o.user_id
+                        JOIN orderdetails od ON o.id = od.order_id
+                        WHERE o.id = ? OR u.username LIKE ?
+                        LIMIT $start, $row_per_page";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $id, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        $conn->close();
+
+        return $data;
+    }
+
     // Getters & Setters
     public function getId()
     {
@@ -203,3 +232,5 @@ class Order extends Model
         $this->status = $status;
     }
 }
+
+

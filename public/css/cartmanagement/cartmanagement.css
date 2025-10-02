@@ -98,7 +98,7 @@ h1 {
   height: 28px;
   border: none;
   border-radius: 8px;
-  background: var(--chip);
+  background: #faf9ea;
   cursor: pointer;
   font-weight: 700;
   color: #444;

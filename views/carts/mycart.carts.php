@@ -32,7 +32,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
             }
             ?>
 
-            <h1>Tổng số sản phẩm <?= $total ?> </h1>
+            <h1>Tổng số sản phẩm: <?= $total ?> </h1>
 
             <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $cart): ?>
@@ -57,7 +57,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                         </div>
 
                         <div class="money-wrap">
-                            <div class="col-label">Total</div>
+                            <div class="col-label">Total:</div>
                             <div class="money"><?= number_format($cart['total_price'], 0, ',', '.') ?> </div>
                         </div>
 

@@ -43,3 +43,14 @@ if (isset($_GET['page_number'])) {
     $start = $page * $row_per_page;
 }
 $orders = $order->getAllOrder($start, $row_per_page);
+
+//tim don hang
+if (isset($_GET['found'])) {
+    $found = $_GET['data'] ?? '';
+    $id = $found ?? '';
+    $usernameData = "%$found%" ?? '';
+
+    $orders = $order->findOrder($id, $usernameData, $start, $row_per_page);
+} else {
+    $orders = $order->getAllOrder($start, $row_per_page);
+}

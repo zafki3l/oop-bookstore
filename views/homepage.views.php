@@ -33,6 +33,12 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <!-- NEW BOOKS -->
         <?php include_once 'section/newBooks.section.php' ?>
 
+        <!-- ON SALES -->
+        <?php include_once 'section/onSales.section.php' ?>
+
+        <!-- ON SALES -->
+        <?php include_once 'section/bestSeller.section.php' ?>
+
         <?php if (!empty($_SESSION['login_success'])): ?>
             <script src="/oop-bookstore/public/js/loginMessage.js"></script>
             <?php unset($_SESSION['login_success']); ?>

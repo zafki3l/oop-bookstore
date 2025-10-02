@@ -2,7 +2,7 @@
 include_once '../models/book.models.php';
 
 $book = new Book();
-$books = $book->newBooks();
+$books = $book->onSales();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,23 +10,31 @@ $books = $book->newBooks();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW BOOKS</title>
+    <link rel="stylesheet" href="../../public/css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../public/css/homepage/bookSection.css">
 </head>
 
 <body>
-    <h2 class="section">NEW BOOKS</h2>
+    <h2 class="section">ON SALES</h2>
 
     <div class="book-grid">
         <?php foreach ($books as $book): ?>
             <div class="book-item">
                 <!-- Nút xem chi tiết -->
-                <a href="viewDetail.views.php?book=<?php echo $book['id'] ?>">
+                <a href="viewDetail.views.php?book=<?php echo $book['id'] ?>&discounted=yes">
                     <img src="../public/images/<?php echo htmlspecialchars($book['cover']) ?>"
                         alt="<?php echo htmlspecialchars($book['name']) ?>">
                 </a>
                 <h3 class="book-title"><?php echo htmlspecialchars($book['name']) ?></h3>
                 <p class="book-author"><?php echo htmlspecialchars($book['author']) ?></p>
-                <p class="book-price">
+                <p class="discounted-price">
+                    <?php
+                    $discounted_price = $book['price'] * (1 + 0.2) / (1 + 0.2);
+                    echo number_format($discounted_price, 0, ',', '.');
+                    ?> VND (20% Discounted)
+                </p>
+
+                <p class="original-price">
                     <?php
                     $price = $book['price'] * (1 + 0.2);
                     echo number_format($price, 0, ',', '.');
@@ -40,7 +48,7 @@ $books = $book->newBooks();
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                         <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
                         <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
-                        <input type="hidden" name="price" value="<?php echo $price; ?>">
+                        <input type="hidden" name="price" value="<?php echo $discounted_price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>
                     </form>
@@ -49,7 +57,7 @@ $books = $book->newBooks();
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                         <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
                         <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
-                        <input type="hidden" name="price" value="<?php echo $price; ?>">
+                        <input type="hidden" name="price" value="<?php echo $discounted_price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>
                     </form>

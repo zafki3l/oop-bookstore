@@ -24,11 +24,10 @@ class OrderController
 
     public function delete($id)
     {
-        session_start();
         $this->order->deleteOrder($id);
 
         $_SESSION['delete_order_success'] = 'Delete order successfully';
-        header('Location: /oop-bookstore/views/staff/orders/index.orders.php');
+        header('Location: /oop-bookstore/views/staff/orders/index.orders.php?page_number=1');
         exit();
     }
 

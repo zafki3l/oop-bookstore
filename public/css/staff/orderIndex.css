@@ -6,6 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: calc(100vw - 400px);
     transition: width 0.3s ease;
+    padding-bottom: 40px;
 }
 
 .order-header{

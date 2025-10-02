@@ -90,16 +90,12 @@ class Order extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $stmt = $conn->prepare("INSERT INTO orders (user_id)
-                                VALUES (?)");
-
+        $stmt = $conn->prepare("INSERT INTO orders (user_id) VALUES (?)");
         $stmt->bind_param('i', $user_id);
         $stmt->execute();
 
+        
         $order_id = $conn->insert_id;
-
-        $stmt->close();
-        $conn->close();
 
         return $order_id;
     }

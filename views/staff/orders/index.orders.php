@@ -35,7 +35,7 @@ function deleteOrderMessage()
         <div class="content">
             <div class="order-header">
                 <div class="header-text">
-                    <h2>Book Management</h2>
+                    <h2>Order Management</h2>
                     <h3>WELCOME <?php echo htmlspecialchars($_SESSION['username']) ?></h3>
                 </div>
 

@@ -58,7 +58,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
 
                         <div class="money-wrap">
                             <div class="col-label">Total</div>
-                            <div class="money"><?= number_format($cart['total_price'], 0, ',', '.') ?> </div>
+                            <div class="money"><?= number_format($cart['total_price'], 0, ',', '.') ?>VNĐ </div>
                         </div>
 
                         <div class="action">

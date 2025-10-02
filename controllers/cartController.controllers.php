@@ -11,6 +11,15 @@ class CartController
     {
         $this->cart = $cart;
     }
+
+    // Tạo giỏ hàng
+    public function create()
+    {
+        $this->cart->createCart();
+
+        header('Location: /oop-bookstore/views/homepage.views.php');
+        exit();
+    }
 	
     // Xóa giỏ hàng
     public function delete($id)
@@ -18,5 +27,6 @@ class CartController
         $this->cart->deleteCart($id);
 
         header('Location: /oop-bookstore/views/carts/mycart.carts.php');
+        exit();
     }
 }

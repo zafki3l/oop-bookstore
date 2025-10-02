@@ -4,11 +4,6 @@ include_once 'model.models.php';
 
 class Order extends Model
 {
-    //Status
-    const PENDING_STATUS = 1;
-    const IN_TRANSIST_STATUS = 2;
-    const COMPLETED_STATUS = 3;
-
     //Attribute 
     private $id;
     private $user_id;

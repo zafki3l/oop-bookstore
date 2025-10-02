@@ -22,7 +22,7 @@ $books = $book->newBooks();
         <?php foreach ($books as $book): ?>
             <div class="book-item">
                 <!-- Nút xem chi tiết -->
-                <a href="#">
+                <a href="viewDetail.views.php?book=<?php echo $book['id'] ?>">
                     <img src="../public/images/<?php echo htmlspecialchars($book['cover']) ?>"
                         alt="<?php echo htmlspecialchars($book['name']) ?>">
                 </a>

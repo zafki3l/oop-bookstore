@@ -61,6 +61,21 @@ class Cart extends Model
         return $data;
     }
 
+    // Tạo giỏ hàng
+    public function createCart()
+    {
+        $conn = $this->getDb()->connect();
+
+        $stmt = $conn->prepare("INSERT INTO carts (user_id, book_id, price, quantity)
+                                VALUES (?, ?, ?, ?)");
+        
+        $stmt->bind_param('iidi', $this->user_id, $this->book_id, $this->price, $this->quantity);
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+    }
+
     // Xóa giỏ hàng của user
     public function deleteCart($id)
     {

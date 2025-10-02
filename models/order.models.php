@@ -68,6 +68,23 @@ class Order extends Model
         return $query->num_rows;
     }
 
+    public function getFindOrderCount($id, $username)
+    {
+        $conn = $this->getDb()->connect();
+
+        $sql = "SELECT o.id
+                FROM orders o
+                JOIN users u ON u.id = o.user_id
+                JOIN orderdetails od ON o.id = od.order_id
+                WHERE o.id = ? OR u.username LIKE ?
+                GROUP BY o.id";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('is', $id, $username);
+        $stmt->execute();
+
+        return $stmt->num_rows;
+    }
     // Tạo 1 đơn hàng mới khi người dùng nhấn mua hàng
     public function createOrder($user_id)
     {

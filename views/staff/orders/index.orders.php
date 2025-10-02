@@ -58,8 +58,8 @@ function deleteOrderMessage()
                             <th>USERNAME</th>
                             <th>TOTAL PRICE</th>
                             <th>STATUS</th>
-                            <th>CREATE AT</th>
-                            <th>UPDATE AT</th>
+                            <th>CREATED AT</th>
+                            <th>UPDATED AT</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>

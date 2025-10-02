@@ -21,7 +21,6 @@
 
 h1 {
   font-size: 22px;
-  font-weight: 800;
   letter-spacing: .3px;
   margin: 10px 0 22px;
 }
@@ -147,4 +146,23 @@ h1 {
   justify-content: flex-end;
   gap: 10px;
 }
+.card{
+  display:grid;
+  grid-template-columns: 96px 1fr repeat(3, minmax(120px, 1fr));
+  align-items:center;
+  gap:16px;
+}
+
+.qty-wrap,
+.money-wrap,
+.card .buy,
+.card .trash{
+  justify-self:center;
+}
+.card .buy{ 
+  width:100%; 
+  max-width:140px; 
+} 
+
+
 

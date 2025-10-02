@@ -60,7 +60,7 @@ class BookController
         $this->book->deleteBook($id);
 
         $_SESSION['delete_book_success'] = 'Delete book successfully';
-        header('Location: /oop-bookstore/views/staff/books/index.books.php');
+        header('Location: /oop-bookstore/views/staff/books/index.books.php?page_number=1');
         exit();
     }
 

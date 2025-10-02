@@ -40,20 +40,16 @@ class OrderDetail extends Model
 
         $stmt = $conn->prepare("INSERT INTO orderDetails (order_id, book_id, price, quantity)
                                 VALUES (?, ?, ?, ?)");
+
         
-        $stmt->bind_param(
-            'iidi', 
-            $order_id, 
-            $this->book_id, 
-            $this->price, 
-            $this->quantity
-        );
+        $book_id = (int) $this->book_id;
+        $price   = (float) $this->price;
+        $qty     = (int) $this->quantity;
 
+        $stmt->bind_param('iidi', $order_id, $book_id, $price, $qty);
         $stmt->execute();
-
-        $stmt->close();
-        $conn->close();
     }
+
 
  public function getAllOrderDetails()
 {

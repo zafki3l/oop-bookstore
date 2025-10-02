@@ -38,7 +38,6 @@ use function PHPSTORM_META\type;
 
             <form action="../actions/buyNow.actions.php" method="post">
                 <input type="hidden" name="book_id" value="<?= $_POST['book_id'] ?>">
-                <input type="hidden" name="user_id" value="<?= $_POST['user_id'] ?>">
                 <input type="hidden" name="price" value="<?= $_POST['price'] ?>">
                 <input type="hidden" name="quantity" value="<?= $_POST['quantity'] ?>">
                 <input type="submit" name="buy" value="buy">

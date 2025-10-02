@@ -36,7 +36,12 @@ include_once '../../actions/carts/cartmanagement.carts.php';
 
             <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $cart): ?>
-                        <form action="../../actions/buyNow.actions.php" method="post" class="card">
+                        <form action="../buyform.views.php" method="post" class="card">
+                            <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
+                            <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
+                            <input type="hidden" name="book_name" value="<?= $cart['book_name'] ?>">
+                            <input type="hidden" name="author" value="<?= $cart['author'] ?>">
+                            <input type="hidden" name="price" value="<?= $cart['price'] ?>">
                         <div class="thumb">
                             <img src="/oop-bookstore/public/images/<?= $cart['cover']  ?>">
                         </div>
@@ -62,9 +67,6 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                         </div>
 
                         <div class="action">
-                            <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
-                            <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
-                            <input type="hidden" name="price" value="<?= $cart['price'] ?>">
                             <button type="submit" class="buy">Buy Now</button>
 
                             <a href="../../actions/carts/deleteCart.carts.php?id=<?= $cart['id'] ?>" class="trash">

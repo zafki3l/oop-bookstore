@@ -49,7 +49,7 @@ class UserController
         $user->deleteUser($id);
         
         $_SESSION['delete-user-success'] = 'Delete user successfully!';
-        header('Location: /oop-bookstore/views/admin/dashboard.admin.php');
+        header('Location: /oop-bookstore/views/admin/dashboard.admin.php?page_number=1');
         exit();
     }
 }

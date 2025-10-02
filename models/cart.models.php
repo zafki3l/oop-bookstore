@@ -51,6 +51,7 @@ class Cart extends Model
             FROM carts c
             JOIN users u ON u.id = c.user_id
             JOIN books b ON b.id = c.book_id
+            ORDER BY c.id DESC
         ");
 
         $data = $sql->fetch_all(MYSQLI_ASSOC);

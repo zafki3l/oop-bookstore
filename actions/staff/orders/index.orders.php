@@ -50,7 +50,29 @@ if (isset($_GET['found'])) {
     $id = $found ?? '';
     $usernameData = "%$found%" ?? '';
 
+    // Lấy ra tổng số bản ghi
+    $records = $order->getFindOrderCount($id, $usernameData);
+
+    // Tính số trang
+    $pages = (ceil($records / $row_per_page) <= 1) ? 1 : ceil($records / $row_per_page);
+
+    if (isset($_GET['page_number'])) {
+        $page = $_GET['page_number'] - 1;
+        $start = $page * $row_per_page;
+    }
+
     $orders = $order->findOrder($id, $usernameData, $start, $row_per_page);
 } else {
+    // Lấy ra tổng số bản ghi
+    $records = $order->getAllOrderCount();
+
+    // Tính số trang
+    $pages = (ceil($records / $row_per_page) <= 1) ? 1 : ceil($records / $row_per_page);
+
+    if (isset($_GET['page_number'])) {
+        $page = $_GET['page_number'] - 1;
+        $start = $page * $row_per_page;
+    }
+
     $orders = $order->getAllOrder($start, $row_per_page);
 }

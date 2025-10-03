@@ -1,5 +1,6 @@
 <?php
 
+$cart_id = $_POST['cart_id'] ?? '';
 session_start() 
 ?>
 <!DOCTYPE html>
@@ -79,6 +80,7 @@ session_start()
                         </div>
                         <div class="button">
                             <form action="../actions/buyNow.actions.php" method="post">
+                                <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
                                 <input type="hidden" name="book_id" value="<?= $_POST['book_id'] ?>">
                                 <input type="hidden" name="price" value="<?= $_POST['price'] ?>">
                                 <input type="hidden" name="quantity" value="<?= $_POST['quantity'] ?>">
@@ -121,7 +123,7 @@ session_start()
 
                 <div class="content">
                     <div class="cover">
-                        <img src="../public/images/<?= $_POST['cover'] ?>" alt="">
+                        <img src="/oop-bookstore/public/images/<?= $_POST['cover'] ?>" alt="">
                     </div>
                     
                     <div class="book-content">

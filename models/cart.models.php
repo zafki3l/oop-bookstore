@@ -34,11 +34,11 @@ class Cart extends Model
     }
 
     // Lấy ra giỏ hàng của user
-    public function getusercart()
+    public function getusercart($id)
     {
         $conn = $this->getDb()->connect();
 
-        $sql = $conn->execute_query("
+        $stmt = $conn->prepare("
             SELECT 
                 c.id as 'id',
                 b.id as 'book_id',
@@ -51,12 +51,16 @@ class Cart extends Model
             FROM carts c
             JOIN users u ON u.id = c.user_id
             JOIN books b ON b.id = c.book_id
+            WHERE u.id = ?
             ORDER BY c.id DESC
         ");
 
-        $data = $sql->fetch_all(MYSQLI_ASSOC);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
 
-        $sql->close();
+        $stmt->close();
         $conn->close();
 
         return $data;

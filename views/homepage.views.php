@@ -3,6 +3,21 @@ session_start();
 $username = $_SESSION['username'] ?? 'Guest';
 
 function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
+
+function buyMessage()
+{
+    return $_SESSION['buy_success'];
+}
+
+function addCartMessage() 
+{
+    return $_SESSION['add_cart_success'];
+}
+
+function errorCartMessage() 
+{
+    return $_SESSION['add_cart_error'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +54,46 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
         <!-- ON SALES -->
         <?php include_once 'section/bestSeller.section.php' ?>
 
+
         <?php if (!empty($_SESSION['login_success'])): ?>
             <script src="/oop-bookstore/public/js/loginMessage.js"></script>
             <?php unset($_SESSION['login_success']); ?>
         <?php endif; ?>
+
+        <!-- Thông báo mua hàng thành công -->
+        <div class="buy-message">
+            <?php if (isset($_SESSION['buy_success'])): ?>
+                <?php echo buyMessage(); ?>
+            <?php endif; ?>
+        </div>
+        <?php if (!empty($_SESSION['buy_success'])): ?>
+            <script src="/oop-bookstore/public/js/buyMessage.js"></script>
+            <?php unset($_SESSION['buy_success']); ?>
+        <?php endif; ?>
+
+        <!-- Thông báo thêm giỏ hàng thành công -->
+        <div class="cart-message">
+            <?php if (isset($_SESSION['add_cart_success'])): ?>
+                <?php echo addCartMessage(); ?>
+            <?php endif; ?>
+        </div>
+        <?php if (!empty($_SESSION['add_cart_success'])): ?>
+            <script src="/oop-bookstore/public/js/cartMessage.js"></script>
+            <?php unset($_SESSION['add_cart_success']); ?>
+        <?php endif; ?>
+
+
+        <!-- Lỗi thêm giỏ hàng -->
+        <div class="cart-error">
+            <?php if (isset($_SESSION['add_cart_error'])): ?>
+                <?php echo errorCartMessage(); ?>
+            <?php endif; ?>
+        </div>
+        <?php if (!empty($_SESSION['add_cart_error'])): ?>
+            <script src="/oop-bookstore/public/js/cartError.js"></script>
+            <?php unset($_SESSION['add_cart_error']); ?>
+        <?php endif; ?>
+
     </div>
 
     <!--Footer-->

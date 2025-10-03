@@ -1,0 +1,136 @@
+.user-infor {
+    margin: 80px 250px 1px;
+    background: #faf9ea;
+    width: auto;
+    border-radius: 8px;
+    padding-bottom: 10px;
+}
+
+.user-infor .header {
+    transform: translateY(15px);
+    background: black;
+    color: #faf9ea;
+    margin: 40px 30px 40px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+
+.username,
+.email,
+.address {
+    padding-left: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.username label,
+.email label,
+.address label {
+    font-weight: bold;
+    min-width: 120px; 
+}
+
+.user-infor input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 700px;
+    transition: border 0.3s;
+
+}
+
+.book-infor {
+    margin: 1px 250px 100px;
+    background: #faf9ea;
+    width: auto;
+    border-radius: 8px;
+    padding-bottom: 10px;
+}
+
+.book-infor .content {
+    display: flex;
+    transform: translateY(-10px);
+    font-size: 16px;
+}
+
+.content .book-content {
+    flex: 1;
+}
+
+.book-infor .header {
+    transform: translateY(15px);
+    background: black;
+    color: #faf9ea;
+    margin: 40px 30px 40px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+
+.book-infor img {
+    width: 220px;
+    margin-left: 30px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+}
+
+.book_name,
+.book_author,
+.price,
+.quantity {
+    padding-left: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.book_name label,
+.book_author label,
+.price label,
+.quantity label {
+    font-weight: bold;
+    min-width: 120px; 
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.button button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Nút Mua ngay */
+.button .buy-btn {
+  background-color: #ca122f;
+  color: white;
+  font-weight: bold;
+}
+
+.total-price {
+    display: flex;
+    padding-top: 20px;
+    justify-content: flex-end;
+    margin-right: 30px;
+    margin-bottom: 0;
+    font-size: 20px;
+    color: #ca122f;
+    font-weight: bold;
+}

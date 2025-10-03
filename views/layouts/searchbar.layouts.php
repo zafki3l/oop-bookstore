@@ -15,8 +15,8 @@
         <ul type="none" class="user-menu">
             <!-- Search bar -->
             <li class="search-bar">
-                <form action="#" method="get">
-                    <input type="text" name="search" placeholder="Search books..." />
+                <form action="/oop-bookstore/views/searchResult.views.php" method="get">
+                    <input type="text" name="book" placeholder="Search books..." />
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </li>

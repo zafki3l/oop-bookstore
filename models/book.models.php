@@ -54,6 +54,42 @@ class Book extends Model
         $this->updated_at = $updated_at;
     }
 
+    public function getBookByCategory($category_id)
+    {
+        $conn = $this->getDb()->connect();
+
+        $stmt = $conn->prepare("SELECT * FROM books WHERE category_id = ?");
+        $stmt->bind_param('i', $category_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
+    public function searchBook($book_name, $author)
+    {
+        $conn = $this->getDb()->connect();
+
+        $stmt = $conn->prepare("SELECT * FROM books WHERE name LIKE ? OR author LIKE ?");
+        $stmt->bind_param('ss', $book_name, $author);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
+
     public function newBooks()
     {
         $conn = $this->getDb()->connect();

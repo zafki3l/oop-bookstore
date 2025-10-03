@@ -18,10 +18,10 @@
                     <div class="dropdown">
                         <button>Category</button>
                         <div class="category-content">
-                        <a href="#">Fiction</a>
-                        <a href="#">Non-Fiction</a>
-                        <a href="#">Science</a>
-                        <a href="#">History</a>
+                        <a href="/oop-bookstore/views/bookCategory/category.bookCategory.php?category=1">Fiction</a>
+                        <a href="/oop-bookstore/views/bookCategory/category.bookCategory.php?category=4">Non-Fiction</a>
+                        <a href="/oop-bookstore/views/bookCategory/category.bookCategory.php?category=3">Science</a>
+                        <a href="/oop-bookstore/views/bookCategory/category.bookCategory.php?category=2">History</a>
                     </div>
                 <li><a href="/oop-bookstore/views/homepage.views.php">Homepage</a></li>
                 <?php if($role == 3): ?> <!--admin-->

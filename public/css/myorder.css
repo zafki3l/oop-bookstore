@@ -35,7 +35,7 @@ main .page {
 .redband {
     background: var(--brand);
     padding: 56px 0 36px;
-    color: #fff;
+    color: #fafafa;
     flex: 1;
 }
 
@@ -45,7 +45,7 @@ main .page {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    background: #fff;
+    background: #faf9ea;
     border-radius: var(--radius-lg);
     padding: 18px 12px;
     box-shadow: var(--shadow);
@@ -83,7 +83,7 @@ main .page {
 }
 
 .card {
-    background: #fff;
+    background: #faf9ea;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     padding: 26px 24px 18px;

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['status'
     $order->setStatus($_POST['status']);
     $order->editOrder();
 
-    header("Location: ../../../views/staff/orders/index.orders.php");
+    header("Location: ../../../views/staff/orders/index.orders.php?page_number=1");
     exit();
 }
 

@@ -18,7 +18,7 @@ class OrderController
 
         $this->order->editOrder($id);
         $_SESSION['edit_order_success'] = 'Edit order successfully';
-        header('Location: /oop-bookstore/views/staff/orders/index.orders.php');
+        header('Location: /oop-bookstore/views/staff/orders/index.orders.php?page_number=1');
         exit();
     }
 

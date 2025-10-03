@@ -150,6 +150,7 @@ class Order extends Model
                     SUM(od.quantity * od.price) as 'income'
             FROM orders o
             JOIN orderdetails od ON o.id = od.order_id
+            WHERE o.status = 2
             GROUP BY MONTH(o.created_at), YEAR(o.created_at)
             ORDER BY MONTH(o.created_at), YEAR(o.created_at)"
         );

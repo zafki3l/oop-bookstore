@@ -70,6 +70,12 @@
     text-align: left;
 }
 
+.search-text {
+    padding: 80px 50px 60px;
+    color: #faf9ea;
+    font-size: 40px;
+}
+
 .book-author {
     text-align: left;
     font-size: 0.9rem;

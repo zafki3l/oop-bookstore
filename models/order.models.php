@@ -227,7 +227,8 @@ class Order extends Model
                 FROM books b
                 JOIN orderdetails od ON b.id = od.book_id
                 JOIN orders o ON o.id = od.order_id
-                WHERE o.user_id = ?";
+                WHERE o.user_id = ?
+                ORDER BY o.id DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $id);
@@ -259,7 +260,8 @@ class Order extends Model
                 FROM books b
                 JOIN orderdetails od ON b.id = od.book_id
                 JOIN orders o ON o.id = od.order_id
-                WHERE o.user_id = ? AND o.status = ?";
+                WHERE o.user_id = ? AND o.status = ?
+                ORDER BY o.id DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ii', $id, $status);

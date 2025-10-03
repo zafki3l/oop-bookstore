@@ -70,6 +70,7 @@ $quantity = 1;
                         <input type="hidden" name="author" value="<?= $bookData['author'] ?>">
                         <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                         <input type="hidden" name="book_id" value="<?= $bookData['id'] ?>">
+                        <input type="hidden" name="cover" value="<?php echo $bookData['cover']; ?>">
                         <input type="hidden" name="price" value="<?= $bookData['price'] * (1 + 0.2) ?>">
                         <input type="hidden" name="quantity" class="buy-quantity" value="<?= $quantity ?>">
                         <button type="submit" class="buy">Buy now</button>

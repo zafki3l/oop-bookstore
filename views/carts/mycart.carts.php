@@ -37,6 +37,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
             <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $cart): ?>
                         <form action="../buyform.views.php" method="post" class="card">
+                            <input type="hidden" name="cover" value="<?php echo $cart['cover']; ?>">
                             <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                             <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
                             <input type="hidden" name="book_name" value="<?= $cart['book_name'] ?>">

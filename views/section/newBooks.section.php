@@ -40,6 +40,7 @@ $books = $book->newBooks();
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                         <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
                         <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
+                        <input type="hidden" name="cover" value="<?php echo $book['cover']; ?>">
                         <input type="hidden" name="price" value="<?php echo $price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>
@@ -49,6 +50,7 @@ $books = $book->newBooks();
                         <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                         <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
                         <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
+                        <input type="hidden" name="cover" value="<?php echo $book['cover']; ?>">
                         <input type="hidden" name="price" value="<?php echo $price; ?>">
                         <input type="hidden" name="quantity" value="1">
                         <button type="submit" class="btn-buy-now">Buy now</button>

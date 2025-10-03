@@ -96,6 +96,16 @@ th {
     border: 1px solid #ccc;
 }
 
+tbody input,
+tbody select {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 150px;
+    transition: border 0.3s;
+}
+
 .order-header .search-add button {
     padding: 8px 16px;
     border-radius: 6px;

@@ -74,6 +74,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
                             <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                             <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                             <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
+                            <input type="hidden" name="cover" value="<?php echo $book['cover']; ?>">
                             <input type="hidden" name="author" value="<?php echo $book['author']; ?>">
                             <input type="hidden" name="price" value="<?php echo $price; ?>">
                             <input type="hidden" name="quantity" value="1">
@@ -81,6 +82,7 @@ function loginMessage() { return htmlspecialchars($_SESSION['login_success']); }
                         </form>
                     <?php else: ?>
                         <form action="../buyform.views.php" method="post">
+                            <input type="hidden" name="cover" value="<?php echo $book['cover']; ?>">
                             <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
                             <input type="hidden" name="book_name" value="<?php echo $book['name']; ?>">
                             <input type="hidden" name="author" value="<?php echo $book['author']; ?>">

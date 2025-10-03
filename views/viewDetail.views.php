@@ -4,6 +4,7 @@ session_start();
 
 include_once '../models/book.models.php';
 
+$user_id = $_SESSION['id'] ?? '';
 $book_id = $_GET['book'];
 $book = new Book();
 $bookData = $book->getBookById($book_id);
@@ -68,7 +69,7 @@ $quantity = 1;
                     <form action="buyform.views.php" method="post" class="buy-form">
                         <input type="hidden" name="book_name" value="<?= $bookData['name'] ?>">
                         <input type="hidden" name="author" value="<?= $bookData['author'] ?>">
-                        <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
+                        <input type="hidden" name="user_id" value="<?= $user_id ?>">
                         <input type="hidden" name="book_id" value="<?= $bookData['id'] ?>">
                         <input type="hidden" name="cover" value="<?php echo $bookData['cover']; ?>">
                         <input type="hidden" name="price" value="<?= $bookData['price'] * (1 + 0.2) ?>">

@@ -1,6 +1,13 @@
 <?php
 session_start();
+
+$user_id = $_SESSION['id'] ?? '';
 include_once '../../actions/carts/cartmanagement.carts.php';
+
+function deleteCartMessage() 
+{
+    return $_SESSION['delete_cart_success'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +17,7 @@ include_once '../../actions/carts/cartmanagement.carts.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/oop-bookstore/public/css/cartmanagement/cartmanagement.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/rule.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/noti.css">
     <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,12 +42,13 @@ include_once '../../actions/carts/cartmanagement.carts.php';
 
             <h1>Total Cart Item <?= $total ?> </h1>
 
-            <?php if (!empty($carts)): ?>
-                <?php foreach ($carts as $cart): ?>
+            <?php if (!empty($user_id)): ?>
+                <?php if (!empty($carts)): ?>
+                    <?php foreach ($carts as $cart): ?>
                         <form action="../buyform.views.php" method="post" class="card">
-                            <input type="hidden" name="cover" value="<?php echo $cart['cover']; ?>">
                             <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                             <input type="hidden" name="book_id" value="<?= $cart['book_id'] ?>">
+                            <input type="hidden" name="cover" value="<?= $cart['cover'] ?>">
                             <input type="hidden" name="book_name" value="<?= $cart['book_name'] ?>">
                             <input type="hidden" name="author" value="<?= $cart['author'] ?>">
                             <input type="hidden" name="price" value="<?= $cart['price'] ?>">
@@ -76,14 +85,28 @@ include_once '../../actions/carts/cartmanagement.carts.php';
                         </div>
                         </form>
 
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <h3>There's no products in cart</h3>
+                <?php endif; ?>
             <?php else: ?>
-                <h3>There's no products in cart</h3>
+                <h3>Please Login to add item to cart!</h3>
             <?php endif; ?>
         </main>
         <br>
         <br>
         <br>
+
+        <!-- Thông báo xóa giỏ hàng -->
+        <div class="delete-cart">
+            <?php if (isset($_SESSION['delete_cart_success'])): ?>
+                <?php echo deleteCartMessage(); ?>
+            <?php endif; ?>
+        </div>
+        <?php if (!empty($_SESSION['delete_cart_success'])): ?>
+            <script src="/oop-bookstore/public/js/deleteCart.js"></script>
+            <?php unset($_SESSION['delete_cart_success']); ?>
+        <?php endif; ?>
     </div>
         <!--footer-->
         <?php include '../layouts/footer.layouts.php' ?>

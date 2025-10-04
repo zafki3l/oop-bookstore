@@ -4,6 +4,7 @@ include_once 'model.models.php';
 
 class OrderDetail extends Model
 {
+    // Attributes
     private $id;
     private $order_id;
     private $book_id;
@@ -12,6 +13,7 @@ class OrderDetail extends Model
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct(
         $db = new Database(),
         $id = null,
@@ -33,7 +35,18 @@ class OrderDetail extends Model
         $this->updated_at = $updated_at;
     }
 
-    // Tạo 1 chi tiết đơn hàng khi người dùng click mua hàng
+    /**
+     * Summary of createOrderItem
+     * Tạo ra 1 order item vào order khi người dùng mua hàng
+     * 
+     * @param mixed $order_id
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function createOrderItem($order_id)
     {
         $conn = $this->getDb()->connect();
@@ -41,7 +54,7 @@ class OrderDetail extends Model
         $stmt = $conn->prepare("INSERT INTO orderDetails (order_id, book_id, price, quantity)
                                 VALUES (?, ?, ?, ?)");
 
-        
+
         $book_id = (int) $this->book_id;
         $price   = (float) $this->price;
         $qty     = (int) $this->quantity;
@@ -50,45 +63,53 @@ class OrderDetail extends Model
         $stmt->execute();
     }
 
+    /**
+     * Summary of getAllOrderDetails
+     * @return array
+     */
+    public function getAllOrderDetails()
+    {
+        $conn = $this->getDb()->connect();
 
- public function getAllOrderDetails()
-{
-    $conn = $this->getDb()->connect();
+        $sql = "
+            SELECT 
+                o.id AS order_id,
+                u.username AS user_name,   -- sửa ở đây
+                b.name AS book_name,       -- nếu bảng books dùng 'title' thì đổi lại
+                od.quantity,
+                o.status,
+                (od.price * od.quantity) AS total,
+                o.created_at,
+                o.updated_at
+            FROM orders o
+            JOIN users u ON o.user_id = u.id
+            JOIN orderDetails od ON o.id = od.order_id
+            JOIN books b ON od.book_id = b.id
+            ORDER BY o.id DESC
+        ";
 
-    $sql = "
-        SELECT 
-            o.id AS order_id,
-            u.username AS user_name,   -- sửa ở đây
-            b.name AS book_name,       -- nếu bảng books dùng 'title' thì đổi lại
-            od.quantity,
-            o.status,
-            (od.price * od.quantity) AS total,
-            o.created_at,
-            o.updated_at
-        FROM orders o
-        JOIN users u ON o.user_id = u.id
-        JOIN orderDetails od ON o.id = od.order_id
-        JOIN books b ON od.book_id = b.id
-        ORDER BY o.id DESC
-    ";
+        $result = $conn->query($sql);
+        $data = [];
 
-    $result = $conn->query($sql);
-    $data = [];
+        if ($result) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+        }
 
-    if ($result) {
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        $result->free();
+        $conn->close();
+        return $data;
     }
 
-    $conn->close();
-    return $data;
-}
+    /**
+     * Summary of getOrderDetailById
+     * @param mixed $id
+     * @return array
+     */
+    public function getOrderDetailById($id)
+    {
+        $conn = $this->getDb()->connect();
 
-public function getOrderDetailById($id)
-{
-    $conn = $this->getDb()->connect();
-
-    $sql = "
+        $sql = "
         SELECT 
             o.id AS order_id,
             u.username AS user_name,   -- sửa ở đây
@@ -105,23 +126,23 @@ public function getOrderDetailById($id)
         WHERE o.id = ?
     ";
 
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            $conn->close();
+            return [];
+        }
+
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+
+        $res = $stmt->get_result();
+        $data = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+
+        $stmt->close();
         $conn->close();
-        return [];
+
+        return $data;
     }
-
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
-
-    $res = $stmt->get_result();
-    $data = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
-
-    $stmt->close();
-    $conn->close();
-
-    return $data;
-}
 
 
     // Getters & Setters

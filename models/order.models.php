@@ -4,13 +4,14 @@ include_once 'model.models.php';
 
 class Order extends Model
 {
-    //Attribute 
+    // Attributes
     private $id;
     private $user_id;
     private $status;
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct(
         $db = new Database,
         $id = null,
@@ -28,6 +29,20 @@ class Order extends Model
         $this->updated_at = $updated_at;
     }
 
+    /**
+     * Summary of getAllOrder
+     * Lấy ra tất cả dữ liệu trong bảng orders
+     * 
+     * @param mixed $start (Bắt đầu tại)
+     * @param mixed $row_per_page (Số dữ liệu mỗi trang)
+     * @return array<array|bool|null>
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số $start và $row_per_page vào truy vấn để thực hiện phân trang.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     */
     public function getAllOrder($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
@@ -59,6 +74,15 @@ class Order extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllOrderCount
+     * Lấy ra tất cả records trong bảng orders
+     * 
+     *
+     * - Thực thi truy vấn.
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     * - Trả về tổng số bản ghi
+     */
     public function getAllOrderCount() 
     {
         $conn = $this->getDb()->connect();
@@ -70,6 +94,18 @@ class Order extends Model
         return $data['total'];
     }
 
+    /**
+     * Summary of getFindOrderCount
+     * Lấy ra tổng số bản ghi của kết quả tìm kiếm của người dùng
+     * 
+     * @param mixed $id (mã người dùng)
+     * @param mixed $username (Tên người dùng)
+     * @return int|string
+     * 
+     * - Thực thi truy vấn.
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     * - Trả về tổng số bản ghi
+     */
     public function getFindOrderCount($id, $username)
     {
         $conn = $this->getDb()->connect();
@@ -87,7 +123,21 @@ class Order extends Model
 
         return $stmt->num_rows;
     }
-    // Tạo 1 đơn hàng mới khi người dùng nhấn mua hàng
+    
+    /**
+     * Summary of createOrder
+     * Tạo 1 đơn hàng mới khi người dùng bấm mua hàng
+     * 
+     * @param int $user_id (mã người dùng)
+     * @return int|string
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Lấy ra $order_id
+     * - return $order_id
+     */
     public function createOrder($user_id)
     {
         $conn = $this->getDb()->connect();
@@ -102,7 +152,16 @@ class Order extends Model
         return $order_id;
     }
 
-    //sua don hang
+    /**
+     * Summary of editOrder
+     * Sửa trạng thái của đơn hàng (Pending/Being Delivered/Completed)
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function editOrder()
     {
         $conn = $this->getDb()->connect();
@@ -126,7 +185,19 @@ class Order extends Model
         $stmt->close();
         $conn->close();
     }
-    //xoa don hang
+
+    /**
+     * Summary of deleteOrder
+     * Xóa đơn hàng
+     * 
+     * @param int $id (mã đơn hàng)
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function deleteOrder($id)
     {
         $conn = $this->getDb()->connect();
@@ -141,7 +212,17 @@ class Order extends Model
         $conn->close();
     }
 
-    //tinh doanh thu
+    /**
+     * Summary of createSalesReport
+     * Tính doanh thu theo tháng
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Chuyển về dạng mảng kết hợp
+     */
     public function createSalesReport()
     {
         $conn = $this->getDb()->connect();
@@ -167,6 +248,11 @@ class Order extends Model
         $query->close();
         $conn->close();
 
+        /** Tạo mảng kết hợp với đủ 12 tháng
+         * 
+         * Kiểm tra tháng có tồn tại không?
+         * Nếu không thì tạo 1 dữ liệu mới với doanh thu = 0
+         */
         $finalData = [];
         for ($m = 1; $m <= 12; $m++) {
             if (isset($data[$m])) {
@@ -183,6 +269,22 @@ class Order extends Model
         return $finalData;
     }
 
+    /**
+     * Summary of findOrder
+     * Tìm kiếm đơn hàng
+     * 
+     * @param mixed $id (Mã đơn hàng)
+     * @param mixed $username (Tên người dùng)
+     * @param mixed $start (Bắt đầu từ)
+     * @param mixed $row_per_page (Số kết quả mỗi trang)
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Chuyển về dạng mảng kết hợp
+     */
     public function findOrder($id, $username, $start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
@@ -214,6 +316,18 @@ class Order extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllUserOrder
+     * Lấy ra tất cả đơn hàng của khách hàng
+     * 
+     * @return array<array|bool|null>
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Chuyển về dạng mảng kết hợp
+     */
     public function getAllUserOrder()
     {
         $conn = $this->getDb()->connect();
@@ -247,6 +361,19 @@ class Order extends Model
         return $data;
     }
 
+    /**
+     * Summary of getUserOrderByStatus
+     * Lấy ra tất cả đơn hàng khách hàng theo trạng thái đơn hàng
+     * 
+     * @param mixed $status
+     * @return array<array|bool|null>
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Chuyển về dạng mảng kết hợp
+     */
     public function getUserOrderByStatus($status)
     {
         $conn = $this->getDb()->connect();
@@ -280,6 +407,18 @@ class Order extends Model
         return $data;
     }
 
+    /**
+     * Summary of countAllUserOrder
+     * Đếm tổng số lượng đơn hàng của khách hàng
+     * @return int|string
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Lấy ra kết quả
+     * - return số lượng bản ghi
+     */
     public function countAllUserOrder()
     {
         $conn = $this->getDb()->connect();
@@ -297,6 +436,20 @@ class Order extends Model
         return $result->num_rows;
     }
 
+    /**
+     * Summary of countUserOrderByStatus
+     * Đếm đơn hàng của khách hàng theo trạng thái
+     * 
+     * @param mixed $status
+     * @return int|string
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     * - Lấy ra kết quả
+     * - return số lượng bản ghi
+     */
     public function countUserOrderByStatus($status)
     {
         $conn = $this->getDb()->connect();

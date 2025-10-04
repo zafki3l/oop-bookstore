@@ -4,9 +4,11 @@ include_once 'model.models.php';
 
 class Book extends Model
 {
+    // Constant
     const OUT_STOCK = 0;
     const IN_STOCK = 1;
 
+    // Attributes
     private $id;
     private $name;
     private $author;
@@ -21,6 +23,7 @@ class Book extends Model
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct(
         $db = new Database(),
         $id = null,
@@ -54,6 +57,19 @@ class Book extends Model
         $this->updated_at = $updated_at;
     }
 
+    /**
+     * Summary of getBookByCategory
+     * Lấy ra danh sách sách theo thể loại
+     * 
+     * @param int $category_id
+     * @return array
+     *
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function getBookByCategory($category_id)
     {
         $conn = $this->getDb()->connect();
@@ -64,7 +80,6 @@ class Book extends Model
         $result = $stmt->get_result();
 
         $data = [];
-
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
@@ -72,6 +87,22 @@ class Book extends Model
         return $data;
     }
 
+
+    /**
+     * Summary of searchBook
+     * Tìm kiếm sách theo tên sách, tên tác giả
+     * 
+     * @param string $book_name
+     * @param string $author
+     * @return array<array|bool|null>
+     * 
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function searchBook($book_name, $author)
     {
         $conn = $this->getDb()->connect();
@@ -90,6 +121,16 @@ class Book extends Model
         return $data;
     }
 
+    /**
+     * Summary of newBooks
+     * Lấy ra danh sách sách thuộc section New Books
+     * 
+     * @return array<array|bool|null>
+     * 
+     * - Lấy ra những sách mới nhất bằng ORDER BY id DESC
+     * - Thực thi truy vấn.
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function newBooks()
     {
         $conn = $this->getDb()->connect();
@@ -105,6 +146,16 @@ class Book extends Model
         return $data;
     }
 
+    /**
+     * Summary of onSales
+     * Lấy ra danh sách sách thuộc section On Sales
+     * 
+     * @return array<array|bool|null>
+     * 
+     * 
+     * - Thực thi truy vấn
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function onSales()
     {
         $conn = $this->getDb()->connect();
@@ -120,6 +171,16 @@ class Book extends Model
         return $data;
     }
 
+    /**
+     * Summary of bestSeller
+     * Lấy ra danh sách sách thuộc section Best Seller
+     * 
+     * @return array<array|bool|null>
+     * 
+     * - Lấy ra những sách bán chạy nhất bằng SUM(od.quantity)
+     * - Thực thi truy vấn
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function bestSeller()
     {
         $conn = $this->getDb()->connect();
@@ -143,6 +204,21 @@ class Book extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllBook
+     * Lấy ra tất cả sách trong bảng books
+     * 
+     * @param mixed $start (Bắt đầu từ trang ?)
+     * @param mixed $row_per_page (Số kết quả mỗi trang)
+     * @return array
+     * 
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số $start và $row_per_pages để thực hiện chức năng phân trang.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array).
+     */
     public function getAllBook($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
@@ -171,6 +247,15 @@ class Book extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllBookCount
+     * Lấy ra tất cả số bản ghi của bảng books
+     * 
+     * @return int $query->num_rows (Số bản ghi)
+     * 
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Return kết quả số bản ghi.
+     */
     public function getAllBookCount()
     {
         $conn = $this->getDb()->connect();
@@ -181,6 +266,20 @@ class Book extends Model
         return $query->num_rows;
     }
 
+    /**
+     * Summary of getFindBookCount
+     * Lấy ra tổng số bản ghi trong bảng books khi người dùng thực hiện chức năng
+     * 
+     * @param mixed $id (Mã sách)
+     * @param mixed $bookName (Tên sách)
+     * @return int $stmt->num_rows() (Tổng số bản ghi)
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Return kết quả số bản ghi.
+     */
     public function getFindBookCount($id, $bookName)
     {
         $conn = $this->getDb()->connect();
@@ -194,6 +293,17 @@ class Book extends Model
         return $stmt->num_rows();
     }
 
+    /**
+     * Summary of addBook
+     * Truy vấn Thêm sách
+     * 
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn.
+     */
     public function addBook()
     {
         $conn = $this->getDb()->connect();
@@ -210,6 +320,17 @@ class Book extends Model
         $conn->close();
     }
 
+    /**
+     * Summary of editBook
+     * Truy vấn Sửa thông tin sách
+     * @param int $id (Mã sách)
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn.
+     */
     public function editBook($id)
     {
         $conn = $this->getDb()->connect();
@@ -250,6 +371,18 @@ class Book extends Model
         $conn->close();
     }
 
+    /**
+     * Summary of deleteBook
+     * Truy vấn xóa sách
+     * 
+     * @param int $id (mã sách)
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn.
+     */
     public function deleteBook($id)
     {
         $conn = $this->getDb()->connect();
@@ -264,6 +397,18 @@ class Book extends Model
         $conn->close();
     }
 
+    /**
+     * Summary of getBookById
+     * Lấy ra books theo id để sửa sách
+     * 
+     * @param int $id (mã sách)
+     * @return array|bool|null
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và chuyển kết quả thành dạng associative array.
+     */
     public function getBookById($id)
     {
         $conn = $this->getDb()->connect();
@@ -282,7 +427,23 @@ class Book extends Model
         return $data;
     }
 
-    public function getBook($idData, $usernameData, $start, $row_per_page)
+    /**
+     * Summary of getBook
+     * Lấy ra danh sách sách khi người dùng tìm kiếm
+     * 
+     * @param int $idData (Mã sách: Mã sách người dùng nhập vào)
+     * @param string $usernameData (Tên sách: Tên sách người dùng nhập vào)
+     * @param mixed $start (Bắt đầu từ)
+     * @param mixed $row_per_page (Số kết quả mỗi trang)
+     * @return array
+     * 
+     *
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số $start và $row_per_page vào truy vấn để thực hiện phân trang.
+     * - Thực thi truy vấn và chuyển kết quả thành dạng associative array.
+     */
+    public function getBook($idData, $book_nameData, $start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
 
@@ -303,7 +464,7 @@ class Book extends Model
                 LIMIT $start, $row_per_page";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('is', $idData, $usernameData);
+        $stmt->bind_param('is', $idData, $book_nameData);
         $stmt->execute();
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);

@@ -4,6 +4,7 @@ include_once 'model.models.php';
 
 class Cart extends Model
 {
+    // Attributes
     private $id;
     private $user_id;
     private $book_id;
@@ -12,6 +13,7 @@ class Cart extends Model
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct(
         $db = new Database(),
         $id = null,
@@ -33,7 +35,19 @@ class Cart extends Model
         $this->updated_at = $updated_at;
     }
 
-    // Lấy ra giỏ hàng của user
+    /**
+     * Summary of getusercart
+     * Lấy ra giỏ hàng của user
+     * 
+     * @param int $id (mã người dùng)
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     */
     public function getusercart($id)
     {
         $conn = $this->getDb()->connect();
@@ -66,7 +80,16 @@ class Cart extends Model
         return $data;
     }
 
-    // Tạo giỏ hàng
+    /**
+     * Summary of createCart
+     * Tạo giỏ hàng
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function createCart()
     {
         $conn = $this->getDb()->connect();
@@ -81,7 +104,17 @@ class Cart extends Model
         $conn->close();
     }
 
-    // Xóa giỏ hàng của user
+    /**
+     * Summary of deleteCart
+     * Xóa giỏ hàng
+     * @param int $id (Mã giỏ hàng)
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function deleteCart($id)
     {
         $conn = $this->getDb()->connect();

@@ -19,6 +19,7 @@ class User extends Model
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct($db = new Database(), $id = null, $email = null, $username = null, $password = null, $address = null, $role = null, $created_at = null, $updated_at = null)
     {
         parent::__construct($db);
@@ -33,7 +34,21 @@ class User extends Model
         $this->updated_at = $updated_at;
     }
 
-    // Tạo 1 user mới khi user đăng ký
+    /**
+     * Summary of registerUser
+     * Tạo 1 user mới khi người dùng đăng ký
+     * 
+     * @param mixed $username
+     * @param mixed $email
+     * @param mixed $password
+     * @param mixed $address
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function registerUser($username, $email, $password, $address)
     {
         $conn = $this->getDb()->connect();
@@ -50,7 +65,18 @@ class User extends Model
         $conn->close();
     }
 
-    // Lấy ra user login
+    /**
+     * Summary of getLoginUser
+     * Lấy ra user login để đăng nhập
+     * 
+     * @param mixed $email
+     * @return array|bool|null
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function getLoginUser($email)
     {
         $conn = $this->getDb()->connect();
@@ -70,7 +96,20 @@ class User extends Model
         return $data;
     }
 
-    // Lấy ra tất cả user
+    /**
+     * Summary of getAllUser
+     * Lấy ra tất cả dữ liệu trong bảng users
+     * 
+     * @param mixed $start
+     * @param mixed $row_per_page
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy ra kết quả
+     * - Chuyển thành dạng associative array
+     */
     public function getAllUser($start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
@@ -82,6 +121,15 @@ class User extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllUserCount
+     * Đếm tất cả records trong bảng users
+     * 
+     * @return int|string
+     * 
+     * - Thực thi truy vấn
+     * - Trả về tổng số bản ghi
+     */
     public function getAllUserCount()
     {
         $conn = $this->getDb()->connect();
@@ -91,7 +139,22 @@ class User extends Model
         return $sql->num_rows;
     }
 
-    // Tìm kiếm user
+    /**
+     * Summary of findUser
+     * Tìm kiếm user trong bảng users
+     * 
+     * @param mixed $id
+     * @param mixed $username
+     * @param mixed $start
+     * @param mixed $row_per_page
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy ra kết quả
+     * - Chuyển thành dạng associative array
+     */
     public function findUser($id, $username, $start, $row_per_page)
     {
         $conn = $this->getDb()->connect();
@@ -110,6 +173,19 @@ class User extends Model
         return $data;
     }
 
+    /**
+     * Summary of getFindUserCount
+     * Lấy ra tổng số bản ghi của kết quả tìm kiếm users
+     * 
+     * @param mixed $id
+     * @param mixed $username
+     * @return int|string
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy ra số bản ghi
+     */
     public function getFindUserCount($id, $username)
     {
         $conn = $this->getDb()->connect();
@@ -124,7 +200,17 @@ class User extends Model
         return $result->num_rows;
     }
 
-    // Thêm mới 1 user
+    /**
+     * Summary of createUser
+     * Tạo 1 user mới
+     * 
+     * @return int|string
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function createUser()
     {
         $conn = $this->getDb()->connect();
@@ -144,7 +230,19 @@ class User extends Model
         return $id;
     }
 
-    // Lấy ra id của user để edit
+    /**
+     * Summary of getUserToEdit
+     * Lấy ra dữ liệu user để edit
+     * 
+     * @param mixed $id
+     * @return array|bool|null
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy ra kết quả
+     * - Chuyển thành dạng associative array
+     */
     public function getUserToEdit($id)
     {
         $conn = $this->getDb()->connect();
@@ -163,7 +261,17 @@ class User extends Model
         return $data;
     }
 
-    // Edit user
+    /**
+     * Summary of editUser
+     * Sửa thông tin người dùng
+     * 
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function editUser()
     {
         $conn = $this->getDb()->connect();
@@ -183,7 +291,17 @@ class User extends Model
         $conn->close();
     }
 
-    // Delete User
+    /**
+     * Summary of deleteUser
+     * Xóa user khỏi csdl
+     * @param mixed $id
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function deleteUser($id)
     {
         $conn = $this->getDb()->connect();

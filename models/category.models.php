@@ -4,11 +4,13 @@ include_once 'model.models.php';
 
 class Category extends Model
 {
+    // Attributes
     private $id;
     private $name;
     private $created_at;
     private $updated_at;
 
+    // Constructor
     public function __construct(
         $db = new Database(),
         $id = null,
@@ -24,6 +26,18 @@ class Category extends Model
         $this->updated_at = $updated_at;
     }
 
+    /**
+     * Summary of getCategoryName
+     * Lấy ra tên của category theo id
+     * 
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     */
     public function getCategoryName() 
     {
         $conn = $this->getDb()->connect();
@@ -37,6 +51,18 @@ class Category extends Model
         return $data;
     }
 
+    /**
+     * Summary of getAllCategory
+     * Lấy ra tất cả dữ liệu trong bảng categories
+     * 
+     * @return array
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn và lấy kết quả bằng function get_result().
+     * - Chuyển kết quả truy vấn sang dạng mảng kết hợp (Associative Array)
+     */
     public function getAllCategory()
     {
         $conn = $this->getDb()->connect();
@@ -50,6 +76,17 @@ class Category extends Model
         return $data;
     }
 
+    /**
+     * Summary of createCategory
+     * Thêm category vào CSDL
+     * 
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function createCategory()
     {
         $conn = $this->getDb()->connect();
@@ -65,6 +102,17 @@ class Category extends Model
         $conn->close();
     }
 
+    /**
+     * Summary of editCategory
+     * Sửa thông tin của category
+     * 
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function editCategory()
     {
         $conn = $this->getDb()->connect();
@@ -81,6 +129,17 @@ class Category extends Model
         $conn->close();
     }
 
+    /**
+     * Summary of deleteCategory
+     * Xóa category
+     * 
+     * @return void
+     * 
+     * - Sử dụng Prepared Statement để chống SQL Injection.
+     * - Chuẩn bị truy vấn với tham số ẩn danh.
+     * - Truyền tham số vào truy vấn.
+     * - Thực thi truy vấn
+     */
     public function deleteCategory()
     {
         $conn = $this->getDb()->connect();

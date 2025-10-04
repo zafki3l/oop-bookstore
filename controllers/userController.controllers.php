@@ -6,15 +6,22 @@ include_once __DIR__ . '/../handlers/userErrorHandler.handlers.php';
 
 class UserController
 {
+    // Attributes
     private $user;
     private $userErrorHandler;
 
+    // Constructor
     public function __construct($user = new User(), userErrorHandler $userErrorHandler)
     {
         $this->user = $user;
         $this->userErrorHandler = $userErrorHandler;
     }
 
+    /**
+     * Summary of create
+     * Chức năng thêm user
+     * @return never
+     */
     public function create()
     {
         $redirectPath = '/oop-bookstore/views/admin/addUser.admin.php';
@@ -30,6 +37,11 @@ class UserController
         exit();
     }
 
+    /**
+     * Summary of edit
+     * Chức năng sửa User
+     * @return never
+     */
     public function edit()
     {
         $redirectPath = '/oop-bookstore/views/admin/editUser.admin.php?id=' . $this->user->getId();
@@ -43,6 +55,12 @@ class UserController
         exit();
     }
 
+    /**
+     * Summary of delete
+     * Chức năng xóa user
+     * @param mixed $id
+     * @return never
+     */
     public function delete($id)
     {
         $user = $this->user;

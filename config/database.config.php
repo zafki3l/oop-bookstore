@@ -2,6 +2,10 @@
 
 include_once 'app.config.php';
 
+/**
+ * Summary of Database
+ * Class Database thực hiện nhiệm vụ kết nối tới CSDL
+ */
 class Database
 {
     private $server = SERVER_NAME;

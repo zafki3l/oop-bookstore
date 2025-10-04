@@ -6,9 +6,11 @@ include_once __DIR__ . '/../handlers/userErrorHandler.handlers.php';
 
 class AuthController
 {
+    // Attributes
     private $user;
     private $userErrorHandler;
 
+    // Constructor
     public function __construct($user = new User(), $userErrorHandler = new UserErrorHandler())
     {
         $this->user = $user;
@@ -16,10 +18,10 @@ class AuthController
     }
 
     /**
-     * ----- CÁC CHỨC NĂNG CHÍNH -----
+     * Summary of register
+     * Đăng ký người dùng
+     * @return never
      */
-
-    // Đăng ký người dùng
     public function register()
     {
         $redirectPath = '/oop-bookstore/views/auth/register.auth.php';
@@ -43,7 +45,13 @@ class AuthController
         exit();
     }
 
-    // Đăng nhập
+    /**
+     * Summary of login
+     * Đăng nhập
+     * @return void
+     * 
+     * Xử lý đăng nhập người dùng: Kiểm tra thông tin, lưu session và redirect dựa trên role
+     */
     public function login()
     {
         session_start();
@@ -62,7 +70,13 @@ class AuthController
         $this->redirectUser($user);
     }
 
-    // Đăng xuất
+    /**
+     * Summary of logout
+     * Đăng xuất
+     * @return never
+     * 
+     * Xử lý đăng xuất: Xóa session và redirect về trang đăng nhập
+     */
     public function logout()
     {
         session_start();
@@ -77,7 +91,12 @@ class AuthController
      * ----- CÁC CHỨC NĂNG PHỤ -----
      */
 
-    // Lưu thông tin đăng nhập vào session
+    /**
+     * Summary of sessionManager
+     * Lưu các thông tin đăng nhập vào $_SESSION
+     * @param mixed $loginUser
+     * @return void
+     */
     private function sessionManager($loginUser)
     {
         $_SESSION['id'] = $loginUser['id'];
@@ -87,7 +106,12 @@ class AuthController
         $_SESSION['role'] = $loginUser['role'];
     }
 
-    // Xử lý redirect user
+    /**
+     * Summary of redirectUser
+     * Xử lý điều hướng người dùng khi đăng nhập
+     * @param mixed $user
+     * @return never
+     */
     private function redirectUser($user)
     {
         $_SESSION['login_success'] =  'Login successfully!';
@@ -104,7 +128,13 @@ class AuthController
         }
     }
 
-    // Kiểm tra role của user
+    /**
+     * Summary of checkRole
+     * Kiểm tra role của user
+     * 
+     * @param mixed $user
+     * @return void
+     */
     private function checkRole($user)
     {
         if ($_SESSION['role'] != $user::ROLE_USER && $_SESSION['role'] != $user::ROLE_STAFF && $_SESSION['role'] != $user::ROLE_ADMIN) {
@@ -114,7 +144,13 @@ class AuthController
         }
     }
 
-    // Xác nhận mật khẩu khi đăng ký
+    /**
+     * Summary of passwordMismatch
+     * Xác nhận mật khẩu khi đăng ký
+     * @param mixed $password
+     * @param mixed $password_confirmation
+     * @return void
+     */
     public function passwordMismatch($password, $password_confirmation)
     {
         session_start();
@@ -125,7 +161,13 @@ class AuthController
         }
     }
 
-    // Xác thực đầu vào
+    /**
+     * Summary of validateLoginInput
+     * Xác thực đầu vào đăng nhập
+     * @param mixed $user
+     * @param mixed $loginUser
+     * @return void
+     */
     private function validateLoginInput($user, $loginUser)
     {
         $inputPassword = $user->getPassword();
@@ -143,7 +185,13 @@ class AuthController
         $this->userErrorHandler->checkEmail($inputEmail, $userEmail);
     }
 
-    // Nếu chưa đăng nhập thì đẩy người dùng ra trang đăng nhập
+    /**
+     * Summary of ensureLogin
+     * @return void
+     * 
+     * Đảm bảo người dùng đã đăng nhập
+     * Nếu chưa thì chuyển về trang login
+     */
     public function ensureLogin()
     {
         if (!isset($_SESSION['id'])) {
@@ -152,7 +200,12 @@ class AuthController
         }
     }
 
-    // Kiểm tra role admin mới được truy cập
+    /**
+     * Summary of ensureAdmin
+     * @return void
+     * 
+     * Kiểm tra chỉ có admin mới có quyền truy cập
+     */
     public function ensureAdmin()
     {
         if ($_SESSION['role'] != $this->user::ROLE_ADMIN) {
@@ -160,6 +213,12 @@ class AuthController
         }
     }
 
+    /**
+     * Summary of ensureAdminOrStaff
+     * @return void
+     * 
+     * Kiểm tra chỉ có admin hoặc staff mới có quyền truy cập
+     */
     public function ensureAdminOrStaff()
     {
         if ($_SESSION['role'] != $this->user::ROLE_ADMIN && $_SESSION['role'] != $this->user::ROLE_STAFF) {

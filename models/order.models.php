@@ -63,16 +63,18 @@ class Order extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $query = $conn->execute_query("SELECT id FROM orders");
+        $query = $conn->execute_query("SELECT count(id) as 'total' FROM orders");
 
-        return $query->num_rows;
+        $data = $query->fetch_assoc();
+
+        return $data['total'];
     }
 
     public function getFindOrderCount($id, $username)
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT o.id
+        $sql = "SELECT *
                 FROM orders o
                 JOIN users u ON u.id = o.user_id
                 JOIN orderdetails od ON o.id = od.order_id

@@ -4,13 +4,21 @@ include_once __DIR__ . '/../config/database.config.php';
 
 class OrderController
 {
+    // Attributes
     private $order;
     
+    // Constructor
     public function __construct($order = new Order())
     {
         $this->order = $order;
     }
 
+    /**
+     * Summary of edit
+     * Sửa đơn hàng
+     * @param mixed $id
+     * @return never
+     */
     public function edit($id)
     {
         session_start();
@@ -22,6 +30,12 @@ class OrderController
         exit();
     }
 
+    /**
+     * Summary of delete
+     * Xóa đơn hàng
+     * @param mixed $id
+     * @return never
+     */
     public function delete($id)
     {
         $this->order->deleteOrder($id);
@@ -31,6 +45,11 @@ class OrderController
         exit();
     }
 
+    /**
+     * Summary of createSalesReport
+     * Lập báo cáo thống kê doanh số
+     * @return void
+     */
     public function createSalesReport()
     {
         session_start();

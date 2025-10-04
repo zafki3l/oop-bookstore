@@ -5,13 +5,20 @@ include_once __DIR__ . '/../config/database.config.php';
 
 class CategoryController
 {
+    // Attributes
     private $category;
 
+    // Constructor
     public function __construct($category = new Category())
     {
         $this->category = $category;
     }
 	
+    /**
+     * Summary of create
+     * Tạo danh mục mới
+     * @return never
+     */
     public function create()
     {
         session_start();
@@ -22,6 +29,11 @@ class CategoryController
         exit();
     }
 
+    /**
+     * Summary of edit
+     * Sửa danh mục
+     * @return never
+     */
     public function edit()
     {
         session_start();
@@ -32,6 +44,11 @@ class CategoryController
         exit();
     }
 
+    /**
+     * Summary of delete
+     * Xóa danh mục
+     * @return never
+     */
     public function delete()
     {
         session_start();

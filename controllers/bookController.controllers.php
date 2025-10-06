@@ -15,6 +15,11 @@ class BookController
         $this->bookErrorHandler = $bookErrorHandler;
     }
 
+    /**
+     * Summary of create
+     * Chức năng thêm sách
+     * @return never
+     */
     public function create()
     {
         session_start();
@@ -34,6 +39,12 @@ class BookController
         exit();
     }
 
+    /**
+     * Summary of edit
+     * Chức năng sửa sách
+     * @param mixed $id
+     * @return never
+     */
     public function edit($id)
     {
         session_start();
@@ -54,6 +65,12 @@ class BookController
         exit();
     }
 
+    /**
+     * Summary of delete
+     * Chức năng xóa sách
+     * @param mixed $id
+     * @return never
+     */
     public function delete($id)
     {
         session_start();
@@ -64,6 +81,11 @@ class BookController
         exit();
     }
 
+    /**
+     * Summary of uploadFile
+     * Xử lý upload file
+     * @return void
+     */
     private function uploadFile()
     {
         //Nếu như người dùng đã upload file
@@ -90,6 +112,12 @@ class BookController
         }
     }
 
+    /**
+     * Summary of emptyCoverInput
+     * Giữ ảnh cũ nếu người dùng không upload gì
+     * @param mixed $id
+     * @return void
+     */
     private function emptyCoverInput($id)
     {
         $bookData = $this->book->getBookById($id);

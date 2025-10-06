@@ -5,14 +5,20 @@ include_once __DIR__ . '/../models/cart.models.php';
 
 class CartController
 {
+    // Attributes
     private $cart;
 
+    // Constructor
     public function __construct($cart = new Cart())
     {
         $this->cart = $cart;
     }
 
-    // Tạo giỏ hàng
+    /**
+     * Summary of create
+     * Chức năng tạo giỏ hàng
+     * @return never
+     */
     public function create()
     {
         session_start();
@@ -28,7 +34,12 @@ class CartController
         exit();
     }
 	
-    // Xóa giỏ hàng
+    /**
+     * Summary of delete
+     * Chức năng xóa giỏ hàng
+     * @param mixed $id
+     * @return never
+     */
     public function delete($id)
     {
         session_start();

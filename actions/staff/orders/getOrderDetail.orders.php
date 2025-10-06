@@ -15,7 +15,7 @@ try {
             u.username AS user_name,
             b.name AS book_name,
             od.quantity,
-            b.price
+            od.price
             FROM orders o
             JOIN users u ON o.user_id = u.id
             JOIN orderDetails od ON o.id = od.order_id

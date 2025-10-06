@@ -51,24 +51,28 @@ function loginMessage()
                     <a href="books/index.books.php?page_number=1">
                         <div class="dashboard box1 book-manage">Book Management</div>
                     </a>
-                    <div class="dashboard box1 category-man">Quản lý thể loại</div>
+
+                    <a href="categories/index.categories.php">
+                        <div class="dashboard box1 category-man">Category Management</div>
+                    </a>
                 </div>
             </div>
 
-            <div class="div1 bottom">
-                <div class="dashboard sales-report">
-                    <div class="chart">
-                <canvas id="myChart"></canvas>
-                </div>
+            <a href="salesReport/monthly.salesReport.php">
+                <div class="div1 bottom">
+                    <div class="dashboard sales-report">
+                        <div class="chart">
+                        <canvas id="myChart"></canvas>
+                    </div>
+            </a>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="/oop-bookstore/public/js/chart.js"></script>
                 </div>
-                <div class="div2">
+                <div class="div2-2">
                     <a href="orders/index.orders.php?page_number=1">
-                        <div class="dashboard box2 order-manage">Quản lý đơn hàng</div>
+                        <div class=" box2 order-manage">Order Management</div>
                     </a>
-                    <div class="dashboard box2 total-order">Tổng đơn hàng</div>
                 </div>
             </div>
         </div>

@@ -21,8 +21,8 @@
   }
 
   .sales-report{
-    padding: 150px 170px;
-    max-width: 570px;
+    width: 570px;
+    height: 320px;
   }
 }
 .info-content {
@@ -53,31 +53,65 @@
 
 .div2{
   margin-left: 20px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 320px;
   a{
     text-decoration: none;
+    color: black;
   }
   .box1{
-    padding: 65px 100px;
+    width: 400px ;
+    text-align: center;
+    padding: 64px 0;
   }
 
   .box2{
-    padding: 65px 135px;
+    width: 400px ;
+    text-align: center;
+    /* padding: 64px 0; */
   }
   .book-manage, .order-manage{
     margin-bottom: 20px ;
     color: black;
   }
+
 }
 
 .bottom{
   margin: 20px 0;
+  height: 320px;
 }
 
 .dashboard {
   background: #fdfcf0;
-  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   font-size: 18px;
   font-weight: bold;
+}
+
+.div2-2{
+  a{
+  width: 400px ;
+  height: 320px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  background-color: #fdfcf0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+    .order-manage{
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+      width: 100%;
+      height: max-content;
+    }
+  }
+margin-left: 20px;
+
+  
 }

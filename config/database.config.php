@@ -17,6 +17,7 @@ class Database
     {
         try {
             $mysqli = new mysqli($this->server, $this->user, $this->password, $this->database);
+            $mysqli->set_charset("utf8mb4");
             
             return $mysqli;
         } catch (Exception $e) {

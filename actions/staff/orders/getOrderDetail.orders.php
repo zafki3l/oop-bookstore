@@ -1,7 +1,9 @@
 <?php
 include_once '../../../config/database.config.php';
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 try {
     $db = new Database();
@@ -34,8 +36,10 @@ try {
         $data[] = $row;
     }
 
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    exit;
 
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
+    exit;
 }

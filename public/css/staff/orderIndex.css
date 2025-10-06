@@ -57,14 +57,20 @@ th {
     cursor: pointer;
     font-size: 20px;
     gap: 20px;
+
+    .info-btn{
+        background-color: #faf9ea;
+
+    }
 }
 
-.action-btn button{
-    border: none;
-    background-color: #faf9ea;
-    cursor: pointer;
-    .fa-circle-info{
-        font-size: 22px ;
+.action-btn{
+    button{
+        border: none;
+        cursor: pointer;
+        .fa-circle-info{
+            font-size: 22px ;
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 function showDetail(id) {
-    fetch(`/oop-bookstore/actions/staff/orders/getOrderDetail.orders.php?id=${id}`)
+    fetch("../../../actions/staff/orders/getOrderDetail.orders.php?id=" + id)
         .then(res => res.json())
         .then(data => {
             const body = document.querySelector(`#detailModal-${id} .detail-body`);

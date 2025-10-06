@@ -59,14 +59,19 @@ th {
     gap: 20px;
 }
 
+.action-btn button{
+    border: none;
+    background-color: #faf9ea;
+    cursor: pointer;
+    .fa-circle-info{
+        font-size: 22px ;
+    }
+}
+
 .delete-btn {
     font-size: 20px;
     border: none;
     background-color: transparent;
-}
-
-.edit-btn {
-    color: black;
 }
 
 .modal {
@@ -100,10 +105,12 @@ tbody input,
 tbody select {
     padding: 10px 12px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid;
     font-size: 14px;
     width: 150px;
     transition: border 0.3s;
+    cursor: pointer;
+    background-color: #faf9ea;
 }
 
 .order-header .search-add button {
@@ -115,10 +122,10 @@ tbody select {
 }
 
 .modal-content {
-    background: #fff;
+    background: #faf9ea;
     padding: 20px;
     margin: 15% auto;
-    width: 300px;
+    width: 80vw;
     border-radius: 8px;
     text-align: center;
 }
@@ -141,7 +148,8 @@ tbody select {
 
 .modal-content button {
     flex: 1;
-    padding: 10px 0;
+    margin-top: 10px;
+    padding: 10px 5px;
     border: none;
     border-radius: 6px;
     font-size: 14px;
@@ -158,3 +166,17 @@ tbody select {
     background-color: black;
     color: #fff;
 }
+
+.detail-table th, .detail-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.detail-table th {
+    background: #f4f4f4;
+}
+
+.detail-table tr {
+    background: #fafafa;
+}
+

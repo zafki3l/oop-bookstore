@@ -2,6 +2,10 @@
 
 include_once 'app.config.php';
 
+/**
+ * Summary of Database
+ * Class Database thực hiện nhiệm vụ kết nối tới CSDL
+ */
 class Database
 {
     private $server = SERVER_NAME;
@@ -13,6 +17,7 @@ class Database
     {
         try {
             $mysqli = new mysqli($this->server, $this->user, $this->password, $this->database);
+            $mysqli->set_charset("utf8mb4");
             
             return $mysqli;
         } catch (Exception $e) {

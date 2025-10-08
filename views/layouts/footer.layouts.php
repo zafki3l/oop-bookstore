@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\oop-bookstore\public\css\layouts\footer.css">
+    <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/footer.css">
     <title>Document</title>
 </head>
 <body>
@@ -45,8 +45,8 @@
                 <p>Follow us at</p>
                 <hr>    
                 <ul type="none">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/">Instagram</a></li>
                 </ul>
             </li>
         </ul>

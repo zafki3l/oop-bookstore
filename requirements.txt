@@ -17,11 +17,10 @@
 
 ## 4. Tài Nguyên Giao Diện
 - Đặt tất cả file JavaScript và CSS trong thư mục `public`, tổ chức vào các thư mục con: `public/js` và `public/css`.
-- Đặt tên file JS và CSS với tiền tố theo mục đích sử dụng (ví dụ: `user.script.js`, `homepage.style.css`).
 
 ## 5. Quy Ước Đặt Tên File
 - Tất cả file phải tuân theo quy ước đặt tên, bao gồm tiền tố là tên thư mục, theo sau là mục đích của file và phần mở rộng:
-  - Model: `<name>.model.php` (ví dụ: `user.model.php` trong `/models/`).
-  - View: `<name>.view.php` (ví dụ: `homepage.view.php` trong `/views/`).
-  - Controller: `<name>.controller.php` (ví dụ: `userController.controller.php` trong `/controllers/`).
+  - Model: `<name>.model.php` (ví dụ: `user.models.php` trong `/models/`).
+  - View: `<name>.view.php` (ví dụ: `homepage.views.php` trong `/views/`).
+  - Controller: `<name>.controller.php` (ví dụ: `userController.controllers.php` trong `/controllers/`).
   - Migration: `<YYYY_MM_DD_HHMMSS_mô_tả>.php` (ví dụ: `2025_09_13_120000_create_users_table.php`).

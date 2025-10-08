@@ -1,0 +1,169 @@
+:root {
+  --red: #ca122f;
+  --cream: #faf9ea;
+  --ink: #111014;
+  --muted: #777;
+  --line: #e7e3d6;
+  --btn: #ca122f;
+  --btn-hover: #ca122f;
+  --chip: #f0efe6;
+  --radius: 8px;
+  --radius-sm: 8px;
+  --shadow: 0 8px 20px rgba(17, 16, 20, .08);
+}
+
+/* Page Title */
+.page {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 60px 80px 60px;
+}
+
+h1 {
+  font-size: 40 px;
+  letter-spacing: .3px;
+  margin: 10px 0 22px;
+}
+
+/* Cart list */
+.card {
+  background: var(--cream);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 92px 1fr 120px 120px 150px;
+  align-items: center;
+  gap: 22px;
+  border: 1px solid var(--line);
+  padding-right: 40px;
+}
+
+.card {
+  margin-top: 18px
+}
+
+.thumb {
+  width: 92px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ddd;
+  display: grid;
+  place-items: center;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
+.meta .book-name {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 6px
+}
+
+.meta .author {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.2
+}
+
+.meta .price-small {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px
+}
+
+.col-label {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 8px
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #e6e2d6;
+  border-radius: 999px;
+  padding: 6px 8px;
+}
+
+.qty button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: #faf9ea;
+  cursor: pointer;
+  font-weight: 700;
+  color: #444;
+}
+
+.qty .val {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 600
+}
+
+.money {
+  font-weight: 700
+}
+
+.buy {
+  border: none;
+  background: var(--btn);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.buy:hover {
+  background: var(--btn-hover)
+}
+
+.trash {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #e1dfd6;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #111014;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.card{
+  display:grid;
+  grid-template-columns: 96px 1fr repeat(3, minmax(120px, 1fr));
+  align-items:center;
+  gap:16px;
+}
+
+.qty-wrap,
+.money-wrap,
+.card .buy,
+.card .trash{
+  justify-self:center;
+}
+.card .buy{ 
+  width:100%; 
+  max-width:140px; 
+} 
+
+.money-wrap {
+  transform: translateY(-10px);
+}

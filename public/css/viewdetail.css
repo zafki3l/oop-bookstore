@@ -1,0 +1,182 @@
+.qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #e6e2d6;
+  border-radius: 999px;
+  padding: 6px 8px;
+}
+
+.qty button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: #faf9ea;
+  cursor: pointer;
+  font-weight: 700;
+  color: #444;
+}
+
+.qty .val {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 600
+}
+
+.book-container {
+    display: flex;
+    background-color: #faf9ea;
+    align-items: center;
+    margin: 40px 250px 1px;
+    height: 380px;
+    width: auto;
+    border-radius: 8px;
+    padding-bottom: 30px;
+}
+
+.book-container img {
+    width: 220px;
+    margin: 20px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+}
+
+
+.book-container .content {
+    flex: 1;
+
+    transform: translateX(40px);
+}
+
+.name-book {
+    transform: translateY(-60px);
+    font-size: 16px;
+}
+
+.author-book {
+    transform: translateY(-60px);
+    font-style: italic;
+    color: #5b5a5a;
+}
+
+.price {
+    transform: translateY(30px);
+    font-size: 36px;
+    color: #ca122f;
+}
+
+.qty-wrap {
+    transform: translateY(50px);
+    label {
+        font-size: 16px;
+    }
+
+    .qty {
+        transform: translateX(20px);
+    }
+}
+
+.button {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  transform: translateY(55px);
+}
+
+.button button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Nút Mua ngay */
+.button .buy {
+  background-color: #ca122f;
+  color: white;
+  font-weight: bold;
+}
+
+/* Nút Add to cart */
+.button .cart-btn {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.book-detail {
+    display: block;
+    background-color: #faf9ea;
+    align-items: center;
+    margin: 10px 250px 1px;
+    height: 380px;
+    width: auto;
+    border-radius: 8px;
+    padding-bottom: 30px;
+}
+
+.book-detail .header {
+    transform: translateY(15px);
+    background: black;
+    color: #faf9ea;
+    margin: 40px 30px 40px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+
+.stock,
+.name,
+.author,
+.publisher-book,
+.pages-book {
+    padding-left: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.stock label,
+.name label,
+.author label,
+.publisher-book label,
+.pages-book label {
+    font-weight: bold;
+    min-width: 120px; 
+}
+
+.book-description {
+    display: block;
+    background-color: #faf9ea;
+    align-items: center;
+    margin: 10px 250px 150px;
+    height: fit-content;
+    width: auto;
+    border-radius: 8px;
+    padding-bottom: 30px;
+}
+
+.book-description .header {
+    transform: translateY(15px);
+    background: black;
+    color: #faf9ea;
+    margin: 40px 30px 40px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+
+.book-description .description {
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.8;
+}

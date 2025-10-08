@@ -71,13 +71,15 @@ class OrderDetail extends Model
     {
         $conn = $this->getDb()->connect();
 
-        $sql = "SELECT o.id AS order_id,
-                o.status,
-                o.created_at,
-                u.username AS user_name,
+        $sql = "SELECT od.id,
+                o.id AS order_id,
+                b.id as book_id,
                 b.name AS book_name,
                 od.quantity,
-                od.price
+                od.price,
+                (od.quantity * od.price) as total_price,
+                od.created_at,
+                od.updated_at
                 FROM orders o
                 JOIN users u ON o.user_id = u.id
                 JOIN orderdetails od ON o.id = od.order_id

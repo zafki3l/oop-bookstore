@@ -35,7 +35,7 @@ class BookController
         $this->book->addBook();
 
         $_SESSION['add_book_success'] = 'Add book successfully';
-        header('Location: /oop-bookstore/views/staff/books/index.books.php');
+        header('Location: /oop-bookstore/views/staff/books/index.books.php?page_number=1');
         exit();
     }
 
@@ -61,7 +61,7 @@ class BookController
         $this->book->editBook($id);
 
         $_SESSION['edit_book_success'] = 'Edit book successfully';
-        header('Location: /oop-bookstore/views/staff/books/index.books.php');
+        header('Location: /oop-bookstore/views/staff/books/index.books.php?page_number=1');
         exit();
     }
 

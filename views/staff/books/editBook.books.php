@@ -106,7 +106,7 @@ $bookData = $book->getBookById($_GET['id']);
                     </div>
 
                     <div class="form-group">
-                        <a href="index.books.php" class="cancel-btn">Cancel</a>
+                        <a href="index.books.php?page_number=1" class="cancel-btn">Cancel</a>
                         <input type="submit" name="submit" value="Save" class="submit-btn">
 
                         <!-- Hiển thị lỗi -->

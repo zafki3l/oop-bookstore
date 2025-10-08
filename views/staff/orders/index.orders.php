@@ -20,7 +20,6 @@ function deleteOrderMessage()
     <link rel="stylesheet" href="/oop-bookstore/public/css/layouts/pagination.css">
     <link rel="stylesheet" href="/oop-bookstore/public/css/staff/orderIndex.css">
     <link rel="shortcut icon" href="/oop-bookstore/public/icon/birdcage.png" type="image/x-icon">
-
     <title>Order Management</title>
 </head>
 
@@ -87,25 +86,11 @@ function deleteOrderMessage()
                                 <td><?php echo htmlspecialchars($order['updated_at']) ?></td>
                                 <td>
                                     <div class="action-btn">
-                                        <button type="button" onclick="showDetail(<?php echo htmlspecialchars($order['id']) ?>)" class="info-btn">
-                                            <i class="fa-solid fa-circle-info"></i>
-                                        </button>
+                                        <a href="orderDetail.orders.php?id=<?php echo htmlspecialchars($order['id']) ?>"><i class="fa-solid fa-circle-info"></i></a>
 
                                         <button type="button" onclick="showConfirm(<?php echo htmlspecialchars($order['id']) ?>)" class="delete-btn">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
-
-                                        <!-- Detail Modal -->
-                                        <div id="detailModal-<?php echo $order['id']; ?>" class="modal">
-                                            <div class="modal-content">
-                                                <h2>Order Detail</h2>
-                                                <hr>
-                                                <div class="detail-body">
-                                                    <!-- noi dung -->
-                                                </div>
-                                                <button onclick="closeDetail(<?php echo $order['id']; ?>)">Close</button>
-                                            </div>
-                                        </div>
 
                                         <!-- Delete Modal -->
                                         <div id="confirmModal-<?= htmlspecialchars($order['id']) ?>" class="modal">
